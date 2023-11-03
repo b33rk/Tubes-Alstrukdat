@@ -3,7 +3,7 @@
 
 #include "../boolean.h"
 #include <stdio.h>
-#include "../machine/stringmachine.h"
+#include "../machine/textmachine.h"
 #include "../../database/database.h"
 
 void registerUser();

@@ -1,5 +1,11 @@
 {
     "files.associations": {
-        "boolean.h": "c"
+        "boolean.h": "c",
+        "stringmachine.h": "c",
+        "matrixchar.h": "c",
+        "profilepicture.h": "c",
+        "charmachine.h": "c",
+        "profile.h": "c",
+        "database.h": "c"
     }
 }

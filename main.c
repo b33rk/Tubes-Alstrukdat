@@ -1,6 +1,7 @@
 #include "libs/machine/wordmachine.h"
 #include "database/database.h"
 #include "libs/feature/userfeature.h"
+#include "libs/feature/profile.h"
 
 int main()
 {
@@ -41,6 +42,16 @@ int main()
         }
         else if (isWordEqual(currentWord, stringToWord("KELUAR"))){
             logoutUser();
+        }
+        else if (isWordEqual(currentWord, stringToWord("LIHAT_PROFIL"))){
+            ADVWORD();
+            seeProfile(currentWord);
+        } else if (isWordEqual(currentWord, stringToWord("GANTI_PROFIL"))){
+            changeProfile();
+        } else if (isWordEqual(currentWord, stringToWord("ATUR_JENIS_AKUN"))){
+            changeAccountType();
+        } else if (isWordEqual(currentWord, stringToWord("UBAH_FOTO_PROFIL"))){
+            changeProfilePicture();
         }
 
         printf("\n");

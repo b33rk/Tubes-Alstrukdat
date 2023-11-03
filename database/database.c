@@ -1,9 +1,9 @@
 #include "database.h"
 
 ListUser listUser;
-User currentUser;
+User* currentUser;
 
 void initDatabase(){
     CreateListUser(&listUser);
-    CreateUser(&currentUser);
+    currentUser = NULL;
 }

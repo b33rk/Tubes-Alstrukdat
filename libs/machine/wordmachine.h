@@ -1,14 +1,12 @@
-/* File: wordmachine.h */
-/* Definisi Mesin Word: Model Akuisisi Versi I */
-
 #ifndef __WORDMACHINE_H__
 #define __WORDMACHINE_H__
 
 #include "../boolean.h"
 #include "charmachine.h"
+#include <stdlib.h>
 #include <stdio.h>
 
-#define NMax 50
+#define NMax 101
 #define BLANK ' '
 
 typedef struct
@@ -50,6 +48,8 @@ void CopyWord();
 void printWord(Word word);
 
 boolean isWordEqual(Word w1, Word w2);
+
+Word wordToLowerCase(Word w);
 
 Word stringToWord(char *str);
 

@@ -5,7 +5,7 @@
 
 extern ListUser listUser;
 
-extern User currentUser;
+extern User* currentUser;
 
 void initDatabase();
 

@@ -1,36 +1,36 @@
-#include "stringmachine.h"
+#include "textmachine.h"
 
-boolean EndString;
-String currentString;
+boolean EndText;
+Text currentText;
 
-void STARTSTRING()
+void STARTTEXT()
 {
     START();
-    IgnoreNewLine();
+    IgnoreNewLineText();
     if (currentChar == MARK)
     {
-        EndString = true;
-        currentString.Length = 0;
-        currentString.TabString[0] = '\0';
-
+        EndText = true;
+        currentText.Length = 0;
+        currentText.TabString[0] = '\0';
     }
     else
     {
-        EndString = false;
+        EndText = false;
         int length = 0;
         while (!(currentChar == MARK))
         {
 
-            currentString.TabString[length++] = currentChar;
+            if (length < 280)
+                currentText.TabString[length++] = currentChar;
             ADV();
         }
 
-        currentString.Length = length;
-        currentString.TabString[length] = '\0';
+        currentText.Length = length;
+        currentText.TabString[length] = '\0';
     }
 }
 
-boolean isAllBlank(String sentence)
+boolean isTextAllBlank(Text sentence)
 {
     int i;
     for (i = 0; i < sentence.Length; i++)
@@ -44,7 +44,7 @@ boolean isAllBlank(String sentence)
     return true;
 }
 
-boolean isStringEqual(String s1, String s2)
+boolean isTextEqual(Text s1, Text s2)
 {
     if (s1.Length != s2.Length)
     {
@@ -64,9 +64,9 @@ boolean isStringEqual(String s1, String s2)
     }
 }
 
-String charArrToString(char *c)
+Text charArrToText(char *c)
 {
-    String str;
+    Text str;
     char curr = c[0];
     int i = 0;
     while (curr != '\0')
@@ -80,14 +80,16 @@ String charArrToString(char *c)
     return str;
 }
 
-void printString(String str) {
-   int i;
-   for (i = 0; i < str.Length; i++) {
-      printf("%c", str.TabString[i]);
-   }
+void printText(Text str)
+{
+    int i;
+    for (i = 0; i < str.Length; i++)
+    {
+        printf("%c", str.TabString[i]);
+    }
 }
 
-void IgnoreNewLine()
+void IgnoreNewLineText()
 {
     while (currentChar == '\n')
     {

@@ -3,20 +3,18 @@
 
 #include "../boolean.h"
 #include "../user.h"
-#include "../machine/stringmachine.h"
+#include "../machine/textmachine.h"
 
 /*  Kamus Umum */
 #define CAPACITY_USER 20
 /* Kapasitas penyimpanan */
 #define IDX_MIN 0
 /* Indeks minimum list */
-#define IDX_UNDEF -1
 
 /* Definisi elemen dan koleksi objek */
-typedef User ElType;  /* type elemen List */
 typedef int IdxType;
 typedef struct {
-   ElType contents[CAPACITY_USER]; /* memori tempat penyimpan elemen (container) */
+   User contents[CAPACITY_USER]; /* memori tempat penyimpan elemen (container) */
 } ListUser;
 
 void CreateListUser(ListUser *l);
@@ -74,38 +72,38 @@ int listUserIndexOfWithName(ListUser l, char* name);
 
 /* ********** MENAMBAH ELEMEN ********** */
 /* *** Menambahkan elemen terakhir *** */
-void listUserInsertFirst(ListUser *l, ElType val);
+void listUserInsertFirst(ListUser *l, User val);
 /* Proses: Menambahkan val sebagai elemen pertama List */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen pertama l yang baru */
 /* *** Menambahkan elemen pada index tertentu *** */
-void listUserInsertAt(ListUser *l, ElType val, IdxType idx);
+void listUserInsertAt(ListUser *l, User val, IdxType idx);
 /* Proses: Menambahkan val sebagai elemen pada index idx List */
 /* I.S. List l tidak kosong dan tidak penuh, idx merupakan index yang valid di l */
 /* F.S. val adalah elemen yang disisipkan pada index idx l */
 /* *** Menambahkan elemen terakhir *** */
-void listUserInsertLast(ListUser *l, ElType val);
+void listUserInsertLast(ListUser *l, User val);
 /* Proses: Menambahkan val sebagai elemen terakhir List */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 
 /* ********** MENGHAPUS ELEMEN ********** */
 /* *** Menghapus elemen pertama *** */
-void listUserDeleteFirst(ListUser *l, ElType *val);
+void listUserDeleteFirst(ListUser *l, User *val);
 /* Proses : Menghapus elemen pertama List */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen pertama l sebelum penghapusan, */
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
 /* *** Menghapus elemen pada index tertentu *** */
-void listUserDeleteAt(ListUser *l, ElType *val, IdxType idx);
+void listUserDeleteAt(ListUser *l, User *val, IdxType idx);
 /* Proses : Menghapus elemen pada index idx List */
 /* I.S. List tidak kosong, idx adalah index yang valid di l */
 /* F.S. val adalah nilai elemen pada index idx l sebelum penghapusan, */
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
 /* *** Menghapus elemen terakhir *** */
-void listUserDeleteLast(ListUser *l, ElType *val);
+void listUserDeleteLast(ListUser *l, User *val);
 /* Proses : Menghapus elemen terakhir List */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */

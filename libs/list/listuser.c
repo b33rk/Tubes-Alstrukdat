@@ -67,16 +67,16 @@ IdxType getListUserLastIdx(ListUser l)
 
 int listUserIndexOfWithName(ListUser l, char* name){
     if (isListUserEmpty(l)){
-        return IDX_UNDEF;
+        return -1;
     } else {
         int i;
         for (i = 0; i < listUserLength(l); i++){
-            if (isStringEqual(charArrToString(name), charArrToString(l.contents[i].name))){
+            if (isTextEqual(charArrToText(name), charArrToText(l.contents[i].name))){
                 return i;
             }
         }
 
-        return IDX_UNDEF;
+        return -1;
     }
 }
 
@@ -152,7 +152,7 @@ void printListUser(ListUser l)
 
 
 /* *** Menambahkan elemen terakhir *** */
-void listUserInsertLast(ListUser *l, ElType val)
+void listUserInsertLast(ListUser *l, User val)
 {
     /* Proses: Menambahkan val sebagai elemen terakhir List */
     /* I.S. List l boleh kosong, tetapi tidak penuh */

@@ -9,7 +9,7 @@ void registerUser()
         return;
     }
 
-    if (currentUser.id != -1)
+    if (currentUser != NULL)
     {
         printf("Anda sudah masuk. Keluar terlebih dahulu untuk melakukan daftar.\n\n");
         return;
@@ -21,26 +21,26 @@ void registerUser()
     while (!isNameValid)
     {
         printf("Masukkan nama: \n");
-        STARTSTRING();
+        STARTTEXT();
         printf("\n");
-        if (currentString.Length == 0)
+        if (currentText.Length == 0)
         {
             printf("Nama tidak boleh kosong!!\n\n");
             continue;
         }
-        if (isAllBlank(currentString))
+        if (isTextAllBlank(currentText))
         {
             printf("Nama tidak boleh hanya spasi!!\n");
             continue;
         }
-        if (currentString.Length > 20)
+        if (currentText.Length > 20)
         {
             printf("Nama tidak boleh lebih dari 20 karakter!!\n\n");
             continue;
         }
-        index = listUserIndexOfWithName(listUser, currentString.TabString);
+        index = listUserIndexOfWithName(listUser, currentText.TabString);
 
-        if (index != IDX_UNDEF)
+        if (index != -1)
         {
             printf("Wah, sayang sekali nama tersebut telah diambil.\n\n");
             continue;
@@ -53,26 +53,26 @@ void registerUser()
     CreateUser(&newUser);
     newUser.id = listUserLength(listUser);
 
-    setUserName(&newUser, currentString.TabString);
+    setUserName(&newUser, currentText.TabString);
 
     boolean isPassValid = false;
 
     while (!isPassValid)
     {
         printf("Masukkan password: \n");
-        STARTSTRING();
+        STARTTEXT();
         printf("\n");
-        if (currentString.Length == 0)
+        if (currentText.Length == 0)
         {
             printf("Passwird tidak boleh kosong!!\n\n");
             continue;
         }
-        if (isAllBlank(currentString))
+        if (isTextAllBlank(currentText))
         {
             printf("Password tidak boleh hanya spasi!!\n");
             continue;
         }
-        if (currentString.Length > 20)
+        if (currentText.Length > 20)
         {
             printf("Password tidak boleh lebih dari 20 karakter!!\n\n");
             continue;
@@ -81,7 +81,7 @@ void registerUser()
         isPassValid = true;
     }
 
-    setUserPassword(&newUser, currentString.TabString);
+    setUserPassword(&newUser, currentText.TabString);
 
     listUserInsertLast(&listUser, newUser);
 
@@ -90,7 +90,7 @@ void registerUser()
 
 void loginUser()
 {
-    if (currentUser.id != -1)
+    if (currentUser != NULL)
     {
         printf("Wah Anda sudah masuk. Keluar dulu yuk!\n\n");
         return;
@@ -101,27 +101,27 @@ void loginUser()
     while (!isNameValid)
     {
         printf("Masukkan nama: \n");
-        STARTSTRING();
+        STARTTEXT();
         printf("\n");
-        if (currentString.Length == 0)
+        if (currentText.Length == 0)
         {
             printf("Nama tidak boleh kosong!!\n\n");
             continue;
         }
-        if (isAllBlank(currentString))
+        if (isTextAllBlank(currentText))
         {
             printf("Nama tidak boleh hanya spasi!!\n");
             continue;
         }
-        if (currentString.Length > 20)
+        if (currentText.Length > 20)
         {
             printf("Nama tidak boleh lebih dari 20 karakter!!\n\n");
             continue;
         }
 
-        index = listUserIndexOfWithName(listUser, currentString.TabString);
+        index = listUserIndexOfWithName(listUser, currentText.TabString);
 
-        if (index == IDX_UNDEF)
+        if (index == -1)
         {
             printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n\n");
             continue;
@@ -136,24 +136,24 @@ void loginUser()
     while (!isPassValid)
     {
         printf("Masukkan password: \n");
-        STARTSTRING();
+        STARTTEXT();
         printf("\n");
-        if (currentString.Length == 0)
+        if (currentText.Length == 0)
         {
             printf("Passwird tidak boleh kosong!!\n\n");
             continue;
         }
-        if (isAllBlank(currentString))
+        if (isTextAllBlank(currentText))
         {
             printf("Password tidak boleh hanya spasi!!\n");
             continue;
         }
-        if (currentString.Length > 20)
+        if (currentText.Length > 20)
         {
             printf("Password tidak boleh lebih dari 20 karakter!!\n\n");
             continue;
         }
-        isPassCorrect = isStringEqual(charArrToString(listUser.contents[index].password), charArrToString(currentString.TabString));
+        isPassCorrect = isTextEqual(charArrToText(listUser.contents[index].password), charArrToText(currentText.TabString));
 
         if (!isPassCorrect)
         {
@@ -163,23 +163,20 @@ void loginUser()
         isPassValid = true;
     }
 
-    currentUser = listUser.contents[index];
+    currentUser = &(listUser.contents[index]);
 
     printf("Anda telah berhasil masuk dengan nama pengguna Tuan %s. Mari menjelajahi BurBir bersama Ande-Ande Lumut!", listUser.contents[index].name);
 }
 
 void logoutUser()
 {
-    if (currentUser.id == -1)
+    if (currentUser->id == -1)
     {
         printf("Anda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n\n");
         return;
     }
 
-    User temp;
-    CreateUser(&temp);
-
-    currentUser = temp;
+    currentUser = NULL;
 
     printf("Anda berhasil logout. Sampai jumpa di pertemuan berikutnya!\n\n");
 }
