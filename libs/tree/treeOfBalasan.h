@@ -1,23 +1,27 @@
 #include "nodeBalasan.h"
-#include "listnode.h"
+#include "NodeHashMap.h"
 
 /* Definisi elemen dan koleksi objek */
 typedef struct treeofbalasan{
     NodeBalasanAddress master;
-    NodeList ListNode;
+    NodeHashMap Nodes;
     int nextId;
 } TreeOfBalasan;
 
 /* ********** SELEKTOR ********** */
 #define TREE_MASTER(T) (T).master
-#define TREE_LIST(T) (T).ListNode
-#define TREE_NODE_BY_ID(T, id) LISTNODE_ELMT(TREE_LIST(T), id)
+#define TREE_HMP(T) (T).Nodes
 #define TREE_NEXTID(T) (T).nextId
 
 /* ********** KONSTRUKTOR ********** */
 void createTree(TreeOfBalasan *T);
 
-void addToTreeAt(TreeOfBalasan *T, Text txt, int trueId);
+NodeBalasanAddress getNodeInTreeById(TreeOfBalasan T, int Id);
 
-void deleteTreeNodeAt(TreeOfBalasan *T, int trueId);
+void addToTreeAt(TreeOfBalasan *T, Text txt, int Id);
 
+void deleteTreeNodeAt(TreeOfBalasan *T, int Id);
+
+void displayAll(TreeOfBalasan T);
+
+void displayNodeAll(TreeOfBalasan T, int Id, int indent);

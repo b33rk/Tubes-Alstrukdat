@@ -9,16 +9,14 @@
 /* Indeks minimum list */
 #define LISTNODE_IDX_UNDEF -1
 /* Indeks tak terdefinisi*/
+#define LISTNODE_CAPACITY 20
 
 /* Definisi elemen dan koleksi objek */
 typedef NodeBalasanAddress ListNodeElType; /* type elemen list */
 typedef int IdxType;
-typedef struct
-{
-    ListNodeElType *buffer; /* memori tempat penyimpan elemen (container) */
-    int capacity;   /* ukuran elemen */
-    int length;
-    int emptyidx;
+typedef struct nodelist{
+    ListNodeElType buffer[LISTNODE_CAPACITY]; /* memori tempat penyimpan elemen (container) */
+    int nEff;
 } ListNode;
 /* Indeks yang digunakan [0..capacity-1] */
 /* Jika l adalah : ListNode, cara deklarasi dan akses: */
@@ -33,21 +31,15 @@ typedef struct
   Definisi elemen terakhir yang terdefinisi: l.buffer[i] dengan i=l.capacity */
 
 /* ********** SELEKTOR ********** */
-#define LISTNODE_LENGTH(l) (l).length
+#define LISTNODE_NEFF(l) (l).nEff
 #define LISTNODE_BUFFER(l) (l).buffer
 #define LISTNODE_ELMT(l, i) (l).buffer[i]
-#define LISTNODE_CAPACITY(l) (l).capacity
-#define LISTNODE_EMPTYIDX(l) (l).emptyidx
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
-void CreateListNode(ListNode *l, int capacity);
+void CreateListNode(ListNode *l);
 /* I.S. l sembarang, capacity > 0 */
 /* F.S. Terbentuk list dinamis l kosong dengan kapasitas capacity */
-
-void dealocateListNode(ListNode *l);
-/* I.S. l terdefinisi; */
-/* F.S. (l) dikembalikan ke system, CAPACITY(l)=0; NEFF(l)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
@@ -61,17 +53,9 @@ IdxType getListNodeFirstIdx(ListNode l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l pertama */
 
-IdxType getListNodeFirstEmptyIdx(ListNode l, IdxType start);
-/* Mengirimkan indeks elemen l pertama yang kosong*/
-
 IdxType getListNodeLastIdx(ListNode l);
 /* Prekondisi : List l tidak kosong */
 /* Mengirimkan indeks elemen l terakhir */
-
-/* ********** Test Indeks yang valid ********** */
-boolean isListNodeIdxValid(ListNode l, IdxType i);
-/* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
-/* yaitu antara indeks yang terdefinisi utk container*/
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test list kosong *** */
@@ -88,7 +72,7 @@ boolean isListNodeEqual(ListNode l1, ListNode l2);
 
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : list boleh kosong!! *** */
-IdxType listNodeIndexOf(ListNode l, ListNodeElType val);
+IdxType listNodeIndexOf(ListNode l, int Id);
 /* Search apakah ada elemen List l yang bernilai val */
 /* Jika ada, menghasilkan indeks i terkecil, dengan elemen ke-i = val */
 /* Jika tidak ada, mengirimkan IDX_UNDEF */
@@ -108,26 +92,13 @@ void insertListNode(ListNode *l, ListNodeElType val);
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteListNode(ListNode *l, ListNodeElType *val, IdxType Idx);
+void deleteListNode(ListNode *l, int Id);
 /* Proses : Menghapus elemen terakhir list */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
 /*      Banyaknya elemen list berkurang satu */
 /*      List l mungkin menjadi kosong */
 
-/* ********* MENGUBAH UKURAN ARRAY ********* */
-void expandListNode(ListNode *l, int num);
-/* Proses : Menambahkan capacity l sebanyak num */
-/* I.S. List sudah terdefinisi */
-/* F.S. Ukuran list bertambah sebanyak num */
-
-void doubleListNode(ListNode *l);
-
-void shrinkListNode(ListNode *l, int num);
-/* Proses : Mengurangi capacity sebanyak num */
-/* I.S. List sudah terdefinisi, ukuran capacity > num, dan nEff < capacity - num. */
-/* F.S. Ukuran list berkurang sebanyak num. */
-
-void halveListNode(ListNode *l);
+NodeBalasanAddress getNodeFromId(ListNode l, int Id);
 
 #endif

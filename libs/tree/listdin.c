@@ -233,7 +233,7 @@ ElType sumListDin(ListDin l){
 /* Jika l kosong menghasilkan 0 */
     int sum = 0;
     int i;
-    for(i = 0; i <= getListDinIdx(l); i++){
+    for(i = 0; i <= getListDinLastIdx(l); i++){
         sum += LISTDIN_ELMT(l, i);
     };
     return sum;

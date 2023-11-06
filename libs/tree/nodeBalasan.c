@@ -2,13 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-NodeBalasanAddress newNodeBalasan(int Id, int trueId, Text content, NodeBalasanAddress parent){
+NodeBalasanAddress newNodeBalasan(int Id, Text content, NodeBalasanAddress parent){
     NodeBalasanAddress N;
     
     N = (NodeBalasanAddress) malloc (sizeof(NodeBalasan));
 
     NODEBALASAN_ID(N) = Id;
-    NODEBALASAN_TRUEID(N) = trueId;
 
     Text newContent;
     copyText(content, &newContent);
@@ -21,12 +20,24 @@ NodeBalasanAddress newNodeBalasan(int Id, int trueId, Text content, NodeBalasanA
     NODEBALASAN_PARENT(N) = parent;
 }
 
-void addChildren(NodeBalasanAddress Nparent, int Id, int trueId, Text content){
-    NodeBalasanAddress newChild = newNodeBalasan(Id, trueId, content, Nparent);
-    insertLastListDin(&NODEBALASAN_CHILDREN(Nparent), trueId);
+void addChildren(NodeBalasanAddress Nparent, NodeBalasanAddress Nchildren){
+    insertLastListDin(&(NODEBALASAN_CHILDREN(Nparent)), NODEBALASAN_ID(Nchildren));
+    NODEBALASAN_PARENT(Nchildren) = Nparent;
 }
 
 void removeChildren(NodeBalasanAddress Nparent, NodeBalasanAddress Nchildren){
     deleteElListDin(&NODEBALASAN_CHILDREN(Nparent), NODEBALASAN_ID(Nchildren));
     NODEBALASAN_PARENT(Nchildren) = NULL;
+    free(Nchildren);
+}
+
+void displayNode(NodeBalasanAddress N, int Indent){
+    int i;
+    int j;
+    for(i = 0; i < Indent; i++){printf(" ");}
+    printf("| ID = %d\n", NODEBALASAN_ID(N));
+    for(i = 0; i < Indent; i++){printf(" ");}
+    printf("| ");
+    printText(NODEBALASAN_TEXT(N));
+    printf("\n");
 }
