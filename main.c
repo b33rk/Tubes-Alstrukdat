@@ -2,6 +2,8 @@
 #include "database/database.h"
 #include "libs/feature/userfeature.h"
 #include "libs/feature/profile.h"
+#include "libs/feature/friendshipfeature.h"
+#include "libs/feature/friendshipreqfeature.h"
 
 int main()
 {
@@ -24,10 +26,6 @@ int main()
         printf("\n>> ");
         STARTWORD();
 
-        // printf("input: ");
-        // printWord(currentWord);
-        // printf("\n");
-
         if (isWordEqual(currentWord, stringToWord("TUTUP_PROGRAM")))
         {
             programStart = false;
@@ -40,23 +38,49 @@ int main()
         {
             loginUser();
         }
-        else if (isWordEqual(currentWord, stringToWord("KELUAR"))){
+        else if (isWordEqual(currentWord, stringToWord("KELUAR")))
+        {
             logoutUser();
         }
-        else if (isWordEqual(currentWord, stringToWord("LIHAT_PROFIL"))){
+        else if (isWordEqual(currentWord, stringToWord("LIHAT_PROFIL")))
+        {
             ADVWORD();
             seeProfile(currentWord);
-        } else if (isWordEqual(currentWord, stringToWord("GANTI_PROFIL"))){
+        }
+        else if (isWordEqual(currentWord, stringToWord("GANTI_PROFIL")))
+        {
             changeProfile();
-        } else if (isWordEqual(currentWord, stringToWord("ATUR_JENIS_AKUN"))){
+        }
+        else if (isWordEqual(currentWord, stringToWord("ATUR_JENIS_AKUN")))
+        {
             changeAccountType();
-        } else if (isWordEqual(currentWord, stringToWord("UBAH_FOTO_PROFIL"))){
+        }
+        else if (isWordEqual(currentWord, stringToWord("UBAH_FOTO_PROFIL")))
+        {
             changeProfilePicture();
+        }
+        else if (isWordEqual(currentWord, stringToWord("DAFTAR_TEMAN")))
+        {
+            friendlist();
+        }
+        else if (isWordEqual(currentWord, stringToWord("HAPUS_TEMAN")))
+        {
+            deleteFriend();
+        }
+        else if (isWordEqual(currentWord, stringToWord("TAMBAH_TEMAN")))
+        {
+            addFriend();
+        }
+        else if (isWordEqual(currentWord, stringToWord("DAFTAR_PERMINTAAN_PERTEMANAN")))
+        {
+            friendshipReqList();
+        }
+        else if (isWordEqual(currentWord, stringToWord("SETUJUI_PERTEMANAN")))
+        {
+            acceptFrienship();
         }
 
         printf("\n");
-
-        // printUser(currentUser);
     }
 
     printf(" ______  ____  ____  ________  ______  ____  ____  ________  \n");

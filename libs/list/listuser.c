@@ -1,7 +1,6 @@
 /* File : liststatik.c */
 /* Body ADT LISTSTATIK */
 #include "listuser.h"
-#include <stdio.h>
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */

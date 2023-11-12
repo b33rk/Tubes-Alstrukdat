@@ -64,7 +64,7 @@ void registerUser()
         printf("\n");
         if (currentText.Length == 0)
         {
-            printf("Passwird tidak boleh kosong!!\n\n");
+            printf("Password tidak boleh kosong!!\n\n");
             continue;
         }
         if (isTextAllBlank(currentText))

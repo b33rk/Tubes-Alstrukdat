@@ -5,8 +5,10 @@
 #include "machine/wordmachine.h"
 #include "profilepicture.h"
 #include "machine/stringdinmachine.h"
+#include "queue/prioqueuefriendreq.h"
 
-typedef struct
+
+typedef struct user
 {
     int id;
     char name[21];
@@ -16,7 +18,10 @@ typedef struct
     StringDin phoneNumber;
     boolean isPublic;
     ProfilePicture profilePicture;
+    int manyFriend;
+    PrioQueueFriendReq friendReq;
 } User;
+
 
 void CreateUser(User *u);
 
@@ -30,6 +35,8 @@ void setUserWeton(User* user, char* weton);
 
 void setUserPhoneNumber(User* user, StringDin phoneNumber);
 
-void printUser(User user);
+void displayUserProfile(User user, boolean withProfilePicture);
+
+void reSortPrioQueueFR(User*user);
 
 #endif

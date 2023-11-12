@@ -6,6 +6,13 @@
         "profilepicture.h": "c",
         "charmachine.h": "c",
         "profile.h": "c",
-        "database.h": "c"
+        "database.h": "c",
+        "wordmachine.h": "c",
+        "pcolor.h": "c",
+        "user.h": "c",
+        "listuser.h": "c",
+        "prioqueuefriendreq.h": "c",
+        "friendshipreqfeature.h": "c",
+        "textmachine.h": "c"
     }
 }
