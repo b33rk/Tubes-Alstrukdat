@@ -10,58 +10,61 @@ void seeProfile(Word name)
         printf("User dengan nama tersebut tidak ada!!\n\n");
         return;
     }
+
     if (!userProfile.isPublic)
     {
-        printf("Wah, akun Tuan Prim diprivat nih. Ikuti dulu yuk untuk bisa melihat profil %s\n\n", name.TabWord);
-        return;
+        if (!isHasRelation(graphFriendship, currentUser->id, index))
+        {
+            printf("Wah, akun %s diprivat nih. Ikuti dulu yuk untuk bisa melihat profil %s\n\n", name.TabWord, name.TabWord);
+            return;
+        }
     }
 
-    printf("| Nama: %s\n", userProfile.name);
-    printf("| Bio Akun: %s\n", userProfile.bio);
-    printf("| No HP: ");
-    printStringDin(currentUser->phoneNumber);
+    displayUserProfile(userProfile, true);
     printf("\n");
-    printf("| Weton: %s\n\n", userProfile.weton);
-
-    printf("Foto profil akun %s\n", name.TabWord);
-
-    displayMatrixPicture(userProfile.profilePicture);
-    printf("\n");
-
 }
 
-void changeAccountType(){
+void changeAccountType()
+{
     if (currentUser == NULL)
     {
         printf("Anda belum masuk. Masuk terlebih dahulu untuk mengganti tipe akun.\n\n");
         return;
     }
-    if (currentUser->isPublic){
+    if (currentUser->isPublic)
+    {
         printf("Saat ini, akun Anda adalah akun Publik. Ingin mengubah ke akun Privat?\n");
         printf("(YA/TIDAK) ");
         STARTWORD();
-        if (isWordEqual(currentWord, stringToWord("YA"))){
+        if (isWordEqual(currentWord, stringToWord("YA")))
+        {
             currentUser->isPublic = false;
             printf("Akun anda sudah diubah menjadi akun Privat.\n\n");
-
-        } else {
+        }
+        else
+        {
             printf("Akun anda tetap menjadi akun Public.\n\n");
         }
-    } else {
+    }
+    else
+    {
         printf("Saat ini, akun Anda adalah akun Privat. Ingin mengubah ke akun Publik?\n");
         printf("(YA/TIDAK) ");
         STARTWORD();
-        if (isWordEqual(currentWord, stringToWord("YA"))){
+        if (isWordEqual(currentWord, stringToWord("YA")))
+        {
             currentUser->isPublic = true;
             printf("Akun anda sudah diubah menjadi akun Publik.\n\n");
-
-        } else {
+        }
+        else
+        {
             printf("Akun anda tetap menjadi akun Privat.\n\n");
         }
     }
 }
 
-void changeProfilePicture(){
+void changeProfilePicture()
+{
     if (currentUser == NULL)
     {
         printf("Anda belum masuk. Masuk terlebih dahulu untuk mengganti foto profil.\n\n");
@@ -78,28 +81,24 @@ void changeProfilePicture(){
     printf("\nFoto profil anda sudah berhasil diganti!\n\n");
 }
 
-void changeProfile(){
+void changeProfile()
+{
     if (currentUser == NULL)
     {
         printf("Anda belum masuk. Masuk terlebih dahulu untuk mengganti profil.\n\n");
         return;
     }
 
-    printf("| Nama: %s\n", currentUser->name);
-    printf("| Bio Akun: %s\n", currentUser->bio);
-    printf("| No HP: ");
-    printStringDin(currentUser->phoneNumber);
-    printf("\n");
-    printf("| Weton: %s\n\n", currentUser->weton);
+    displayUserProfile(*currentUser, false);
 
     boolean isBioValid = false;
 
     while (!isBioValid)
     {
-        printf("Masukkan bio akun:\n");    
+        printf("Masukkan bio akun:\n");
         STARTTEXT();
         printf("\n");
-    
+
         if (currentText.Length > 135)
         {
             printf("Bio tidak boleh lebih dari 135 karakter!!\n\n");
@@ -115,10 +114,10 @@ void changeProfile(){
 
     while (!isPhoneNumberValid)
     {
-        printf("Masukkan No HP:\n");    
+        printf("Masukkan No HP:\n");
         STARTSTRINGDIN();
         printf("\n");
-    
+
         if (!isStringDinAllNumber(currentStringDin))
         {
             printf("No HP tidak valid. Masukkan lagi yuk!\n\n");
@@ -134,7 +133,7 @@ void changeProfile(){
 
     while (!isWetonValid)
     {
-        printf("Masukkan Weton:\n");    
+        printf("Masukkan Weton:\n");
         STARTWORD();
         printf("\n");
 

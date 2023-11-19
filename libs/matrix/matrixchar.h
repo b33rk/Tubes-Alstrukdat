@@ -9,13 +9,11 @@
 #include <stdio.h>
 
 /* Ukuran maksimum baris dan kolom */
-#define ROW_CAP 10
-#define COL_CAP 100
 
-typedef int IdxType; /* Index baris, kolom */
+
 typedef struct
 {
-   char mem[ROW_CAP][COL_CAP];
+   char mem[50][50];
    int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
    int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } MatrixChar;
@@ -30,23 +28,19 @@ void createMatrixChar(MatrixChar *m, int row, int col);
 /* I.S. nRow dan nCol adalah valid untuk memori matriks yang dibuat */
 /* F.S. Matriks m sesuai dengan definisi di atas terbentuk */
 
-/* *** Selektor *** */
-#define ROW_EFF(M) (M).rowEff
-#define COL_EFF(M) (M).colEff
-#define ELMT(M, i, j) (M).mem[(i)][(j)]
 
 /* *** Selektor "Dunia Matrix" *** */
 boolean isMatrixCharIdxValid(int i, int j);
 /* Mengirimkan true jika i, j adalah index yang valid untuk matriks apa pun */
 
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
-IdxType getMatrixCharLastIdxRow(MatrixChar m);
+int getMatrixCharLastIdxRow(MatrixChar m);
 /* Mengirimkan Index baris terbesar m */
-IdxType getMatrixCharLastIdxCol(MatrixChar m);
+int getMatrixCharLastIdxCol(MatrixChar m);
 /* Mengirimkan Index kolom terbesar m */
-boolean isMatrixCharIdxEff(MatrixChar m, IdxType i, IdxType j);
+boolean isMatrixCharIdxEff(MatrixChar m, int i, int j);
 /* Mengirimkan true jika i, j adalah Index efektif bagi m */
-char getMatrixCharElmtDiagonal(MatrixChar m, IdxType i);
+char getMatrixCharElmtDiagonal(MatrixChar m, int i);
 /* Mengirimkan elemen m(i,i) */
 
 /* ********** Assignment  MatrixChar ********** */

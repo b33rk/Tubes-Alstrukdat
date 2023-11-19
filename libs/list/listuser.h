@@ -4,6 +4,7 @@
 #include "../boolean.h"
 #include "../user.h"
 #include "../machine/textmachine.h"
+#include <stdio.h>
 
 /*  Kamus Umum */
 #define CAPACITY_USER 20
