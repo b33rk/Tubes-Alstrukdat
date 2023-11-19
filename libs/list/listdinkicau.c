@@ -251,9 +251,9 @@ void sortListDinKicauByDateTime(ListDinKicau *l, boolean asc)
             {
                 if (DGT(l->buffer[j].datetime, l->buffer[j + 1].datetime))
                 {
-                    temp = ELMT(*l, j);
-                    ELMT(*l, j) = ELMT(*l, j + 1);
-                    ELMT(*l, j + 1) = temp;
+                    temp = l->buffer[j];
+                    l->buffer[j] = l->buffer[j+1];
+                    l->buffer[j+1] = temp;
                     tukar = true;
                 }
             }
@@ -261,9 +261,9 @@ void sortListDinKicauByDateTime(ListDinKicau *l, boolean asc)
             {
                 if (DLT(l->buffer[j].datetime, l->buffer[j + 1].datetime))
                 {
-                    temp = ELMT(*l, j);
-                    ELMT(*l, j) = ELMT(*l, j + 1);
-                    ELMT(*l, j + 1) = temp;
+                    temp = l->buffer[j];
+                    l->buffer[j] = l->buffer[j+1];
+                    l->buffer[j+1] = temp;
                     tukar = true;
                 }
             }

@@ -48,7 +48,7 @@ void printStringDin(StringDin str)
 
 void IgnoreNewLineStringDin()
 {
-    while (currentChar == '\n')
+    while (currentChar == '\n' || currentChar == '\r')
     {
         ADV();
     }

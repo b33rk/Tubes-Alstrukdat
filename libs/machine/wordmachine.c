@@ -11,7 +11,7 @@ void IgnoreBlanksAndNewLine()
     /* KAMUS */
 
     /* ALGORITMA */
-    while (currentChar == BLANK || currentChar == '\n')
+    while (currentChar == BLANK || currentChar == '\n' || currentChar == '\r')
     {
         ADV();
     }
@@ -159,14 +159,23 @@ Word wordToLowerCase(Word w)
     return w2;
 }
 
-int wordToInt(Word w){
+int wordToInt(Word w)
+{
     int len = w.Length;
     int i;
     int a = 1;
     int num = 0;
-    for (i = len - 1; i >= 0; i--){
-        num += (w.TabWord[i] - '0') * a;
-        a *= 10;
+    for (i = len - 1; i >= 0; i--)
+    {
+        if (w.TabWord[i] == '-')
+        {
+            num *= -1;
+        }
+        else
+        {
+            num += (w.TabWord[i] - '0') * a;
+            a *= 10;
+        }
     }
 
     return num;

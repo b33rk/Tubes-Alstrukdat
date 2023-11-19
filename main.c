@@ -107,6 +107,19 @@ int main()
         {
             lihatdraft();
         }
+        // else if (isWordEqual(currentWord, stringToWord("BALAS")))
+        // {
+        //     ADVWORD();
+        //     int idKicau = wordToInt(currentWord);
+        //     ADVWORD();
+        //     int idBalasan = wordToInt(currentWord);
+        //     balas(idKicau, idBalasan);
+        // }
+        // else if (isWordEqual(currentWord, stringToWord("BALASAN")))
+        // {
+        //     ADVWORD();
+        //     balasan(wordToInt(currentWord));
+        // }
 
         printf("\n");
     }
