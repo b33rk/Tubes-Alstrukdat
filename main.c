@@ -5,6 +5,7 @@
 #include "libs/feature/friendshipfeature.h"
 #include "libs/feature/friendshipreqfeature.h"
 #include "libs/feature/kicauan.h"
+#include "libs/feature/draft.h"
 
 int main()
 {
@@ -79,22 +80,33 @@ int main()
         else if (isWordEqual(currentWord, stringToWord("SETUJUI_PERTEMANAN")))
         {
             acceptFrienship();
-        } else if (isWordEqual(currentWord, stringToWord("KICAU")))
+        }
+        else if (isWordEqual(currentWord, stringToWord("KICAU")))
         {
             publishKicauan();
-        } else if (isWordEqual(currentWord, stringToWord("KICAUAN")))
+        }
+        else if (isWordEqual(currentWord, stringToWord("KICAUAN")))
         {
             displayKicauan();
-        } else if (isWordEqual(currentWord, stringToWord("SUKA_KICAUAN")))
+        }
+        else if (isWordEqual(currentWord, stringToWord("SUKA_KICAUAN")))
         {
             ADVWORD();
             likeKicauan(wordToInt(currentWord));
-        } 
-         else if (isWordEqual(currentWord, stringToWord("UBAH_KICAUAN")))
+        }
+        else if (isWordEqual(currentWord, stringToWord("UBAH_KICAUAN")))
         {
             ADVWORD();
             updateKicauan(wordToInt(currentWord));
-        } 
+        }
+        else if (isWordEqual(currentWord, stringToWord("BUAT_DRAFT")))
+        {
+            buatdraft(false);
+        }
+        else if (isWordEqual(currentWord, stringToWord("LIHAT_DRAFT")))
+        {
+            lihatdraft();
+        }
 
         printf("\n");
     }

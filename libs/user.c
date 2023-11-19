@@ -14,6 +14,7 @@ void CreateUser(User *u)
     u->manyFriend = 0;
     CreatePrioQueueFR(&(u->friendReq), 20);
     u->isPublic = true;
+    CreateStackDraft(&u->stackDraft);
 }
 
 void setUserName(User *user, char *name)

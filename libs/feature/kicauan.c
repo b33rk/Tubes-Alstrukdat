@@ -65,10 +65,10 @@ void publishKicauan()
 
 void displayKicauan()
 {
-    printf(">> Kicauan:\n");
     sortListDinKicauByDateTime(&listKicauan, false);
 
     int i;
+    int count = 0;
     for (i = 0; i < listKicauan.nEff; i++){
         if (listKicauan.buffer[i].idUser == currentUser->id || isHasRelation(graphFriendship ,currentUser->id, listKicauan.buffer[i].idUser)){
             printf("| ID = %d\n", listKicauan.buffer[i].id);
@@ -78,7 +78,12 @@ void displayKicauan()
             printf("\n");
             printf("| %s\n", listKicauan.buffer[i].text);
             printf("| Disukai: %d\n\n", listKicauan.buffer[i].like);
+            count++;
         }
+    }
+
+    if (count == 0){
+        printf("Tidak ada kicauan!!\n\n");
     }
 }
 

@@ -6,6 +6,7 @@
 #include "profilepicture.h"
 #include "machine/stringdinmachine.h"
 #include "queue/prioqueuefriendreq.h"
+#include "stack/stackdraft.h"
 
 
 typedef struct user
@@ -20,6 +21,7 @@ typedef struct user
     ProfilePicture profilePicture;
     int manyFriend;
     PrioQueueFriendReq friendReq;
+    StackDraft stackDraft;
 } User;
 
 

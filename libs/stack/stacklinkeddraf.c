@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "stacklinked.h"
+#include "stacklinkeddraf.h"
 
 /* Prototype manajemen memori */
 Address newNode(ElType x)
@@ -54,7 +54,7 @@ void DisplayStack(Stack s)
 /* Jika Stack kosong : menulis [] */
 {
     Address p;
-    if(isEmpty(s)) {
+    if(isEmptyStack(s)) {
         printf("[]");
     }
     else{
