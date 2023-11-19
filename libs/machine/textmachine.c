@@ -91,7 +91,7 @@ void printText(Text str)
 
 void IgnoreNewLineText()
 {
-    while (currentChar == '\n')
+    while (currentChar == '\n' || currentChar == '\r')
     {
         ADV();
     }

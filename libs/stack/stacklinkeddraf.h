@@ -3,7 +3,7 @@
 #ifndef STACKLINKED_H
 #define STACKLINKED_H
 
-#include "boolean.h"
+#include "../boolean.h"
 #include <stdlib.h>
 
 #define NIL NULL

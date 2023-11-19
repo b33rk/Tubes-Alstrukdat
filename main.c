@@ -2,6 +2,10 @@
 #include "database/database.h"
 #include "libs/feature/userfeature.h"
 #include "libs/feature/profile.h"
+#include "libs/feature/friendshipfeature.h"
+#include "libs/feature/friendshipreqfeature.h"
+#include "libs/feature/kicauan.h"
+#include "libs/feature/draft.h"
 
 int main()
 {
@@ -24,10 +28,6 @@ int main()
         printf("\n>> ");
         STARTWORD();
 
-        // printf("input: ");
-        // printWord(currentWord);
-        // printf("\n");
-
         if (isWordEqual(currentWord, stringToWord("TUTUP_PROGRAM")))
         {
             programStart = false;
@@ -40,23 +40,88 @@ int main()
         {
             loginUser();
         }
-        else if (isWordEqual(currentWord, stringToWord("KELUAR"))){
+        else if (isWordEqual(currentWord, stringToWord("KELUAR")))
+        {
             logoutUser();
         }
-        else if (isWordEqual(currentWord, stringToWord("LIHAT_PROFIL"))){
+        else if (isWordEqual(currentWord, stringToWord("LIHAT_PROFIL")))
+        {
             ADVWORD();
             seeProfile(currentWord);
-        } else if (isWordEqual(currentWord, stringToWord("GANTI_PROFIL"))){
+        }
+        else if (isWordEqual(currentWord, stringToWord("GANTI_PROFIL")))
+        {
             changeProfile();
-        } else if (isWordEqual(currentWord, stringToWord("ATUR_JENIS_AKUN"))){
+        }
+        else if (isWordEqual(currentWord, stringToWord("ATUR_JENIS_AKUN")))
+        {
             changeAccountType();
-        } else if (isWordEqual(currentWord, stringToWord("UBAH_FOTO_PROFIL"))){
+        }
+        else if (isWordEqual(currentWord, stringToWord("UBAH_FOTO_PROFIL")))
+        {
             changeProfilePicture();
         }
+        else if (isWordEqual(currentWord, stringToWord("DAFTAR_TEMAN")))
+        {
+            friendlist();
+        }
+        else if (isWordEqual(currentWord, stringToWord("HAPUS_TEMAN")))
+        {
+            deleteFriend();
+        }
+        else if (isWordEqual(currentWord, stringToWord("TAMBAH_TEMAN")))
+        {
+            addFriend();
+        }
+        else if (isWordEqual(currentWord, stringToWord("DAFTAR_PERMINTAAN_PERTEMANAN")))
+        {
+            friendshipReqList();
+        }
+        else if (isWordEqual(currentWord, stringToWord("SETUJUI_PERTEMANAN")))
+        {
+            acceptFrienship();
+        }
+        else if (isWordEqual(currentWord, stringToWord("KICAU")))
+        {
+            publishKicauan();
+        }
+        else if (isWordEqual(currentWord, stringToWord("KICAUAN")))
+        {
+            displayKicauan();
+        }
+        else if (isWordEqual(currentWord, stringToWord("SUKA_KICAUAN")))
+        {
+            ADVWORD();
+            likeKicauan(wordToInt(currentWord));
+        }
+        else if (isWordEqual(currentWord, stringToWord("UBAH_KICAUAN")))
+        {
+            ADVWORD();
+            updateKicauan(wordToInt(currentWord));
+        }
+        else if (isWordEqual(currentWord, stringToWord("BUAT_DRAFT")))
+        {
+            buatdraft(false);
+        }
+        else if (isWordEqual(currentWord, stringToWord("LIHAT_DRAFT")))
+        {
+            lihatdraft();
+        }
+        // else if (isWordEqual(currentWord, stringToWord("BALAS")))
+        // {
+        //     ADVWORD();
+        //     int idKicau = wordToInt(currentWord);
+        //     ADVWORD();
+        //     int idBalasan = wordToInt(currentWord);
+        //     balas(idKicau, idBalasan);
+        // }
+        // else if (isWordEqual(currentWord, stringToWord("BALASAN")))
+        // {
+        //     ADVWORD();
+        //     balasan(wordToInt(currentWord));
+        // }
 
         printf("\n");
-
-        // printUser(currentUser);
     }
 
     printf(" ______  ____  ____  ________  ______  ____  ____  ________  \n");

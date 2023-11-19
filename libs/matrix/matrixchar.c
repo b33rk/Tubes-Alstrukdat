@@ -10,8 +10,8 @@ void createMatrixChar(MatrixChar *m, int row, int col)
     /* KAMUS */
 
     /* ALGORITMA */
-    ROW_EFF(*m) = row;
-    COL_EFF(*m) = col;
+    m->rowEff = row;
+    m->colEff = col;
 }
 
 /* *** Selektor "Dunia MatrixChar" *** */
@@ -21,41 +21,41 @@ boolean isMatrixCharIdxValid(int i, int j)
     /* KAMUS */
 
     /* ALGORITMA */
-    return (i >= 0 && i < ROW_CAP) && (j >= 0 && j < COL_CAP);
+    return (i >= 0 && i < 50) && (j >= 0 && j < 50);
 }
 
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
-IdxType getMatrixCharLastIdxRow(MatrixChar m)
+int getMatrixCharLastIdxRow(MatrixChar m)
 {
     /* Mengirimkan Index baris terbesar m */
     /* KAMUS */
 
     /* ALGORITMA */
-    return ROW_EFF(m) - 1;
+    return m.rowEff - 1;
 }
-IdxType getMatrixCharLastIdxCol(MatrixChar m)
+int getMatrixCharLastIdxCol(MatrixChar m)
 {
     /* Mengirimkan Index kolom terbesar m */
     /* KAMUS */
 
     /* ALGORITMA */
-    return COL_EFF(m) - 1;
+    return m.colEff - 1;
 }
-boolean isMatrixCharIdxEff(MatrixChar m, IdxType i, IdxType j)
+boolean isMatrixCharIdxEff(MatrixChar m, int i, int j)
 {
     /* Mengirimkan true jika i, j adalah Index efektif bagi m */
     /* KAMUS */
 
     /* ALGORITMA */
-    return (i >= 0 && i < ROW_EFF(m)) && (j >= 0 && j < COL_EFF(m));
+    return (i >= 0 && i < m.rowEff) && (j >= 0 && j < m.colEff);
 }
-char getMatrixCharElmtDiagonal(MatrixChar m, IdxType i)
+char getMatrixCharElmtDiagonal(MatrixChar m, int i)
 {
     /* Mengirimkan elemen m(i,i) */
     /* KAMUS */
 
     /* ALGORITMA */
-    return ELMT(m, i, i);
+    return m.mem[i][i];
 }
 
 /* ********** Assignment  MatrixChar ********** */
@@ -63,15 +63,15 @@ void copyMatrixChar(MatrixChar mIn, MatrixChar *mOut)
 {
     /* Melakukan assignment mOut <- mIn */
     /* KAMUS */
-    IdxType i, j;
+    int i, j;
 
     /* ALGORITMA */
-    createMatrixChar(mOut, ROW_EFF(mIn), COL_EFF(mIn));
-    for (i = 0; i < ROW_EFF(mIn); i++)
+    createMatrixChar(mOut, mIn.rowEff, mIn.colEff);
+    for (i = 0; i < mIn.rowEff; i++)
     {
-        for (j = 0; j < COL_EFF(mIn); j++)
+        for (j = 0; j < mIn.colEff; j++)
         {
-            ELMT(*mOut, i, j) = ELMT(mIn, i, j);
+            mOut->mem[i][j] = mIn.mem[i][j];
         }
     }
 }
@@ -81,7 +81,7 @@ void readMatrixChar(MatrixChar *m, int row, int col)
 {
 
     /* KAMUS */
-    IdxType i, j;
+    int i, j;
 
     /*ALGORITMA*/
     createMatrixChar(m, row, col);
@@ -90,22 +90,22 @@ void readMatrixChar(MatrixChar *m, int row, int col)
     {
         for (j = 0; j < col; j++)
         {
-            scanf("%c", &ELMT(*m, i, j));
+            scanf("%c", &(m->mem[i][j]));
         }
     }
 }
 void displayMatrixChar(MatrixChar m)
 {
 
-    IdxType i, j;
+    int i, j;
 
     /*ALGORITMA*/
-    for (i = 0; i < ROW_EFF(m); i++)
+    for (i = 0; i < m.rowEff; i++)
     {
-        for (j = 0; j < COL_EFF(m); j++)
+        for (j = 0; j < m.colEff; j++)
         {
-            printf("%c", ELMT(m, i, j));
-            if (j == COL_EFF(m) - 1)
+            printf("%c", m.mem[i][j]);
+            if (j == m.colEff - 1)
             {
                 printf("\n");
             }
@@ -124,7 +124,7 @@ boolean isMatrixCharEqual(MatrixChar m1, MatrixChar m2)
     /* untuk setiap i,j yang merupakan Index baris dan kolom m1(i,j) = m2(i,j) */
     /* Juga merupakan strong eq karena getLastIdxCol(m1) = getLastIdxCol(m2) */
     /* KAMUS */
-    IdxType i, j;
+    int i, j;
 
     /*ALGORITMA*/
     if (countMatrixCharElmt(m1) != countMatrixCharElmt(m2))
@@ -137,11 +137,11 @@ boolean isMatrixCharEqual(MatrixChar m1, MatrixChar m2)
         return false;
     }
 
-    for (i = 0; i < ROW_EFF(m1); i++)
+    for (i = 0; i < m1.rowEff; i++)
     {
-        for (j = 0; j < COL_EFF(m1); j++)
+        for (j = 0; j < m1.colEff; j++)
         {
-            if (ELMT(m1, i, j) != ELMT(m2, i, j))
+            if (m1.mem[i][j] != m2.mem[i][j])
             {
                 return false;
             }
@@ -154,7 +154,7 @@ boolean isMatrixCharNotEqual(MatrixChar m1, MatrixChar m2)
 {
     /* Mengirimkan true jika m1 tidak sama dengan m2 */
     /* KAMUS */
-    IdxType i, j;
+    int i, j;
 
     /*ALGORITMA*/
     if (countMatrixCharElmt(m1) != countMatrixCharElmt(m2))
@@ -167,11 +167,11 @@ boolean isMatrixCharNotEqual(MatrixChar m1, MatrixChar m2)
         return true;
     }
 
-    for (i = 0; i < ROW_EFF(m1); i++)
+    for (i = 0; i < m1.rowEff; i++)
     {
-        for (j = 0; j < COL_EFF(m1); j++)
+        for (j = 0; j < m1.colEff; j++)
         {
-            if (ELMT(m1, i, j) != ELMT(m2, i, j))
+            if (m1.mem[i][j] != m2.mem[i][j])
             {
                 return true;
             }
@@ -187,7 +187,7 @@ boolean isMatrixCharSizeEqual(MatrixChar m1, MatrixChar m2)
     /* KAMUS */
 
     /*ALGORITMA*/
-    return ROW_EFF(m1) == ROW_EFF(m2) && COL_EFF(m1) == COL_EFF(m2);
+    return m1.rowEff == m2.rowEff && m1.colEff == m2.colEff;
 }
 
 /* ********** Operasi lain ********** */
@@ -197,7 +197,7 @@ int countMatrixCharElmt(MatrixChar m)
     /* KAMUS */
 
     /*ALGORITMA*/
-    return COL_EFF(m) * ROW_EFF(m);
+    return m.colEff * m.rowEff;
 }
 
 /* ********** KELOMPOK TEST TERHADAP MatrixChar ********** */
@@ -207,25 +207,25 @@ boolean isMatrixCharSquare(MatrixChar m)
     /* KAMUS */
 
     /*ALGORITMA*/
-    return (ROW_EFF(m) == COL_EFF(m));
+    return (m.rowEff == m.colEff);
 }
 boolean isMatrixCharSymmetric(MatrixChar m)
 {
     /* Mengirimkan true jika m adalah matriks simetri : isSquare(m)
        dan untuk setiap elemen m, m(i,j)=m(j,i) */
     /* KAMUS */
-    IdxType i, j;
+    int i, j;
 
     /*ALGORITMA*/
     if (!isMatrixCharSquare(m))
     {
         return false;
     }
-    for (i = 0; i < ROW_EFF(m); i++)
+    for (i = 0; i < m.rowEff; i++)
     {
-        for (j = 0; j < COL_EFF(m); j++)
+        for (j = 0; j < m.colEff; j++)
         {
-            if (ELMT(m, i, j) != ELMT(m, j, i))
+            if (m.mem[i][j] != m.mem[j][i])
             {
                 return false;
             }
