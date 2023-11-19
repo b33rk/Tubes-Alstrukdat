@@ -26,4 +26,5 @@ boolean isPending(GraphFriendship graph, int id1, int id2);
 boolean isHasRelation(GraphFriendship graph, int id1, int id2);
 
 
+
 #endif

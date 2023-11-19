@@ -6,7 +6,8 @@
     "profilepicture.h": "c",
     "charmachine.h": "c",
     "profile.h": "c",
-    "database.h": "c"
+    "database.h": "c",
+    "datetime.h": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

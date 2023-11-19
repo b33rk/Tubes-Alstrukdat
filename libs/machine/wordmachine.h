@@ -53,4 +53,6 @@ Word wordToLowerCase(Word w);
 
 Word stringToWord(char *str);
 
+int wordToInt(Word w);
+
 #endif

@@ -165,7 +165,7 @@ void loginUser()
 
     currentUser = &(listUser.contents[index]);
 
-    printf("Anda telah berhasil masuk dengan nama pengguna Tuan %s. Mari menjelajahi BurBir bersama Ande-Ande Lumut!", listUser.contents[index].name);
+    printf("Anda telah berhasil masuk dengan nama pengguna %s. Mari menjelajahi BurBir bersama Ande-Ande Lumut!", listUser.contents[index].name);
 }
 
 void logoutUser()

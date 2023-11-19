@@ -158,3 +158,16 @@ Word wordToLowerCase(Word w)
     w2.Length = w.Length;
     return w2;
 }
+
+int wordToInt(Word w){
+    int len = w.Length;
+    int i;
+    int a = 1;
+    int num = 0;
+    for (i = len - 1; i >= 0; i--){
+        num += (w.TabWord[i] - '0') * a;
+        a *= 10;
+    }
+
+    return num;
+}
