@@ -129,6 +129,7 @@ void changeProfile()
 
     setUserPhoneNumber(currentUser, currentStringDin);
 
+    deallocateStringDin();
     boolean isWetonValid = false;
 
     while (!isWetonValid)

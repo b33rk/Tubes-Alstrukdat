@@ -23,6 +23,31 @@ void STARTSTRINGDIN()
     }
 }
 
+void deallocateStringDin()
+{
+    deleteAllListLinierChar(&(currentStringDin.TabString));
+}
+
+// void STARTSTRINGDIN2(char* s)
+// {
+//     deleteAllListLinierChar(&(currentStringDin.TabString));
+//     STARTSTRING(s);
+//     IgnoreNewLineStringDin();
+//     if (currentChar == '\n' || currentChar == '\r')
+//     {
+//         EndStringDin = true;
+//     }
+//     else
+//     {
+//         EndStringDin = false;
+//         while (!(currentChar == '\n' || currentChar == '\r'))
+//         {
+//             insertLastListLinierChar(&(currentStringDin.TabString), currentChar);
+//             ADV();
+//         }
+//     }
+// }
+
 boolean isStringDinAllBlank(StringDin str)
 {
     AddrChar curr = str.TabString;
@@ -54,11 +79,13 @@ void IgnoreNewLineStringDin()
     }
 }
 
-boolean isStringDinAllNumber(StringDin str){
+boolean isStringDinAllNumber(StringDin str)
+{
     AddrChar curr = str.TabString;
     while (curr != NULL)
     {
-        if (curr->info < '0' || curr->info > '9' || curr->info == ' ') return false;
+        if (curr->info < '0' || curr->info > '9' || curr->info == ' ')
+            return false;
         curr = curr->next;
     }
 

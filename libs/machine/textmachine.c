@@ -30,6 +30,33 @@ void STARTTEXT()
     }
 }
 
+// void STARTTEXT2(char* s)
+// {
+//     STARTSTRING(s);
+//     IgnoreNewLineText();
+//     if (currentChar == '\n' || currentChar == '\r')
+//     {
+//         EndText = true;
+//         currentText.Length = 0;
+//         currentText.TabString[0] = '\0';
+//     }
+//     else
+//     {
+//         EndText = false;
+//         int length = 0;
+//         while (!(currentChar == '\n' || currentChar == '\r'))
+//         {
+
+//             if (length < 280)
+//                 currentText.TabString[length++] = currentChar;
+//             ADV();
+//         }
+
+//         currentText.Length = length;
+//         currentText.TabString[length] = '\0';
+//     }
+// }
+
 boolean isTextAllBlank(Text sentence)
 {
     int i;
@@ -74,7 +101,7 @@ Text charArrToText(char *c)
         str.TabString[i++] = curr;
         curr = c[i];
     }
-
+    str.TabString[i] = '\0';
     str.Length = i;
 
     return str;
@@ -95,4 +122,31 @@ void IgnoreNewLineText()
     {
         ADV();
     }
+}
+
+Text appendText(Text t1, Text t2)
+{
+    Text t;
+
+    int i = 0;
+    char curr = t1.TabString[0];
+
+    while (curr != '\0')
+    {
+        t.TabString[i++] = curr;
+        curr = t1.TabString[i];
+    }
+
+    curr = t2.TabString[0];
+    int j = 1;
+    while (curr != '\0')
+    {
+        t.TabString[i++] = curr;
+        curr = t2.TabString[j];
+        j++;
+    }
+
+    t.TabString[i] = '\0';
+    t.Length = t1.Length + t2.Length;
+    return t;
 }

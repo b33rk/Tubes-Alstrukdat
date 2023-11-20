@@ -28,9 +28,14 @@ boolean isTextEqual(Text s1, Text s2);
 
 Text charArrToText(char* c);
 
+Text appendText(Text t1, Text t2);
+
 void printText(Text str);
 
 void IgnoreNewLineText();
+
+// void STARTTEXT2(char* s);
+
 
 
 #endif

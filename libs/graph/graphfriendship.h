@@ -21,6 +21,8 @@ int countGraphFriendshipRelation(GraphFriendship graph, int id);
 
 void addGraphFriendshipPending(GraphFriendship* graph, int id1, int id2);
 
+int countPending(GraphFriendship graph);
+
 boolean isPending(GraphFriendship graph, int id1, int id2);
 
 boolean isHasRelation(GraphFriendship graph, int id1, int id2);

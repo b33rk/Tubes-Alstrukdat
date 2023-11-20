@@ -171,7 +171,6 @@ void updateKicauan(int idKicau)
 
             listKicauan.buffer[index].text[j] = '\0';
 
-            getCurrentDateTime(&listKicauan.buffer[index].datetime);
 
             printf("Selamat! Kicauan telah diterbitkan!\n");
             printf("Detil kicauan:\n");

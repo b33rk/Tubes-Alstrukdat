@@ -6,6 +6,7 @@
 #include "libs/feature/friendshipreqfeature.h"
 #include "libs/feature/kicauan.h"
 #include "libs/feature/draft.h"
+#include "libs/feature/loadsave.h"
 
 int main()
 {
@@ -22,6 +23,7 @@ int main()
     printf("\nSelamat datang di BurBir.\n");
     printf("Aplikasi untuk studi kualitatif mengenai perilaku manusia dengan menggunakan metode (pengambilan data berupa) Focused Group Discussion kedua di zamannya.\n\n");
 
+    load(true);
     while (programStart)
     {
 
@@ -107,6 +109,14 @@ int main()
         {
             lihatdraft();
         }
+        else if (isWordEqual(currentWord, stringToWord("MUAT")))
+        {
+            load(false);
+        }
+        else if (isWordEqual(currentWord, stringToWord("SIMPAN")))
+        {
+            save();
+        }
         // else if (isWordEqual(currentWord, stringToWord("BALAS")))
         // {
         //     ADVWORD();
@@ -123,6 +133,8 @@ int main()
 
         printf("\n");
     }
+
+    // save();
 
     printf(" ______  ____  ____  ________  ______  ____  ____  ________  \n");
     printf("|_   _ \\|_  _||_  _||_   __  ||_   _ \\|_  _||_  _||_   __  | \n");

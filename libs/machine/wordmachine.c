@@ -11,7 +11,7 @@ void IgnoreBlanksAndNewLine()
     /* KAMUS */
 
     /* ALGORITMA */
-    while (currentChar == BLANK || currentChar == '\n' || currentChar == '\r')
+    while (currentChar == BLANK || currentChar == '\n')
     {
         ADV();
     }
@@ -39,6 +39,29 @@ void STARTWORD()
         CopyWord();
     }
 }
+
+// void STARTWORD2(char* s)
+// {
+//     /* I.S. : currentChar sembarang
+//        F.S. : EndWord = true, dan currentChar = MARK;
+//               atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
+//               currentChar karakter pertama sesudah karakter terakhir kata */
+
+//     /* KAMUS */
+
+//     /* ALGORITMA */
+//     STARTSTRING(s);
+//     IgnoreBlanksAndNewLine();
+//     if (currentChar == '\n' || currentChar == '\r')
+//     {
+//         EndWord = true;
+//     }
+//     else
+//     {
+//         EndWord = false;
+//         CopyWord();
+//     }
+// }
 
 void ADVWORD()
 {
