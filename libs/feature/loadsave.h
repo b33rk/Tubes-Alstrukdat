@@ -22,11 +22,13 @@ void save();
 void saveKicauan(Text rootPath);
 void saveUser(Text rootPath);
 void saveDraft(Text rootPath);
+void saveUtas(Text rootPath);
 
 void load(boolean isInitiate);
 void loadUser(Text rootPath);
 void loadKicauan(Text rootPath);
 void loadDraft(Text rootPath);
+void loadUtas(Text rootPath);
 
 
 

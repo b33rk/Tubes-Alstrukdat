@@ -18,4 +18,6 @@ extern ListDinUtas listUtas;
 
 void initDatabase();
 
+void clearDatabase();
+
 #endif

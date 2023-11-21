@@ -51,3 +51,8 @@ void initDatabase()
     // addGraphFriendshipRelation(&graphFriendship, 0, 1);
     // addGraphFriendshipRelation(&graphFriendship, 0, 2);
 }
+
+void clearDatabase(){
+    dealocateListDinKicau(&listKicauan);
+    dealocateListDinUtas(&listUtas);
+}
