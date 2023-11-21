@@ -79,6 +79,21 @@ int listUserIndexOfWithName(ListUser l, char* name){
     }
 }
 
+int listUserIndexOfWithID(ListUser l, int ID){
+    if (isListUserEmpty(l)){
+        return -1;
+    } else {
+        int i;
+        for (i = 0; i < listUserLength(l); i++){
+            if (l.contents[i].id == ID){
+                return i;
+            }
+        }
+
+        return -1;
+    }
+}
+
 /* ********** Test Indeks yang valid ********** */
 boolean isListUserIdxValid(ListUser l, IdxType i)
 {

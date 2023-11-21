@@ -71,6 +71,8 @@ int listUserIndexOfWithName(ListUser l, char* name);
 /* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
 /* Skema Searching yang digunakan bebas */
 
+int listUserIndexOfWithID(ListUser l, int ID);
+
 /* ********** MENAMBAH ELEMEN ********** */
 /* *** Menambahkan elemen terakhir *** */
 void listUserInsertFirst(ListUser *l, User val);
