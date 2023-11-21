@@ -24,8 +24,16 @@ void dealocateListDinUtas(ListDinUtas *l)
     /* KAMUS */
 
     /* ALGORITMA */
+    int len = listDinUtasLength(*l);
+    int i;
+
+    for (i = 0; i < len; i++){
+        Utas u = (*l).buffer[i];
+        deleteAllUtas(&u);
+    }
     l->capacity = 0;
     l->nEff = 0;
+    
     free(l->buffer);
 }
 

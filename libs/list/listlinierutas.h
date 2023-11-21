@@ -118,4 +118,7 @@ int lengthUtas(Utas l);
 // /* Konkatenasi dua buah list : l1 dan l2    */
 // /* menghasilkan l3 yang baru (dengan elemen list l1 dan l2 secara beurutan). */
 // /* Tidak ada alokasi/dealokasi pada prosedur ini */
+
+void deleteAllUtas(Utas* u);
+
 #endif
