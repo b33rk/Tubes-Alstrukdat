@@ -7,6 +7,7 @@ void CreateKicauan(Kicauan *k)
     k->id = -1;
     k->idUser = -1;
     k->like = 0;
+    k->idUtas = - 1;
 }
 
 void CreateListDinKicau(ListDinKicau *l, int capacity)
@@ -115,7 +116,6 @@ void copyListDinKicau(ListDinKicau lIn, ListDinKicau *lOut)
 
     /* ALGORITMA */
     CreateListDinKicau(lOut, lIn.capacity);
-    lOut->nEff = lIn.nEff;
 
     for (i = 0; i < lIn.nEff; i++)
     {
@@ -136,6 +136,7 @@ void copyListDinKicau(ListDinKicau lIn, ListDinKicau *lOut)
         temp.text[j] = '\0';
 
         insertLastListDinKicau(lOut, temp);
+        lOut->nEff++;
     }
 }
 
@@ -252,8 +253,8 @@ void sortListDinKicauByDateTime(ListDinKicau *l, boolean asc)
                 if (DGT(l->buffer[j].datetime, l->buffer[j + 1].datetime))
                 {
                     temp = l->buffer[j];
-                    l->buffer[j] = l->buffer[j+1];
-                    l->buffer[j+1] = temp;
+                    l->buffer[j] = l->buffer[j + 1];
+                    l->buffer[j + 1] = temp;
                     tukar = true;
                 }
             }
@@ -262,8 +263,8 @@ void sortListDinKicauByDateTime(ListDinKicau *l, boolean asc)
                 if (DLT(l->buffer[j].datetime, l->buffer[j + 1].datetime))
                 {
                     temp = l->buffer[j];
-                    l->buffer[j] = l->buffer[j+1];
-                    l->buffer[j+1] = temp;
+                    l->buffer[j] = l->buffer[j + 1];
+                    l->buffer[j + 1] = temp;
                     tukar = true;
                 }
             }
@@ -299,21 +300,21 @@ void sortListDinKicauById(ListDinKicau *l, boolean asc)
         {
             if (asc)
             {
-                if (l->buffer[j].id > l->buffer[j+1].id)
+                if (l->buffer[j].id > l->buffer[j + 1].id)
                 {
                     temp = l->buffer[j];
-                    l->buffer[j] = l->buffer[j+1];
-                    l->buffer[j+1] = temp;
+                    l->buffer[j] = l->buffer[j + 1];
+                    l->buffer[j + 1] = temp;
                     tukar = true;
                 }
             }
             else
             {
-                if (l->buffer[j].id < l->buffer[j+1].id)
+                if (l->buffer[j].id < l->buffer[j + 1].id)
                 {
                     temp = l->buffer[j];
-                    l->buffer[j] = l->buffer[j+1];
-                    l->buffer[j+1] = temp;
+                    l->buffer[j] = l->buffer[j + 1];
+                    l->buffer[j + 1] = temp;
                     tukar = true;
                 }
             }
@@ -340,8 +341,10 @@ void insertLastListDinKicau(ListDinKicau *l, Kicauan val)
     {
         l->buffer[l->nEff] = val;
         l->nEff++;
-    } else {
-        expandListDinKicau(l, l->capacity);
+    }
+    else
+    {
+        // expandListDinKicau(l, l->capacity);
         l->buffer[l->nEff] = val;
         l->nEff++;
     }
@@ -376,10 +379,19 @@ void expandListDinKicau(ListDinKicau *l, int num)
 
     for (i = 0; i < l->nEff; i++)
     {
-        lnew.buffer[i] = l->buffer[i];
+        lnew.buffer[i].id = l->buffer[i].id;
+        lnew.buffer[i].datetime = l->buffer[i].datetime;
+        lnew.buffer[i].idUser = l->buffer[i].idUser;
+        lnew.buffer[i].like = l->buffer[i].like;
+        int j = 0;
+        while (l->buffer[i].text[j] != '\0')
+        {
+            lnew.buffer[i].text[j] = l->buffer[i].text[j];
+            j++;
+        }
+        lnew.buffer[i].text[j] = '\0';
+        lnew.nEff++;
     }
-
-    lnew.nEff = l->nEff;
 
     dealocateListDinKicau(l);
 

@@ -3,7 +3,7 @@
 AddressUtas newNodeUtas(ElUtas val)
 {
     /* Definisi Utas : */
-    /* Utas kosong : FIRST(l) = NULL */
+    /* Utas kosong : l = NULL */
     /* Setiap elemen dengan AddressUtas p dapat diacu INFO(p), p->next */
     /* Elemen terakhir list: jika addressnya Last, maka NEXT(Last)=NULL */
     /* KAMUS */
@@ -13,15 +13,17 @@ AddressUtas newNodeUtas(ElUtas val)
 
     if (p != NULL)
     {
-        INFO(p) = val;
+        p->info.idKicau = val.idKicau;
         p->info.id = val.id;
         p->info.idUser = val.idUser;
+        p->info.datetime = val.datetime;
         int i = 0;
         while (val.text[i] != '\0')
         {
             p->info.text[i] = val.text[i];
             i++;
         }
+        p->info.text[i] = '\0';
         p->next = NULL;
     }
 
@@ -30,7 +32,7 @@ AddressUtas newNodeUtas(ElUtas val)
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateListUtas(Utas *l)
+void CreateUtas(Utas *l)
 {
     /* I.S. sembarang             */
     /* F.S. Terbentuk list kosong */
@@ -47,7 +49,7 @@ boolean isEmptyUtas(Utas l)
     /* KAMUS */
 
     /* ALGORITMA */
-    return FIRST(l) == NULL;
+    return l == NULL;
 }
 
 /****************** GETTER SETTER ******************/
@@ -60,14 +62,14 @@ ElUtas getElmtUtas(Utas l, int idx)
     AddressUtas current;
 
     /* ALGORITMA */
-    current = FIRST(l);
+    current = l;
     while (i < idx)
     {
-        current = NEXT(current);
+        current = current->next;
         i++;
     }
 
-    return INFO(current);
+    return current->info;
 }
 
 void setElmtUtas(Utas *l, int idx, ElUtas val)
@@ -79,14 +81,14 @@ void setElmtUtas(Utas *l, int idx, ElUtas val)
     AddressUtas current;
 
     /* ALGORITMA */
-    current = FIRST(*l);
+    current = *l;
     while (i < idx)
     {
-        current = NEXT(current);
+        current = current->next;
         i++;
     }
 
-    INFO(current) = val;
+    current->info = val;
 }
 
 // int indexOfUtas(Utas l, ElUtas val){
@@ -99,13 +101,13 @@ void setElmtUtas(Utas *l, int idx, ElUtas val)
 //     AddressUtas current;
 
 //     /* ALGORITMA */
-//     current = FIRST(l);
-//     while (NEXT(current) != NULL && INFO(current) != val) {
-//         current = NEXT(current);
+//     current = l;
+//     while (current->next != NULL && current->info != val) {
+//         current = current->next;
 //         i++;
 //     }
 
-//     if (INFO(current) != val) {
+//     if (current->info != val) {
 //         return IDX_UNDEF;
 //     }
 
@@ -129,7 +131,7 @@ void insertFirstUtas(Utas *l, ElUtas val)
     {
         if (!isEmptyUtas(*l))
         {
-            NEXT(newEl) = FIRST(*l);
+            newEl->next = *l;
             *l = newEl;
         }
         else
@@ -154,12 +156,12 @@ void insertLastUtas(Utas *l, ElUtas val)
     {
         if (!isEmptyUtas(*l))
         {
-            current = FIRST(*l);
-            while (NEXT(current) != NULL)
+            current = *l;
+            while (current->next != NULL)
             {
-                current = NEXT(current);
+                current = current->next;
             }
-            NEXT(current) = newEl;
+            current->next = newEl;
         }
         else
         {
@@ -179,27 +181,27 @@ void insertAtUtas(Utas *l, ElUtas val, int idx)
     AddressUtas current, nextCurrent, newEl;
 
     /* ALGORITMA */
-    current = FIRST(*l);
+    current = *l;
     while (i < idx - 1)
     {
-        current = NEXT(current);
+        current = current->next;
         i++;
     }
 
-    nextCurrent = NEXT(current);
-    newEl = newNode(val);
+    nextCurrent = current->next;
+    newEl = newNodeUtas(val);
     if (newEl != NULL)
     {
         if (idx == 0)
         {
-            NEXT(newEl) = FIRST(*l);
+            newEl->next = *l;
             *l = newEl;
         }
         else
         {
 
-            NEXT(current) = newEl;
-            NEXT(newEl) = nextCurrent;
+            current->next = newEl;
+            newEl->next = nextCurrent;
         }
     }
 }
@@ -214,17 +216,17 @@ void deleteFirstUtas(Utas *l, ElUtas *val)
     AddressUtas firstEl;
 
     /* ALGORITMA */
-    *val = INFO(FIRST(*l));
-    if (NEXT(FIRST(*l)) != NULL)
+    *val = (*l)->info;
+    if ((*l)->next != NULL)
     {
-        firstEl = FIRST(*l);
-        *l = NEXT(firstEl);
+        firstEl = *l;
+        *l = firstEl->next;
         free(firstEl);
     }
     else
     {
-        free(FIRST(*l));
-        CreateList(l);
+        free(*l);
+        CreateUtas(l);
     }
 }
 void deleteLastUtas(Utas *l, ElUtas *val)
@@ -236,25 +238,25 @@ void deleteLastUtas(Utas *l, ElUtas *val)
     AddressUtas current, current2;
 
     /* ALGORITMA */
-    current = FIRST(*l);
-    if (NEXT(current) != NULL)
+    current = *l;
+    if (current->next != NULL)
     {
-        current2 = NEXT(current);
-        while (NEXT(current2) != NULL)
+        current2 = current->next;
+        while (current2->next != NULL)
         {
-            current = NEXT(current);
-            current2 = NEXT(current2);
+            current = current->next;
+            current2 = current2->next;
         }
 
-        *val = INFO(current2);
-        NEXT(current) = NULL;
+        *val = current2->info;
+        current->next = NULL;
         free(current2);
     }
     else
     {
-        *val = INFO(current);
-        free(FIRST(*l));
-        CreateList(l);
+        *val = current->info;
+        free(*l);
+        CreateUtas(l);
     }
 }
 
@@ -265,36 +267,36 @@ void deleteAtUtas(Utas *l, int idx, ElUtas *val)
     /*      Elemen l pada indeks ke-idx dihapus dari l */
     /* KAMUS */
     int i = 0;
-    AddressUtas current, nextCurrent, newEl;
+    AddressUtas current, nextCurrent;
 
     /* ALGORITMA */
 
-    current = FIRST(*l);
-    if (NEXT(current) == NULL)
+    current = *l;
+    if (current->next == NULL)
     {
-        *val = INFO(current);
-        free(FIRST(current));
-        CreateList(l);
+        *val = current->info;
+        free(current);
+        CreateUtas(l);
     }
     else
     {
         while (i < idx - 1)
         {
-            current = NEXT(current);
+            current = current->next;
             i++;
         }
 
         if (idx != 0)
         {
-            nextCurrent = NEXT(current);
-            *val = INFO(nextCurrent);
-            NEXT(current) = NEXT(nextCurrent);
+            nextCurrent = current->next;
+            *val = nextCurrent->info;
+            current->next = nextCurrent->next;
             free(nextCurrent);
         }
         else
         {
-            *val = INFO(current);
-            *l = NEXT(FIRST(*l));
+            *val = current->info;
+            *l = (*l)->next;
             free(current);
         }
     }
@@ -311,16 +313,16 @@ void deleteAtUtas(Utas *l, int idx, ElUtas *val)
 //     AddressUtas current;
 
 //     /* ALGORITMA */
-//     if (isEmpty(l)){
+//     if (isEmptyUtas(l)){
 //         printf("[]");
 //     } else {
-//         current = FIRST(l);
-//         printf("[%d", INFO(current));
+//         current = l;
+//         printf("[%d", current->info);
 
-//         while (NEXT(current) != NULL)
+//         while (current->next != NULL)
 //         {
-//             current = NEXT(current);
-//             printf(",%d", INFO(current));
+//             current = current->next;
+//             printf(",%d", current->info);
 //         }
 
 //         printf("]");
@@ -335,14 +337,14 @@ int lengthUtas(Utas l)
     int len;
 
     /* ALGORITMA */
-    if (isEmpty(l))
+    if (isEmptyUtas(l))
     {
         return 0;
     }
     else
     {
         len = 1;
-        for (current = FIRST(l); NEXT(current) != NULL; current = NEXT(current))
+        for (current = l; current->next != NULL; current = current->next)
         {
             len++;
         }
@@ -362,13 +364,13 @@ int lengthUtas(Utas l)
 //     // AddressUtas current;
 
 //     // /* ALGORITMA */
-//     // if (!isEmpty(l1)){
+//     // if (!isEmptyUtas(l1)){
 //     //     FIRST(l3) = FIRST(l1);
 
-//     //     for (current = FIRST(l3); NEXT(current) != NULL; current = NEXT(current)){
+//     //     for (current = FIRST(l3); current->next != NULL; current = current->next){
 
 //     //     }
-//     //     NEXT(current) = FIRST(l2);
+//     //     current->next = FIRST(l2);
 
 //     // } else {
 //     //     FIRST(l3) = FIRST(l2);
@@ -382,19 +384,19 @@ int lengthUtas(Utas l)
 //     AddressUtas current;
 
 //     /* ALGORITMA */
-//     CreateList(&l3);
+//     CreateUtas(&l3);
 //     current = FIRST(l1);
 //     while (current != NULL)
 //     {
-//         insertLast(&l3, INFO(current));
-//         current = NEXT(current);
+//         insertLast(&l3, current->info);
+//         current = current->next;
 //     }
 
 //     current = FIRST(l2);
 //     while (current != NULL)
 //     {
-//         insertLast(&l3, INFO(current));
-//         current = NEXT(current);
+//         insertLast(&l3, current->info);
+//         current = current->next;
 //     }
 
 //     FIRST(l1) = NULL;
@@ -409,12 +411,12 @@ int lengthUtas(Utas l)
 //     AddressUtas current;
 
 //     /* ALGORITMA */
-//     current = FIRST(l);
+//     current = l;
 //     while (current != NULL && !found) {
-//         if (INFO(current) == INFO(p)) {
+//         if (current->info == INFO(p)) {
 //             found = true;
 //         }
-//         current = NEXT(current);
+//         current = current->next;
 //     }
 
 //     return found;
@@ -425,15 +427,15 @@ int lengthUtas(Utas l)
 //     AddressUtas current;
 
 //     /* ALGORITMA */
-//     current = FIRST(l);
-//     if (INFO(current) == x){
+//     current = l;
+//     if (current->info == x){
 //         return NULL;
 //     }
-//     while (NEXT(current) != NULL && !found) {
-//         if (INFO(NEXT(current)) == x) {
+//     while (current->next != NULL && !found) {
+//         if (INFO(current->next) == x) {
 //             found = true;
 //         }
-//         current = NEXT(current);
+//         current = current->next;
 //     }
 
 //     if (found) return current;
@@ -445,14 +447,14 @@ int lengthUtas(Utas l)
 //     AddressUtas current;
 
 //     /* ALGORITMA */
-//     current = FIRST(l);
-//     max = INFO(current);
-//     current = NEXT(current);
+//     current = l;
+//     max = current->info;
+//     current = current->next;
 //     while (current != NULL) {
-//         if (INFO(current) > max) {
-//             max = INFO(current);
+//         if (current->info > max) {
+//             max = current->info;
 //         }
-//         current = NEXT(current);
+//         current = current->next;
 //     }
 
 //     return max;
@@ -463,14 +465,14 @@ int lengthUtas(Utas l)
 //     AddressUtas current;
 
 //     /* ALGORITMA */
-//     current = FIRST(l);
+//     current = l;
 //     max = current;
-//     current = NEXT(current);
+//     current = current->next;
 //     while (current != NULL) {
-//         if (INFO(current) > INFO(max)) {
+//         if (current->info > INFO(max)) {
 //             max = current;
 //         }
-//         current = NEXT(current);
+//         current = current->next;
 //     }
 
 //     return max;
@@ -481,14 +483,14 @@ int lengthUtas(Utas l)
 //     AddressUtas current;
 
 //     /* ALGORITMA */
-//     current = FIRST(l);
-//     min = INFO(current);
-//     current = NEXT(current);
+//     current = l;
+//     min = current->info;
+//     current = current->next;
 //     while (current != NULL) {
-//         if (INFO(current) < min) {
-//             min = INFO(current);
+//         if (current->info < min) {
+//             min = current->info;
 //         }
-//         current = NEXT(current);
+//         current = current->next;
 //     }
 
 //     return min;
@@ -499,14 +501,14 @@ int lengthUtas(Utas l)
 //     AddressUtas current;
 
 //     /* ALGORITMA */
-//     current = FIRST(l);
+//     current = l;
 //     min = current;
-//     current = NEXT(current);
+//     current = current->next;
 //     while (current != NULL) {
-//         if (INFO(current) < INFO(min)) {
+//         if (current->info < INFO(min)) {
 //             min = current;
 //         }
-//         current = NEXT(current);
+//         current = current->next;
 //     }
 
 //     return min;
@@ -517,10 +519,10 @@ int lengthUtas(Utas l)
 //     AddressUtas current;
 
 //     /* ALGORITMA */
-//     current = FIRST(l);
+//     current = l;
 //     while (current != NULL) {
-//         total += (float) INFO(current);
-//         current = NEXT(current);
+//         total += (float) current->info;
+//         current = current->next;
 //     }
 
 //     float mean = total / (float) length(l);
@@ -530,13 +532,13 @@ int lengthUtas(Utas l)
 
 // void deleteAll(Utas* l) {
 //     int temp;
-//     while (!isEmpty(*l)){
+//     while (!isEmptyUtas(*l)){
 //         deleteFirst(l, &temp);
 //     }
 // }
 
 // void copyList(Utas* l1, Utas* l2) {
-//     CreateList(l2);
+//     CreateUtas(l2);
 //     FIRST(*l2) = FIRST(*l1);
 // }
 
@@ -544,14 +546,14 @@ int lengthUtas(Utas l)
 //     AddressUtas current;
 
 //     Utas l2;
-//     CreateList(&l2);
-//     current = FIRST(*l);
+//     CreateUtas(&l2);
+//     current = *l;
 //     while (current != NULL)
 //     {
-//         insertFirst(&l2, INFO(current));
-//         current = NEXT(current);
+//         insertFirst(&l2, current->info);
+//         current = current->next;
 //     }
-//     AddressUtas temp = FIRST(*l);
+//     AddressUtas temp = *l;
 //     *l = FIRST(l2);
 //     deleteAll(&temp);
 //     free(temp);

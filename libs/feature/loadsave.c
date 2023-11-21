@@ -265,7 +265,7 @@ void load(boolean isInitiate)
     }
     if (!isInitiate)
     {
-        printf("Anda akan melakukan pemuatan dari %s.\n\n", currentText);
+        printf("Anda akan melakukan pemuatan dari %s.\n\n", currentText.TabString);
         printf("Mohon tunggu...\n");
         printf("1...\n");
         printf("2...\n");
@@ -314,7 +314,6 @@ void loadDraft(Text rootPath)
             name[j] = currentLine.TabWord[j];
         }
         name[j] = '\0';
-        printf("name:%s.%d\n", name, currentLine.Length);
         char num[200];
         int a = 0;
         for (j = s; j < currentLine.Length; j++)
@@ -322,7 +321,6 @@ void loadDraft(Text rootPath)
             num[a++] = currentLine.TabWord[j];
         }
         num[j] = '\0';
-        printf("num:%s.\n", num);
 
         int manyDraft = wordToInt(stringToWord(num));
         int idUser = listUserIndexOfWithName(listUser, name);

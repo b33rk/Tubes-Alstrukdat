@@ -4,13 +4,16 @@ ListUser listUser;
 User *currentUser;
 GraphFriendship graphFriendship;
 ListDinKicau listKicauan;
+ListDinUtas listUtas;
+
 
 void initDatabase()
 {
     CreateListUser(&listUser);
     currentUser = NULL;
     CreateGraphFriendship(&graphFriendship);
-    CreateListDinKicau(&listKicauan, 10);
+    CreateListDinKicau(&listKicauan, 3);
+    CreateListDinUtas(&listUtas, 10);
 
     //hanya untuk tes
     // User user, user2, user3, user4;

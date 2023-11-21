@@ -9,11 +9,13 @@
 #include "../boolean.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "../datetime.h"
 
 /* Definisi NodeUtas : */
 typedef struct elutas
 {
     int id;
+    int idKicau;
     int idUser;
     char text[281];
     DATETIME datetime;
@@ -48,7 +50,7 @@ boolean isEmptyUtas(Utas l);
 /* Mengirim true jika list kosong */
 
 /****************** GETTER SETTER ******************/
-Utas getElmtUtas(Utas l, int idx);
+ElUtas getElmtUtas(Utas l, int idx);
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengembalikan nilai elemen l pada indeks idx */
 

@@ -19,6 +19,7 @@ typedef struct
    char text[281];
    int like;
    DATETIME datetime;
+   int idUtas;
 } Kicauan;
 
 typedef struct

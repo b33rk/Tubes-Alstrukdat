@@ -20,6 +20,12 @@ void STARTTEXT()
         while (!(currentChar == MARK))
         {
 
+            if (currentChar == '\n' || currentChar == '\r')
+            {
+                ADV();
+                continue;
+            }
+
             if (length < 280)
                 currentText.TabString[length++] = currentChar;
             ADV();

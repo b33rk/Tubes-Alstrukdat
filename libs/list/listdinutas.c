@@ -1,15 +1,10 @@
-#include "listdinkicau.h"
+#include "listdinutas.h"
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
-void CreateKicauan(Kicauan *k)
-{
-    k->id = -1;
-    k->idUser = -1;
-    k->like = 0;
-}
 
-void CreateListDinKicau(ListDinKicau *l, int capacity)
+
+void CreateListDinUtas(ListDinUtas *l, int capacity)
 {
     /* I.S. l sembarang, capacity > 0 */
     /* F.S. Terbentuk list dinamis l kosong dengan kapasitas capacity */
@@ -18,10 +13,11 @@ void CreateListDinKicau(ListDinKicau *l, int capacity)
     /* ALGORITMA */
     l->capacity = capacity;
     l->nEff = 0;
-    l->buffer = (Kicauan *)malloc(capacity * sizeof(Kicauan));
+    l->buffer = (Utas *)malloc(capacity * sizeof(Utas));
+    l->idCount = 1;
 }
 
-void dealocateListDinKicau(ListDinKicau *l)
+void dealocateListDinUtas(ListDinUtas *l)
 {
     /* I.S. l terdefinisi; */
     /* F.S. (l) dikembalikan ke system, l.capacity=0; l.nEff=0 */
@@ -35,7 +31,7 @@ void dealocateListDinKicau(ListDinKicau *l)
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int listDinKicauLength(ListDinKicau l)
+int listDinUtasLength(ListDinUtas l)
 {
     /* Mengirimkan banyaknya elemen efektif list */
     /* Mengirimkan nol jika list l kosong */
@@ -46,7 +42,7 @@ int listDinKicauLength(ListDinKicau l)
 }
 /* *** Daya tampung container *** */
 /* *** Selektor INDEKS *** */
-int getListDinKicauFirstIdx(ListDinKicau l)
+int getListDinUtasFirstIdx(ListDinUtas l)
 {
     /* Prekondisi : List l tidak kosong */
     /* Mengirimkan indeks elemen l pertama */
@@ -55,7 +51,7 @@ int getListDinKicauFirstIdx(ListDinKicau l)
     /* ALGORITMA */
     return 0;
 }
-int getListDinKicauLastIdx(ListDinKicau l)
+int getListDinUtasLastIdx(ListDinUtas l)
 {
     /* Prekondisi : List l tidak kosong */
     /* Mengirimkan indeks elemen l terakhir */
@@ -66,7 +62,7 @@ int getListDinKicauLastIdx(ListDinKicau l)
 }
 
 /* ********** Test Indeks yang valid ********** */
-boolean isListDinKicauIdxValid(ListDinKicau l, int i)
+boolean isListDinUtasIdxValid(ListDinUtas l, int i)
 {
     /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas list l */
     /* yaitu antara indeks yang terdefinisi utk container*/
@@ -75,7 +71,7 @@ boolean isListDinKicauIdxValid(ListDinKicau l, int i)
     /* ALGORITMA */
     return (0 <= i && i < l.capacity);
 }
-boolean isListDinKicauIdxEff(ListDinKicau l, int i)
+boolean isListDinUtasIdxEff(ListDinUtas l, int i)
 {
     /* Mengirimkan true jika i adalah indeks yang terdefinisi utk list */
     /* yaitu antara 0..l.nEff */
@@ -87,7 +83,7 @@ boolean isListDinKicauIdxEff(ListDinKicau l, int i)
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test list kosong *** */
-boolean isListDinKicauEmpty(ListDinKicau l)
+boolean isListDinUtasEmpty(ListDinUtas l)
 {
     /* Mengirimkan true jika list l kosong, mengirimkan false jika tidak */
     /* KAMUS */
@@ -96,7 +92,7 @@ boolean isListDinKicauEmpty(ListDinKicau l)
     return l.nEff == 0;
 }
 /* *** Test list penuh *** */
-boolean isListDinKicauFull(ListDinKicau l)
+boolean isListDinUtasFull(ListDinUtas l)
 {
     /* Mengirimkan true jika list l penuh, mengirimkan false jika tidak */
     /* KAMUS */
@@ -105,7 +101,7 @@ boolean isListDinKicauFull(ListDinKicau l)
     return l.nEff == l.capacity;
 }
 
-void copyListDinKicau(ListDinKicau lIn, ListDinKicau *lOut)
+void copyListDinUtas(ListDinUtas lIn, ListDinUtas *lOut)
 {
     /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
     /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
@@ -114,34 +110,23 @@ void copyListDinKicau(ListDinKicau lIn, ListDinKicau *lOut)
     int i;
 
     /* ALGORITMA */
-    CreateListDinKicau(lOut, lIn.capacity);
+    CreateListDinUtas(lOut, lIn.capacity);
     lOut->nEff = lIn.nEff;
 
     for (i = 0; i < lIn.nEff; i++)
     {
-        Kicauan temp;
-        CreateKicauan(&temp);
+        Utas temp;
+        CreateUtas(&temp);
 
-        temp.id = lIn.buffer[i].id;
-        temp.idUser = lIn.buffer[i].idUser;
-        temp.like = lIn.buffer[i].like;
-        temp.datetime = lIn.buffer[i].datetime;
+        temp = lIn.buffer[i];
 
-        int j = 0;
-        while (lIn.buffer[i].text[j] != '\0')
-        {
-            temp.text[j] = lIn.buffer[i].text[j];
-            j++;
-        }
-        temp.text[j] = '\0';
-
-        insertLastListDinKicau(lOut, temp);
+        insertLastListDinUtas(lOut, temp);
     }
 }
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi list dari pembacaan *** */
-// void readListDinKicau(ListDinKicau *l)
+// void readListDinUtas(ListDinUtas *l)
 // {
 //     /* I.S. l sembarang dan sudah dialokasikan sebelumnya */
 //     /* F.S. List l terdefinisi */
@@ -170,7 +155,7 @@ void copyListDinKicau(ListDinKicau lIn, ListDinKicau *lOut)
 //     }
 // }
 
-// void printListDinKicau(ListDinKicau l)
+// void printListDinUtas(ListDinUtas l)
 // {
 //     /* Proses : Menuliskan isi list dengan traversal, list ditulis di antara kurung siku;
 //        antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
@@ -202,133 +187,133 @@ void copyListDinKicau(ListDinKicau lIn, ListDinKicau *lOut)
 /* *** Operasi pembandingan list : < =, > *** */
 
 /* ********** SEARCHING ********** */
-/* ***  Perhatian : list boleh kosong!! *** */
-int indexOfListDinKicauById(ListDinKicau l, int idKicau)
-{
-    /* Search apakah ada elemen List l yang bernilai val */
-    /* Jika ada, menghasilkan indeks i terkecil, dengan elemen ke-i = val */
-    /* Jika tidak ada, mengirimkan -1 */
-    /* Menghasilkan indeks tak terdefinisi (-1) jika List l kosong */
-    /* Skema Searching yang digunakan bebas */
-    /* KAMUS */
-    int i;
+// /* ***  Perhatian : list boleh kosong!! *** */
+// int indexOfListDinUtasById(ListDinUtas l, int idUtas)
+// {
+//     /* Search apakah ada elemen List l yang bernilai val */
+//     /* Jika ada, menghasilkan indeks i terkecil, dengan elemen ke-i = val */
+//     /* Jika tidak ada, mengirimkan -1 */
+//     /* Menghasilkan indeks tak terdefinisi (-1) jika List l kosong */
+//     /* Skema Searching yang digunakan bebas */
+//     /* KAMUS */
+//     int i;
 
-    /* ALGORITMA */
-    for (i = 0; i < l.nEff; i++)
-    {
-        if (l.buffer[i].id == idKicau)
-        {
-            return i;
-        }
-    }
+//     /* ALGORITMA */
+//     for (i = 0; i < l.nEff; i++)
+//     {
+//         if (l.buffer[i].id == idUtas)
+//         {
+//             return i;
+//         }
+//     }
 
-    return -1;
-}
+//     return -1;
+// }
 
 /* ********** SORTING ********** */
-void sortListDinKicauByDateTime(ListDinKicau *l, boolean asc)
-{
-    /* I.S. l boleh kosong */
-    /* F.S. Jika asc = true, l terurut membesar */
-    /*      Jika asc = false, l terurut mengecil */
-    /* Proses : Mengurutkan l dengan salah satu algoritma sorting,
-       algoritma bebas */
-    /* KAMUS */
-    int i, j;
-    Kicauan temp;
-    boolean tukar;
-    int len;
+// void sortListDinUtasByDateTime(ListDinUtas *l, boolean asc)
+// {
+//     /* I.S. l boleh kosong */
+//     /* F.S. Jika asc = true, l terurut membesar */
+//     /*      Jika asc = false, l terurut mengecil */
+//     /* Proses : Mengurutkan l dengan salah satu algoritma sorting,
+//        algoritma bebas */
+//     /* KAMUS */
+//     int i, j;
+//     Utas temp;
+//     boolean tukar;
+//     int len;
 
-    /* ALGORITMA */
-    /* bubble sort */
-    len = listDinKicauLength(*l);
-    for (i = 0; i < len - 1; i++)
-    {
-        tukar = false;
-        for (j = 0; j < len - 1 - i; j++)
-        {
-            if (asc)
-            {
-                if (DGT(l->buffer[j].datetime, l->buffer[j + 1].datetime))
-                {
-                    temp = l->buffer[j];
-                    l->buffer[j] = l->buffer[j+1];
-                    l->buffer[j+1] = temp;
-                    tukar = true;
-                }
-            }
-            else
-            {
-                if (DLT(l->buffer[j].datetime, l->buffer[j + 1].datetime))
-                {
-                    temp = l->buffer[j];
-                    l->buffer[j] = l->buffer[j+1];
-                    l->buffer[j+1] = temp;
-                    tukar = true;
-                }
-            }
-        }
+//     /* ALGORITMA */
+//     /* bubble sort */
+//     len = listDinUtasLength(*l);
+//     for (i = 0; i < len - 1; i++)
+//     {
+//         tukar = false;
+//         for (j = 0; j < len - 1 - i; j++)
+//         {
+//             if (asc)
+//             {
+//                 if (DGT(l->buffer[j].datetime, l->buffer[j + 1].datetime))
+//                 {
+//                     temp = l->buffer[j];
+//                     l->buffer[j] = l->buffer[j+1];
+//                     l->buffer[j+1] = temp;
+//                     tukar = true;
+//                 }
+//             }
+//             else
+//             {
+//                 if (DLT(l->buffer[j].datetime, l->buffer[j + 1].datetime))
+//                 {
+//                     temp = l->buffer[j];
+//                     l->buffer[j] = l->buffer[j+1];
+//                     l->buffer[j+1] = temp;
+//                     tukar = true;
+//                 }
+//             }
+//         }
 
-        if (tukar == false)
-        {
-            break;
-        }
-    }
-}
+//         if (tukar == false)
+//         {
+//             break;
+//         }
+//     }
+// }
 
-void sortListDinKicauById(ListDinKicau *l, boolean asc)
-{
-    /* I.S. l boleh kosong */
-    /* F.S. Jika asc = true, l terurut membesar */
-    /*      Jika asc = false, l terurut mengecil */
-    /* Proses : Mengurutkan l dengan salah satu algoritma sorting,
-       algoritma bebas */
-    /* KAMUS */
-    int i, j;
-    Kicauan temp;
-    boolean tukar;
-    int len;
+// void sortListDinUtasById(ListDinUtas *l, boolean asc)
+// {
+//     /* I.S. l boleh kosong */
+//     /* F.S. Jika asc = true, l terurut membesar */
+//     /*      Jika asc = false, l terurut mengecil */
+//     /* Proses : Mengurutkan l dengan salah satu algoritma sorting,
+//        algoritma bebas */
+//     /* KAMUS */
+//     int i, j;
+//     Utas temp;
+//     boolean tukar;
+//     int len;
 
-    /* ALGORITMA */
-    /* bubble sort */
-    len = listDinKicauLength(*l);
-    for (i = 0; i < len - 1; i++)
-    {
-        tukar = false;
-        for (j = 0; j < len - 1 - i; j++)
-        {
-            if (asc)
-            {
-                if (l->buffer[j].id > l->buffer[j+1].id)
-                {
-                    temp = l->buffer[j];
-                    l->buffer[j] = l->buffer[j+1];
-                    l->buffer[j+1] = temp;
-                    tukar = true;
-                }
-            }
-            else
-            {
-                if (l->buffer[j].id < l->buffer[j+1].id)
-                {
-                    temp = l->buffer[j];
-                    l->buffer[j] = l->buffer[j+1];
-                    l->buffer[j+1] = temp;
-                    tukar = true;
-                }
-            }
-        }
+//     /* ALGORITMA */
+//     /* bubble sort */
+//     len = listDinUtasLength(*l);
+//     for (i = 0; i < len - 1; i++)
+//     {
+//         tukar = false;
+//         for (j = 0; j < len - 1 - i; j++)
+//         {
+//             if (asc)
+//             {
+//                 if (l->buffer[j].id > l->buffer[j+1].id)
+//                 {
+//                     temp = l->buffer[j];
+//                     l->buffer[j] = l->buffer[j+1];
+//                     l->buffer[j+1] = temp;
+//                     tukar = true;
+//                 }
+//             }
+//             else
+//             {
+//                 if (l->buffer[j].id < l->buffer[j+1].id)
+//                 {
+//                     temp = l->buffer[j];
+//                     l->buffer[j] = l->buffer[j+1];
+//                     l->buffer[j+1] = temp;
+//                     tukar = true;
+//                 }
+//             }
+//         }
 
-        if (tukar == false)
-        {
-            break;
-        }
-    }
-}
+//         if (tukar == false)
+//         {
+//             break;
+//         }
+//     }
+// }
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLastListDinKicau(ListDinKicau *l, Kicauan val)
+void insertLastListDinUtas(ListDinUtas *l, Utas val)
 {
     /* Proses: Menambahkan val sebagai elemen terakhir list */
     /* I.S. List l boleh kosong, tetapi tidak penuh */
@@ -341,13 +326,13 @@ void insertLastListDinKicau(ListDinKicau *l, Kicauan val)
         l->buffer[l->nEff] = val;
         l->nEff++;
     } else {
-        expandListDinKicau(l, l->capacity);
+        expandListDinUtas(l, l->capacity);
         l->buffer[l->nEff] = val;
         l->nEff++;
     }
 }
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLastListDinKicau(ListDinKicau *l, Kicauan *val)
+void deleteLastListDinUtas(ListDinUtas *l, Utas *val)
 {
     /* Proses : Menghapus elemen terakhir list */
     /* I.S. List tidak kosong */
@@ -357,22 +342,22 @@ void deleteLastListDinKicau(ListDinKicau *l, Kicauan *val)
     /* KAMUS */
 
     /* ALGORITMA */
-    *val = l->buffer[getListDinKicauLastIdx(*l)];
+    *val = l->buffer[getListDinUtasLastIdx(*l)];
     l->nEff--;
 }
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
-void expandListDinKicau(ListDinKicau *l, int num)
+void expandListDinUtas(ListDinUtas *l, int num)
 {
     /* Proses : Menambahkan capacity l sebanyak num */
     /* I.S. List sudah terdefinisi */
     /* F.S. Ukuran list bertambah sebanyak num */
     /* KAMUS */
-    ListDinKicau lnew;
+    ListDinUtas lnew;
     int i;
 
     /* ALGORITMA */
-    CreateListDinKicau(&lnew, l->capacity + num);
+    CreateListDinUtas(&lnew, l->capacity + num);
 
     for (i = 0; i < l->nEff; i++)
     {
@@ -381,22 +366,22 @@ void expandListDinKicau(ListDinKicau *l, int num)
 
     lnew.nEff = l->nEff;
 
-    dealocateListDinKicau(l);
+    dealocateListDinUtas(l);
 
-    copyListDinKicau(lnew, l);
+    copyListDinUtas(lnew, l);
 }
 
-void shrinkListDinKicau(ListDinKicau *l, int num)
+void shrinkListDinUtas(ListDinUtas *l, int num)
 {
     /* Proses : Mengurangi capacity sebanyak num */
     /* I.S. List sudah terdefinisi, ukuran capacity > num, dan nEff < capacity - num. */
     /* F.S. Ukuran list berkurang sebanyak num. */
     /* KAMUS */
-    ListDinKicau lnew;
+    ListDinUtas lnew;
     int i;
 
     /* ALGORITMA */
-    CreateListDinKicau(&lnew, l->capacity - num);
+    CreateListDinUtas(&lnew, l->capacity - num);
 
     for (i = 0; i < l->nEff; i++)
     {
@@ -404,22 +389,22 @@ void shrinkListDinKicau(ListDinKicau *l, int num)
     }
     lnew.nEff = l->nEff;
 
-    dealocateListDinKicau(l);
+    dealocateListDinUtas(l);
 
-    copyListDinKicau(lnew, l);
+    copyListDinUtas(lnew, l);
 }
 
-void compressListDinKicau(ListDinKicau *l)
+void compressListDinUtas(ListDinUtas *l)
 {
     /* Proses : Mengubah capacity sehingga capacity = nEff */
     /* I.S. List tidak kosong */
     /* F.S. Ukuran capacity = nEff */
     /* KAMUS */
-    ListDinKicau lnew;
+    ListDinUtas lnew;
     int i;
 
     /* ALGORITMA */
-    CreateListDinKicau(&lnew, l->nEff);
+    CreateListDinUtas(&lnew, l->nEff);
 
     for (i = 0; i < l->nEff; i++)
     {
@@ -428,7 +413,7 @@ void compressListDinKicau(ListDinKicau *l)
 
     lnew.nEff = l->nEff;
 
-    dealocateListDinKicau(l);
+    dealocateListDinUtas(l);
 
-    copyListDinKicau(lnew, l);
+    copyListDinUtas(lnew, l);
 }

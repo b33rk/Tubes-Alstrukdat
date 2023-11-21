@@ -7,6 +7,7 @@
 #include "libs/feature/kicauan.h"
 #include "libs/feature/draft.h"
 #include "libs/feature/loadsave.h"
+#include "libs/feature/utasfeature.h"
 
 int main()
 {
@@ -116,6 +117,32 @@ int main()
         else if (isWordEqual(currentWord, stringToWord("SIMPAN")))
         {
             save();
+        }
+        else if (isWordEqual(currentWord, stringToWord("UTAS")))
+        {
+            ADVWORD();
+            makeUtas(wordToInt(currentWord));
+        }
+        else if (isWordEqual(currentWord, stringToWord("CETAK_UTAS")))
+        {
+            ADVWORD();
+            cetakUtas(wordToInt(currentWord));
+        }
+        else if (isWordEqual(currentWord, stringToWord("SAMBUNG_UTAS")))
+        {
+            ADVWORD();
+            int idUtas = wordToInt(currentWord);
+            ADVWORD();
+            int index = wordToInt(currentWord);
+            sambungUtas(idUtas, index);
+        }
+        else if (isWordEqual(currentWord, stringToWord("HAPUS_UTAS")))
+        {
+            ADVWORD();
+            int idUtas = wordToInt(currentWord);
+            ADVWORD();
+            int index = wordToInt(currentWord);
+            hapusUtas(idUtas, index);
         }
         // else if (isWordEqual(currentWord, stringToWord("BALAS")))
         // {
