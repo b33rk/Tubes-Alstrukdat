@@ -23,6 +23,7 @@ extern StringDin currentStringDin;
 
 void STARTSTRINGDIN();
 
+
 boolean isStringDinAllBlank(StringDin str);
 
 void printStringDin(StringDin str);
@@ -30,6 +31,9 @@ void printStringDin(StringDin str);
 void IgnoreNewLineStringDin();
 
 boolean isStringDinAllNumber(StringDin str);
+
+void deallocateStringDin();
+
 
 
 #endif

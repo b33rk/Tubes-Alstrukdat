@@ -6,7 +6,7 @@ void getCurrentDateTime(DATETIME *D)
     time(&rawtime);
 
     struct tm *local_time = localtime(&rawtime);
-    CreateDATETIME(D, local_time->tm_mday, local_time->tm_mon + 1, local_time->tm_year, local_time->tm_hour, local_time->tm_min, local_time->tm_sec);
+    CreateDATETIME(D, local_time->tm_mday, local_time->tm_mon + 1, 1900 + local_time->tm_year, local_time->tm_hour, local_time->tm_min, local_time->tm_sec);
 }
 
 int GetMaxDay(int M, int Y)
@@ -107,6 +107,16 @@ void TulisDATETIME(DATETIME D)
        tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
 
     printf("%02d/%02d/%d %02d:%02d:%02d", Day(D), Month(D), Year(D), Hour(Time(D)), Minute(Time(D)), Second(Time(D)));
+}
+
+void TulisDATETIMEFile(DATETIME D, FILE* f)
+{
+    /* I.S. : D sembarang */
+    /* F.S. : Nilai D ditulis dg format DD/MM/YYYY HH:MM:SS */
+    /* Proses : menulis nilai setiap komponen D ke layar dalam format DD/MM/YYYY HH:MM:SS
+       tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
+
+    fprintf(f, "%02d/%02d/%d %02d:%02d:%02d", Day(D), Month(D), Year(D), Hour(Time(D)), Minute(Time(D)), Second(Time(D)));
 }
 
 boolean DEQ(DATETIME D1, DATETIME D2)

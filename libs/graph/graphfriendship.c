@@ -70,3 +70,20 @@ boolean isHasRelation(GraphFriendship graph, int id1, int id2)
 {
     return graph.matrix.mem[id1][id2] == 1;
 }
+
+int countPending(GraphFriendship graph){
+    int k, j;
+    int count = 0;
+    for (k = 0; k < 20; k++)
+    {
+        for (j = 0; j < 20; j++)
+        {
+            if (graph.matrix.mem[k][j] == -1){
+                count++;
+            }
+        }
+    }
+
+    return count/2;
+}
+

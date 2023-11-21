@@ -1,17 +1,17 @@
 /* File: charmachine.h */
 /* Definisi Mesin Karakter */
 
-#ifndef __CHAR_MACHINE_H__
-#define __CHAR_MACHINE_H__
+#ifndef __CHAR_FILE_MACHINE_H__
+#define __CHAR_FILE_MACHINE_H__
 
 #include "../boolean.h"
+#include <stdio.h>
 
-#define MARK ';'
 /* State Mesin */
-extern char currentChar;
-extern boolean EOP;
+extern char currentFileChar;
+extern boolean EOPFile;
 
-void START();
+void STARTFILE(FILE *file);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
@@ -21,7 +21,7 @@ void START();
 
 // void STARTSTRING(char* s);
 
-void ADV();
+void ADVFILE();
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,

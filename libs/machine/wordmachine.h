@@ -24,6 +24,8 @@ void IgnoreBlanksAndNewLine();
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
+// void STARTWORD2(char* s);
+
 void STARTWORD();
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;

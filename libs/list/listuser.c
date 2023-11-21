@@ -35,7 +35,7 @@ int listUserLength(ListUser l)
     length = 0;
     i = 0;
 
-    while (i < CAPACITY_USER && l.contents[i].id != -1)
+    while (i < 20 && l.contents[i].id != -1)
     {
         length++;
         i++;

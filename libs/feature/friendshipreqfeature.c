@@ -108,7 +108,7 @@ void friendshipReqList()
     else
     {
         printf("Terdapat %d permintaan pertemanan untuk Anda. \n", manyReq);
-        reSortPrioQueueFR(currentUser);
+        // reSortPrioQueueFR(currentUser);
 
         PrintPrioQueueFR(currentUser->friendReq);
         printf("\n");
@@ -129,7 +129,7 @@ void acceptFrienship()
         return;
     }
 
-    reSortPrioQueueFR(currentUser);
+    // reSortPrioQueueFR(currentUser);
 
     FriendReq fR = currentUser->friendReq.T[currentUser->friendReq.HEAD];
 

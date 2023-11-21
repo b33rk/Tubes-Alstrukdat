@@ -10,7 +10,6 @@
 #include <time.h>
 #include <stdio.h>
 
-
 /* *** Definisi TYPE DATETIME <DD/MM/YY HH:MM:SS> *** */
 typedef struct
 {
@@ -33,6 +32,7 @@ typedef struct
 /* ***************************************************************** */
 void getCurrentDateTime(DATETIME *D);
 
+void TulisDATETIMEFile(DATETIME D, FILE *f);
 int GetMaxDay(int M, int Y);
 /* Mengirimkan jumlah hari maksimum pada bulan M dan tahun Y */
 /* Prekondisi: 1 <= M <= 12*/
