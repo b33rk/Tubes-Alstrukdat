@@ -13,6 +13,8 @@ extern GraphFriendship graphFriendship;
 
 extern ListDinKicau listKicauan;
 
+extern ListDinUtas listUtas;
+
 void initDatabase();
 
 #endif
