@@ -18,10 +18,10 @@ int main()
     printf("\n");
     printf("\n");
     printf("\n");
-    printf("                               ::\n");                               
-    printf("                        .^.    :!?7~.             :~!77!~.\n");        
-    printf("                       .^~77~. :!JY5YJ7^.      :~?JJJJJJJJ7:   \n");      
-    printf("                       :!??JJJ7??Y555555Y?!^.^7JJJJJJJJ?!!7J!     \n");   
+    printf("                               ::\n");
+    printf("                        .^.    :!?7~.             :~!77!~.\n");
+    printf("                       .^~77~. :!JY5YJ7^.      :~?JJJJJJJJ7:   \n");
+    printf("                       :!??JJJ7??Y555555Y?!^.^7JJJJJJJJ?!!7J!     \n");
     printf("                        :!JJJJJJJJY55555555YJJJJJJJJJJ?:...~J?:      \n");
     printf("                          :!JJJJJJJJJY5YYJJJJJJJJJJJJJ?:...~JJJ!^:.  \n");
     printf("                            .!?JJJJJJJJJJJJJJJJJJJJJJJJ?!~!JJJJJ?7^  \n");
@@ -37,10 +37,10 @@ int main()
     printf("                     .^~7?JJJJJJJJJJJJ?^^^^^^^^^:.                    \n");
     printf("                          .:^~!!77?????7^^^::..                       \n");
     printf("                                    .....                             \n");
-    printf("\n");                                                                  
-    printf("\n");                                                                                                                       
-    printf("\n");                                                                                                                       
-    printf("\n");                                                                                                                       
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
 
     printf(".______    __    __  .______      .______    __  .______      \n");
     printf("|   _  \\  |  |  |  | |   _  \\     |   _  \\  |  | |   _  \\     \n");
@@ -51,7 +51,14 @@ int main()
     printf("\nSelamat datang di BurBir.\n");
     printf("Aplikasi untuk studi kualitatif mengenai perilaku manusia dengan menggunakan metode (pengambilan data berupa) Focused Group Discussion kedua di zamannya.\n\n");
 
-    load(true);
+    boolean loadSucces = load(true);
+
+    if (!loadSucces)
+    {
+        printf("Folder tidak ditemukan, program akan berhenti\n\n");
+        programStart = false;
+    }
+    
     while (programStart)
     {
 

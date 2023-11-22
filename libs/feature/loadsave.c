@@ -358,8 +358,13 @@ void saveBalasan(Text rootPath){
 
 
 
-void load(boolean isInitiate)
+boolean load(boolean isInitiate)
 {
+    if (currentUser != NULL)
+    {
+        printf("Anda harus keluar terlebih dahulu untuk melakukan pemuatan.\n\n");
+        return;
+    }
     if (!isInitiate) {
         clearDatabase();
         initDatabase();
@@ -393,7 +398,7 @@ void load(boolean isInitiate)
     if (currentUser != NULL)
     {
         printf("Anda harus keluar terlebih dahulu!!\n");
-        return;
+        return false;
     }
 
     Text w = appendText(charArrToText("config/"), currentText);
@@ -401,7 +406,7 @@ void load(boolean isInitiate)
     if (isDirectoryExists(w.TabString) == 0)
     {
         printf("Tidak ada folder yang dimaksud!\n");
-        return;
+        return false;
     }
     if (!isInitiate)
     {
@@ -425,6 +430,9 @@ void load(boolean isInitiate)
     {
         printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n\n");
     }
+
+    return true;
+
 }
 
 void loadUtas(Text rootPath)

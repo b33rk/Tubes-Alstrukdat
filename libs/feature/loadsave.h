@@ -25,7 +25,7 @@ void saveDraft(Text rootPath);
 void saveUtas(Text rootPath);
 void saveBalasan(Text rootPath);
 
-void load(boolean isInitiate);
+boolean load(boolean isInitiate);
 void loadUser(Text rootPath);
 void loadKicauan(Text rootPath);
 void loadDraft(Text rootPath);
