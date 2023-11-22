@@ -35,12 +35,11 @@ int addToTreeAt(TreeOfBalasan *T, Text content, int IdAuthor, int Id){
 }
 
 void deleteTreeNodeAt(TreeOfBalasan *T, int Id){
-    int i;
     NodeBalasanAddress node = getNodeInHashMap(TREE_HMP(*T), Id);
-    ListDin children = NODEBALASAN_CHILDREN(node);
-    for(i = 0; i < LISTDIN_NEFF(children); i++){
-        deleteTreeNodeAt(T, LISTDIN_ELMT(children, i));
+    ListDin *children = &NODEBALASAN_CHILDREN(node);
+    while(LISTDIN_NEFF(*children) > 0){
+        deleteTreeNodeAt(T, LISTDIN_ELMT(*children, 0));
     }
     removeNodeFromMap(&(TREE_HMP(*T)), node);
-    removeChildren(NODEBALASAN_PARENT(node), node);
+    removeChildren((NODEBALASAN_PARENT(node)), node);
 }

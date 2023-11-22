@@ -296,7 +296,7 @@ void deleteLastListDin(ListDin *l, ElType *val){
 void deleteElListDin(ListDin *l, ElType val){
     int i;
     boolean found = false;
-    for(i = 0; i < LISTDIN_NEFF(*l) - 1; i++){
+    for(i = 0; i < LISTDIN_NEFF(*l); i++){
         if (LISTDIN_ELMT(*l, i) == val){
             found = true;
         }
@@ -304,6 +304,7 @@ void deleteElListDin(ListDin *l, ElType val){
             LISTDIN_ELMT(*l, i) = LISTDIN_ELMT(*l, i + 1);
         }
     }
+    if (LISTDIN_ELMT(*l, i) == val) {found = true;}
     LISTDIN_NEFF(*l) -= found;
 }
 
