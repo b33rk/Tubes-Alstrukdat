@@ -102,11 +102,11 @@ int main()
             ADVWORD();
             updateKicauan(wordToInt(currentWord));
         }
-        else if (isWordEqual(currentWord, stringToWord("BUAT_DRAFT")))
+        else if (isWordEqual(currentWord, stringToWord("BUAT_DRAF")))
         {
             buatdraft(false);
         }
-        else if (isWordEqual(currentWord, stringToWord("LIHAT_DRAFT")))
+        else if (isWordEqual(currentWord, stringToWord("LIHAT_DRAF")))
         {
             lihatdraft();
         }
