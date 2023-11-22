@@ -13,7 +13,7 @@ void seeProfile(Word name)
 
     if (!userProfile.isPublic)
     {
-        if (!isHasRelation(graphFriendship, currentUser->id, index))
+        if (!isHasRelation(graphFriendship, currentUser->id, index) && !isWordEqual(stringToWord(userProfile.name), stringToWord(currentUser->name)))
         {
             printf("Wah, akun %s diprivat nih. Ikuti dulu yuk untuk bisa melihat profil %s\n\n", name.TabWord, name.TabWord);
             return;

@@ -14,6 +14,32 @@ int main()
     boolean programStart = true;
 
     initDatabase();
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("                               ::\n");                               
+    printf("                        .^.    :!?7~.             :~!77!~.\n");        
+    printf("                       .^~77~. :!JY5YJ7^.      :~?JJJJJJJJ7:   \n");      
+    printf("                       :!??JJJ7??Y555555Y?!^.^7JJJJJJJJ?!!7J!     \n");   
+    printf("                        :!JJJJJJJJY55555555YJJJJJJJJJJ?:...~J?:      \n");
+    printf("                          :!JJJJJJJJJY5YYJJJJJJJJJJJJJ?:...~JJJ!^:.  \n");
+    printf("                            .!?JJJJJJJJJJJJJJJJJJJJJJJJ?!~!JJJJJ?7^  \n");
+    printf("                              .~?JJJJJJJJJJJJJJJJJJJJJJJJJJJJJ~:.    \n");
+    printf("  ..                           .^7JJJJJJJJJJJJJJJJJJJJJJJJJJJJ:      \n");
+    printf("   .:^:                    .:~7?JJJJJJJJJJJJJJJJJJJJJJJJJJJJ?:        \n");
+    printf("     .~7!~:..        ..:^~7?JJJJJJJJJJJJJJJJJJJJ?7!!~~~~!7J?.         \n");
+    printf("       .~?JJ??777777??JJJJJJJJJJJJJJJJJJJJJJJ7!~^^^^^^^^^^^.          \n");
+    printf("          ^7JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ?!~^^^^^^^^^^^^.            \n");
+    printf("            :~?JJJJJJJJJJJJJJJJJJJJJJJJJJ7^^^^^^^^^^^^^:              \n");
+    printf("               :!?JJJJJJJJJJJJJJJJJJJJJ?~^^^^^^^^^^^^:.               \n");
+    printf("                 .:~7JJJJJJJJJJJJJJJJJJ~^^^^^^^^^^^:.                 \n");
+    printf("                     .^~7?JJJJJJJJJJJJ?^^^^^^^^^:.                    \n");
+    printf("                          .:^~!!77?????7^^^::..                       \n");
+    printf("                                    .....                             \n");
+    printf("\n");                                                                  
+    printf("\n");                                                                                                                       
+    printf("\n");                                                                                                                       
+    printf("\n");                                                                                                                       
 
     printf(".______    __    __  .______      .______    __  .______      \n");
     printf("|   _  \\  |  |  |  | |   _  \\     |   _  \\  |  | |   _  \\     \n");
