@@ -530,12 +530,12 @@ int lengthUtas(Utas l)
 //     return mean;
 // }
 
-// void deleteAll(Utas* l) {
-//     int temp;
-//     while (!isEmptyUtas(*l)){
-//         deleteFirst(l, &temp);
-//     }
-// }
+void deleteAllUtas(Utas* l) {
+    ElUtas temp;
+    while (!isEmptyUtas(*l)){
+        deleteFirstUtas(l, &temp);
+    }
+}
 
 // void copyList(Utas* l1, Utas* l2) {
 //     CreateUtas(l2);

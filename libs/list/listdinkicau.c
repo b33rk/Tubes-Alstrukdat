@@ -7,7 +7,7 @@ void CreateKicauan(Kicauan *k)
     k->id = -1;
     k->idUser = -1;
     k->like = 0;
-    k->idUtas = - 1;
+    k->idUtas = -1;
     createTree(&(k->balasan));
 }
 

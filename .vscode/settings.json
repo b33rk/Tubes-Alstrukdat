@@ -22,7 +22,8 @@
     "stdlib.h": "c",
     "nodehashmap.h": "c",
     "textmachine.h": "c",
-    "loadsave.h": "c"
+    "loadsave.h": "c",
+    "listlinierutas.h": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

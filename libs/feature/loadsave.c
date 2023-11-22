@@ -49,24 +49,74 @@ void save()
     // printText(w);
     // printf("  tes2\n");
 
+    if (isDirectoryExists(w.TabString) == 0)
+    {
+        printf("Belum terdapat %s. Akan dilakukan pembuatan %s terlebih dahulu.\n\n", currentText.TabString, currentText.TabString);
+        printf("Mohon tunggu...\n");
+        printf("1...\n");
+        printf("2...\n");
+        printf("3...\n");
 #ifndef _WIN32
-    int status = mkdir(w.TabString, 0777);
+        int status = mkdir(w.TabString, 0777);
 #else
-    int status = _mkdir(w.TabString);
+        int status = _mkdir(w.TabString);
 #endif
 
-    // printf("  tes3\n");
+        // printf("  tes3\n");
 
-    if (status != 0)
-    {
-        printf("Gagal membuat directory\n");
-        return;
+        if (status != 0)
+        {
+            printf("Gagal membuat directory\n");
+            return;
+        }
+
+        printf("%s sudah berhasil dibuat.\n", currentText.TabString);
     }
+
     // printf("%d\n", status);
     saveUser(w);
     saveKicauan(w);
     saveDraft(w);
     saveBalasan(w);
+    saveUtas(w);
+
+    printf("Mohon tunggu...\n");
+    printf("1...\n");
+    printf("2...\n");
+    printf("3...\n");
+    printf("Penyimpanan telah berhasil dilakukan!\n\n");
+}
+
+void saveUtas(Text rootPath)
+{
+    Text wUtas = appendText(rootPath, charArrToText("/utas.config"));
+
+    FILE *futas = fopen(wUtas.TabString, "w");
+
+    int countKicauan = listDinUtasLength(listUtas);
+    fprintf(futas, "%d\n", countKicauan);
+
+    int i;
+    for (i = 0; i < countKicauan; i++)
+    {
+        Utas u = listUtas.buffer[i];
+        fprintf(futas, "%d\n", u->info.idKicau);
+
+        int countUtas = lengthUtas(u) - 1;
+
+        fprintf(futas, "%d\n", countUtas);
+
+        u = u->next;
+        while (u != NULL)
+        {
+            fprintf(futas, "%s\n", u->info.text);
+            fprintf(futas, "%s\n", listUser.contents[u->info.idUser].name);
+            TulisDATETIMEFile(u->info.datetime, futas);
+            fprintf(futas, "\n");
+            u = u->next;
+        }
+    }
+    fclose(futas);
 }
 
 void saveDraft(Text rootPath)
@@ -310,6 +360,10 @@ void saveBalasan(Text rootPath){
 
 void load(boolean isInitiate)
 {
+    if (!isInitiate) {
+        clearDatabase();
+        initDatabase();
+    }
     boolean isInputValid = false;
 
     while (!isInputValid)
@@ -361,13 +415,128 @@ void load(boolean isInitiate)
     loadUser(w);
     loadKicauan(w);
     loadDraft(w);
+    loadUtas(w);
     loadBalasan(w);
     if (!isInitiate)
     {
         printf("Pemuatan selesai!\n\n");
-    }else {
+    }
+    else
+    {
         printf("File konfigurasi berhasil dimuat! Selamat berkicau!\n\n");
+    }
+}
 
+void loadUtas(Text rootPath)
+{
+    Text wUtas = appendText(rootPath, charArrToText("/utas.config"));
+
+    FILE *futas = fopen(wUtas.TabString, "r");
+    STARTREADFILE(futas);
+
+    int manyKicauWithUtas = wordToInt(stringToWord(currentLine.TabWord));
+    NEXTLINE();
+
+    int i;
+    for (i = 0; i < manyKicauWithUtas; i++)
+    {
+        int idKicau = wordToInt(stringToWord(currentLine.TabWord));
+        int index = indexOfListDinKicauById(listKicauan, idKicau);
+
+        listKicauan.buffer[index].idUtas = listUtas.idCount;
+        NEXTLINE();
+
+        Utas u;
+        CreateUtas(&u);
+        ElUtas elutas1;
+        int l = 0;
+        while (listKicauan.buffer[index].text[l] != '\0')
+        {
+            elutas1.text[l] = listKicauan.buffer[index].text[l];
+            l++;
+        }
+
+        elutas1.text[l] = '\0';
+        elutas1.id = listUtas.idCount;
+        elutas1.idKicau = idKicau;
+        elutas1.datetime = listKicauan.buffer[index].datetime;
+        elutas1.idUser = listKicauan.buffer[index].idUser;
+        insertLastUtas(&u, elutas1);
+
+        int manyUtas = wordToInt(stringToWord(currentLine.TabWord));
+        NEXTLINE();
+        int j;
+
+        for (j = 0; j < manyUtas; j++)
+        {
+            ElUtas elutas;
+            int k = 0;
+            while (currentLine.TabWord[k] != '\0')
+            {
+                elutas.text[k] = currentLine.TabWord[k];
+                k++;
+            }
+
+            elutas.text[k] = '\0';
+            elutas.id = listUtas.idCount;
+            elutas.idKicau = idKicau;
+            NEXTLINE();
+            int idUser = listUserIndexOfWithName(listUser, currentLine.TabWord);
+
+            elutas.idUser = idUser;
+
+            NEXTLINE();
+
+            char tanggal[3];
+            char bulan[3];
+            char tahun[5];
+            char jam[3];
+            char menit[3];
+            char detik[3];
+
+            tanggal[0] = currentLine.TabWord[0];
+            tanggal[1] = currentLine.TabWord[1];
+            tanggal[2] = '\0';
+
+            bulan[0] = currentLine.TabWord[3];
+            bulan[1] = currentLine.TabWord[4];
+            bulan[2] = '\0';
+
+            tahun[0] = currentLine.TabWord[6];
+            tahun[1] = currentLine.TabWord[7];
+            tahun[2] = currentLine.TabWord[8];
+            tahun[3] = currentLine.TabWord[9];
+            tahun[4] = '\0';
+
+            jam[0] = currentLine.TabWord[11];
+            jam[1] = currentLine.TabWord[12];
+            jam[2] = '\0';
+
+            menit[0] = currentLine.TabWord[14];
+            menit[1] = currentLine.TabWord[15];
+            menit[2] = '\0';
+
+            detik[0] = currentLine.TabWord[17];
+            detik[1] = currentLine.TabWord[18];
+            detik[2] = '\0';
+
+            int d = wordToInt(stringToWord(tanggal));
+            int m = wordToInt(stringToWord(bulan));
+            int y = wordToInt(stringToWord(tahun));
+            int h = wordToInt(stringToWord(jam));
+            int mi = wordToInt(stringToWord(menit));
+            int s = wordToInt(stringToWord(detik));
+
+            DATETIME datetime;
+            CreateDATETIME(&datetime, d, m, y, h, mi, s);
+            elutas.datetime = datetime;
+
+            insertLastUtas(&u, elutas);
+            NEXTLINE();
+        }
+
+        insertLastListDinUtas(&listUtas, u);
+        listUtas.idCount++;
     }
 }
 
