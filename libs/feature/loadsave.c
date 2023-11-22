@@ -363,7 +363,7 @@ boolean load(boolean isInitiate)
     if (currentUser != NULL)
     {
         printf("Anda harus keluar terlebih dahulu untuk melakukan pemuatan.\n\n");
-        return;
+        return false;
     }
     if (!isInitiate) {
         clearDatabase();
