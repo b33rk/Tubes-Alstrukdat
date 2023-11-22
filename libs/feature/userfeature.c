@@ -170,7 +170,7 @@ void loginUser()
 
 void logoutUser()
 {
-    if (currentUser->id == -1)
+    if (currentUser == NULL)
     {
         printf("Anda belum login! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n\n");
         return;

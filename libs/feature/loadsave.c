@@ -66,6 +66,7 @@ void save()
     saveUser(w);
     saveKicauan(w);
     saveDraft(w);
+    saveBalasan(w);
 }
 
 void saveDraft(Text rootPath)
@@ -220,6 +221,91 @@ void saveUser(Text rootPath)
     fclose(fuser);
 }
 
+void saveBalasan(Text rootPath){
+    Text wBalasan = appendText(rootPath, charArrToText("/balasan.config"));
+
+    FILE *fbalasan = fopen(wBalasan.TabString, "w");
+
+    int kicauanWithBalasan = 0;
+
+    int i;
+    for(i = 0; i < listKicauan.nEff; i++){
+        if(TreeLength(listKicauan.buffer[i].balasan) > 1){
+            kicauanWithBalasan++;
+        }
+    }
+    fprintf(fbalasan, "%d\n", kicauanWithBalasan);
+
+    ListNode currentProcessedNode;
+    ListNode nextProcessedNode;
+
+    for(i = 0; i < listKicauan.nEff; i++){
+
+        if(TreeLength(listKicauan.buffer[i].balasan) > 1){
+            // For Nodes that have balasan
+
+            CreateListNode(&currentProcessedNode);
+
+            // print first 2 lines
+            fprintf(fbalasan, "%d\n", listKicauan.buffer[i].id);
+            fprintf(fbalasan, "%d\n", TreeLength(listKicauan.buffer[i].balasan) - 1);
+
+            // Examine Tree Of Balasan of current kicauan
+            TreeOfBalasan currentBalasanTree = listKicauan.buffer[i].balasan;
+
+            // BFS
+            insertListNode(&currentProcessedNode, TREE_MASTER(currentBalasanTree));
+
+            while(!isListNodeEmpty(currentProcessedNode)){
+                CreateListNode(&nextProcessedNode);
+                int j;
+                for(j = 0; j < LISTNODE_NEFF(currentProcessedNode); j++){
+                    NodeBalasanAddress currentBalasanNode = currentProcessedNode.buffer[j];
+
+                    // Print Information
+                    int idSelf = NODEBALASAN_ID(currentBalasanNode);
+                    if(idSelf != 0){
+                        int idParent = NODEBALASAN_ID(NODEBALASAN_PARENT(currentBalasanNode));
+                        if(idParent == 0){idParent = -1;}
+                        fprintf(fbalasan, "%d %d\n", idParent, idSelf);
+                        fprintf(fbalasan, "%s\n", NODEBALASAN_TEXT(currentBalasanNode).TabString);
+                        fprintf(fbalasan, "%s\n", listUser.contents[NODEBALASAN_IDAUTHOR(currentBalasanNode)].name);
+                        fprintf(fbalasan, "%.2d/%.2d/%.4d %.2d:%.2d:%.2d\n", 
+                        NODEBALASAN_TIME(currentBalasanNode).DD,
+                        NODEBALASAN_TIME(currentBalasanNode).MM,
+                        NODEBALASAN_TIME(currentBalasanNode).YYYY,
+                        NODEBALASAN_TIME(currentBalasanNode).T.HH,
+                        NODEBALASAN_TIME(currentBalasanNode).T.MM,
+                        NODEBALASAN_TIME(currentBalasanNode).T.SS);
+                    }
+
+                    // For each Children, get node from tree then add to queue
+                    int k;
+                    for(k = 0; k < LISTDIN_NEFF(NODEBALASAN_CHILDREN(currentBalasanNode)); k++){
+                        insertListNode(&nextProcessedNode, 
+                        getNodeInTreeById(currentBalasanTree, NODEBALASAN_CHILDREN(currentBalasanNode).buffer[k]));
+                    }
+                }
+                currentProcessedNode = nextProcessedNode;
+            }
+
+        }
+    }
+
+    // for (i = 0; i < listKicauan.nEff; i++)
+    // {
+    //     Kicauan k = listKicauan.buffer[i];
+    //     fprintf(fbalasan, "%d\n", k.id);
+    //     fprintf(fbalasan, "%s\n", k.text);
+    //     fprintf(fbalasan, "%d\n", k.like);
+    //     fprintf(fbalasan, "%s\n", listUser.contents[k.idUser].name);
+    //     TulisDATETIMEFile(k.datetime, fbalasan);
+    //     fprintf(fbalasan, "\n");
+    // }
+
+    fclose(fbalasan);
+}
+
 
 
 void load(boolean isInitiate)
@@ -275,6 +361,7 @@ void load(boolean isInitiate)
     loadUser(w);
     loadKicauan(w);
     loadDraft(w);
+    loadBalasan(w);
     if (!isInitiate)
     {
         printf("Pemuatan selesai!\n\n");
@@ -642,4 +729,135 @@ void loadUser(Text rootPath)
         NEXTLINE();
     }
     fclose(fuser);
+}
+
+void loadBalasan(Text rootPath){
+    Text wBalasan = appendText(rootPath, charArrToText("/balasan.config"));
+
+    FILE *fuser = fopen(wBalasan.TabString, "r");
+
+    STARTREADFILE(fuser);
+    int manyBalasan = wordToInt(stringToWord(currentLine.TabWord));
+
+    int i;
+    NEXTLINE();
+    for(i = 0; i < manyBalasan; i++){
+        int IdKicau = wordToInt(stringToWord(currentLine.TabWord));
+        int indexKicau = indexOfListDinKicauById(listKicauan, IdKicau);
+        NEXTLINE();
+        int manyBalasanKicau = wordToInt(stringToWord(currentLine.TabWord));
+        int j;
+        NEXTLINE();
+        int maxId = 0;
+        for(j = 0; j < manyBalasanKicau; j++){
+
+            char id1[200];
+            char id2[200];
+            char content[281];
+            char author[281];
+            
+            int k = 0;
+            int idOfId = 0;
+            boolean pastWhitespace = false;
+            while(currentLine.TabWord[k] != '\0'){
+                if (currentLine.TabWord[k] == ' '){
+                    id1[idOfId] = '\0';
+                    idOfId = 0;
+                    pastWhitespace = true;
+                }
+                else{
+                    if (pastWhitespace){
+                        id2[idOfId] = currentLine.TabWord[k];
+                    }
+                    else{
+                        id1[idOfId] = currentLine.TabWord[k];
+                    }
+                    idOfId++;
+                }
+                k++;
+            }
+            id2[idOfId] = '\0';
+
+            NEXTLINE();
+            k = 0;
+            while (currentLine.TabWord[k] != '\0')
+            {
+                content[k] = currentLine.TabWord[k];
+                k++;
+            }
+            content[k] = '\0';
+
+            NEXTLINE();
+            k = 0;
+            while(currentLine.TabWord[k] != '\0'){
+                author[k] = currentLine.TabWord[k];
+                k++;
+            }
+            author[k] = '\0';
+
+            NEXTLINE();
+            char wDate[3];
+            char wMonth[3];
+            char wYear[5];
+            char wHour[3];
+            char wMinute[3];
+            char wSecond[3];
+
+            wDate[0] = currentLine.TabWord[0];
+            wDate[1] = currentLine.TabWord[1];
+            wDate[2] = '\0';
+
+            wMonth[0] = currentLine.TabWord[3];
+            wMonth[1] = currentLine.TabWord[4];
+            wMonth[2] = '\0';
+
+            wYear[0] = currentLine.TabWord[6];
+            wYear[1] = currentLine.TabWord[7];
+            wYear[2] = currentLine.TabWord[8];
+            wYear[3] = currentLine.TabWord[9];
+            wYear[4] = '\0';
+
+            wHour[0] = currentLine.TabWord[11];
+            wHour[1] = currentLine.TabWord[12];
+            wHour[2] = '\0';
+
+            wMinute[0] = currentLine.TabWord[14];
+            wMinute[1] = currentLine.TabWord[15];
+            wMinute[2] = '\0';
+
+            wSecond[0] = currentLine.TabWord[17];
+            wSecond[1] = currentLine.TabWord[18];
+            wSecond[2] = '\0';
+
+            Text nodeContent = charArrToText(content);
+            Text nodeAuthor = charArrToText(author);
+            int nodeId = wordToInt(stringToWord(id2));
+            int idAddedTo = wordToInt(stringToWord(id1));
+
+            int Date = wordToInt(stringToWord(wDate));
+            int Month = wordToInt(stringToWord(wMonth));
+            int Year = wordToInt(stringToWord(wYear));
+            int Hour = wordToInt(stringToWord(wHour));
+            int Minute = wordToInt(stringToWord(wMinute));
+            int Second = wordToInt(stringToWord(wSecond));
+
+            DATETIME nodeDatetime;
+            CreateDATETIME(&nodeDatetime, Date, Month, Year, Hour, Minute, Second);
+
+            int idAuthor = listUserIndexOfWithName(listUser, nodeAuthor.TabString);
+
+            NodeBalasanAddress balasan;
+            if (idAddedTo == -1){idAddedTo = 0;}
+            balasan = newNodeBalasan(nodeId, 
+            nodeContent, idAuthor, getNodeInTreeById(listKicauan.buffer[indexKicau].balasan, idAddedTo));
+            NODEBALASAN_TIME(balasan) = nodeDatetime;
+            addNodeToMap(&TREE_HMP(listKicauan.buffer[indexKicau].balasan), balasan);
+            addChildren(getNodeInTreeById(listKicauan.buffer[indexKicau].balasan, idAddedTo), balasan);
+
+            maxId = nodeId > maxId ? nodeId : maxId;
+
+            NEXTLINE();
+        }
+        TREE_NEXTID(listKicauan.buffer[indexKicau].balasan) = maxId + 1; 
+    }
 }

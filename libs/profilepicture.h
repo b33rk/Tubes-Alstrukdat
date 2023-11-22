@@ -3,11 +3,7 @@
 #ifndef MATRIXPICTURE_H
 #define MATRIXPICTURE_H
 
-#include "boolean.h"
-#include "machine/charmachine.h"
-#include "pcolor.h"
 #include "matrix/matrixchar.h"
-#include <stdio.h>
 
 typedef struct
 {

@@ -8,6 +8,7 @@
 #include "libs/feature/draft.h"
 #include "libs/feature/loadsave.h"
 #include "libs/feature/utasfeature.h"
+#include "libs/feature/balasan.h"
 
 int main()
 {
@@ -144,19 +145,18 @@ int main()
             int index = wordToInt(currentWord);
             hapusUtas(idUtas, index);
         }
-        // else if (isWordEqual(currentWord, stringToWord("BALAS")))
-        // {
-        //     ADVWORD();
-        //     int idKicau = wordToInt(currentWord);
-        //     ADVWORD();
-        //     int idBalasan = wordToInt(currentWord);
-        //     balas(idKicau, idBalasan);
-        // }
-        // else if (isWordEqual(currentWord, stringToWord("BALASAN")))
-        // {
-        //     ADVWORD();
-        //     balasan(wordToInt(currentWord));
-        // }
+        else if (isWordEqual(currentWord, stringToWord("BALAS")))
+        {
+            balas();
+        }
+        else if (isWordEqual(currentWord, stringToWord("BALASAN")))
+        {
+            displayBalasan();
+        }
+        else if (isWordEqual(currentWord, stringToWord("HAPUS_BALASAN")))
+        {
+            hapusBalasan();
+        }
 
         printf("\n");
     }
