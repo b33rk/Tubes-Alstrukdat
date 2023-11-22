@@ -107,7 +107,7 @@ void displayBalasan(){
             printf("Wah, kicauan tersebut dibuat oleh pengguna dengan akun privat!\n\n");
         }
         else{
-            if(TREE_NEXTID(listKicauan.buffer[index].balasan) == 1){
+            if(TreeLength(listKicauan.buffer[index].balasan) == 1){
                 printf("Belum terdapat balasan apapun pada kicauan tersebut. Yuk balas kicauan tersebut!\n\n");
             }
             else{
