@@ -7,12 +7,12 @@
 #include "../machine/wordmachine.h"
 #include "../../database/database.h"
 #include "../datetime.h"
+#include "../graph/graphfriendship.h"
 
-void makeUtas(int idKicau);
+void createNewUtas(int IDKicau);
+void sambungUtas(int IDUtas, int index);
+void hapusUtas(int IDUtas, int index);
+void cetakUtas(int IDUtas);
 
-void cetakUtas(int idUtas);
-
-void sambungUtas(int idUtas, int index);
-void hapusUtas(int idUtas, int index);
 
 #endif

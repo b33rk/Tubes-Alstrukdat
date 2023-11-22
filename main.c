@@ -121,7 +121,7 @@ int main()
         else if (isWordEqual(currentWord, stringToWord("UTAS")))
         {
             ADVWORD();
-            makeUtas(wordToInt(currentWord));
+            createNewUtas(wordToInt(currentWord));
         }
         else if (isWordEqual(currentWord, stringToWord("CETAK_UTAS")))
         {
