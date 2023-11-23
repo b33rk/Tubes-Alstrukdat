@@ -6,7 +6,7 @@ void displayAll(TreeOfBalasan T){
 
 void displayNodeAll(TreeOfBalasan T, int Id, int indent){
     int i;
-    NodeBalasanAddress node = getNodeInHashMap(TREE_HMP(T), Id);
+    NodeBalasanAddress node = getNodeInHashTable(TREE_HTB(T), Id);
     ListDin children = NODEBALASAN_CHILDREN(node);
     if (Id != 0){displayNode(node, indent);}
     for(i = 0; i < LISTDIN_NEFF(children); i++){

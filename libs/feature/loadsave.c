@@ -1028,7 +1028,7 @@ void loadBalasan(Text rootPath){
             balasan = newNodeBalasan(nodeId, 
             nodeContent, idAuthor, getNodeInTreeById(listKicauan.buffer[indexKicau].balasan, idAddedTo));
             NODEBALASAN_TIME(balasan) = nodeDatetime;
-            addNodeToMap(&TREE_HMP(listKicauan.buffer[indexKicau].balasan), balasan);
+            addNodeToTable(&TREE_HTB(listKicauan.buffer[indexKicau].balasan), balasan);
             addChildren(getNodeInTreeById(listKicauan.buffer[indexKicau].balasan, idAddedTo), balasan);
 
             maxId = nodeId > maxId ? nodeId : maxId;
