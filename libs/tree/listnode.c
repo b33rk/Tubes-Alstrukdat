@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "listNode.h"
+#include "listnode.h"
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
@@ -127,35 +127,7 @@ NodeBalasanAddress getNodeFromId(ListNode l, int Id){
     return LISTNODE_ELMT(l, listNodeIndexOf(l, Id));
 }
 
-// int main(){
-//     ListDin L;
-//     CreateListDin(&L, 100);
-//     readList(&L);
-//     printList(L);
-//     sort(&L, true);
-//     printf("\nSorted : ");
-//     printList(L);
-//     printf("\nList Length : %d", listLength(L));
-//     printf("\nFirst id : %d", getFirstIdx(L));
-//     printf("\nLast id : %d", getLastIdx(L));
-//     printf("\nSum : %d", sumList(L));
-//     printf("\nIs 20 valid ID : %d", isIdxValid(L, 20));
-//     printf("\nIs -1 valid ID : %d", isIdxValid(L, -1));
-//     printf("\nIs 100 valid ID : %d", isIdxValid(L, 100));
-//     printf("\nIs 99 valid ID : %d", isIdxValid(L, 99));
-//     printf("\nIs 5 Eff ID : %d", isIdxEff(L, 5));
-//     printf("\nIs -1 Eff ID : %d", isIdxEff(L, -1));
-//     printf("\nIs 100 Eff ID : %d", isIdxEff(L, 100));
-//     printf("\nIs 99 Eff ID : %d", isIdxEff(L, 99));
-//     printf("\nIs empty : %d", isEmpty(L));
-//     printf("\nIs full : %d", isFull(L));
-//     printf("\n0 appears %d times", countVal(L, 0));
-//     int max, min;
-//     extremeValues(L, &max, &min);
-//     printf("\nMax : %d\nMin : %d", max, min);
-//     ListDin res = plusMinusList(L, L, true);
-//     printf("\n");
-//     printf("Two times L: ");
-//     printList(res);
-//     return 0;
-// }
+void dealokasiListNode(ListNode *l){
+    free(LISTNODE_BUFFER(*l));
+    free(l);
+}

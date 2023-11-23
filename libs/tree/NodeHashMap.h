@@ -1,7 +1,7 @@
 #ifndef NODEHMP_H
 #define NODEHMP_H
 
-#include "listNode.h"
+#include "listnode.h"
 
 typedef struct idnodehashmap{
     ListNode* buffer;
@@ -33,5 +33,7 @@ void addNodeToMap(NodeHashMap *H, NodeBalasanAddress Node);
 void removeNodeFromMap(NodeHashMap *H, NodeBalasanAddress Node);
 
 void doubleHMPSize(NodeHashMap *H);
+
+void dealokasiHMP(NodeHashMap *H);
 
 #endif

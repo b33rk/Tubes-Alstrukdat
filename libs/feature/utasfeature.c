@@ -1,246 +1,208 @@
 #include "utasfeature.h"
 
-void makeUtas(int idKicau)
-{
-    if (currentUser == NULL)
-    {
+void createNewUtas(int IDKicau) {
+    int idx = indexOfListDinKicauById(listKicauan, IDKicau);
+    if (currentUser == NULL) {
         printf("Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n\n");
+    }
+
+    if (idx == -1) {
+        printf("\nKicauan tidak ditemukan\n");
         return;
     }
-
-    int index = indexOfListDinKicauById(listKicauan, idKicau);
-
-    if (index == -1)
-    {
-        printf("Kicauan tidak ditemukan\n");
+    if (listKicauan.buffer[idx].idUser != currentUser->id) {
+        printf("\nKicauan ini bukan milik Anda!\n");
         return;
     }
-
-    if (listKicauan.buffer[index].idUtas != -1)
-    {
-        printf("Kicauan ini sudah menjadi utas!!\n");
+    
+    if (listKicauan.buffer[idx].idUtas != -1) { // sudah ada Utas dengan IDKicau
+        printf("\nTidak bisa membuat utas dengan Kicauan utama yang sama!\n");
         return;
     }
+    Utas Utasan;
+    CreateUtas(&Utasan);
 
-    if (listKicauan.buffer[index].idUser != currentUser->id)
-    {
-        printf("Kicauan ini bukan milik Anda!!\n");
-    }
+    ElUtas tempUtas;
 
-    boolean stop = false;
-
-    Utas u;
-    CreateUtas(&u);
-
-    ElUtas elutas1;
+    tempUtas.idKicau = IDKicau;
+    tempUtas.idUser = currentUser->id;
+    tempUtas.datetime = listKicauan.buffer[idx].datetime;
+    tempUtas.id = listUtas.idCount;
+    
     int j = 0;
-    while (listKicauan.buffer[index].text[j] != '\0')
-    {
-        elutas1.text[j] = listKicauan.buffer[index].text[j];
+    while (listKicauan.buffer[idx].text[j] != '\0') {
+        tempUtas.text[j] = listKicauan.buffer[idx].text[j];
         j++;
     }
+    tempUtas.text[j] = '\0';
 
-    elutas1.text[j] = '\0';
-    elutas1.id = listUtas.idCount;
-    elutas1.idKicau = idKicau;
-    elutas1.datetime = listKicauan.buffer[index].datetime;
-    elutas1.idUser = currentUser->id;
-    insertLastUtas(&u, elutas1);
-    while (!stop)
-    {
-
-        boolean isUtasValid = false;
-        while (!isUtasValid)
-        {
-            printf("\nMasukkan kicauan: \n");
+    insertLastUtas(&Utasan, tempUtas);
+    printf("\nUtas berhasil dibuat!\n");
+    
+    boolean end = false;
+    
+    while (!end) {
+        ElUtas tempUtas1;
+        boolean isKicauanValid = false;
+        while(!isKicauanValid) {
+            printf("Masukkan kicauan:\n");
             STARTTEXT();
             printf("\n");
-
-            if (currentText.Length == 0)
-            {
+            if (currentText.Length == 0) {
                 printf("Kicauan tidak boleh kosong!!\n\n");
                 continue;
             }
 
-
-            isUtasValid = true;
+            isKicauanValid = true;
         }
+        tempUtas1.idUser = currentUser->id;
+        tempUtas1.idKicau = IDKicau;
+        tempUtas1.id = listUtas.idCount;
 
-        ElUtas elutas;
         int j = 0;
-        while (currentText.TabString[j] != '\0')
-        {
-            elutas.text[j] = currentText.TabString[j];
+        while (currentText.TabString[j] != '\0') {
+            tempUtas1.text[j] = currentText.TabString[j];
             j++;
         }
+        tempUtas1.text[j] = '\0';
+        
+        getCurrentDateTime(&tempUtas1.datetime);
 
-        elutas.text[j] = '\0';
-        elutas.id = listUtas.idCount;
-        elutas.idKicau = idKicau;
-
-        getCurrentDateTime(&elutas.datetime);
-        elutas.idUser = currentUser->id;
-        insertLastUtas(&u, elutas);
+        insertLastUtas(&Utasan, tempUtas1);
 
         printf("Apakah Anda ingin melanjutkan utas ini? (YA/TIDAK)\n");
         STARTWORD();
-        if (isWordEqual(currentWord, stringToWord("TIDAK")))
-        {
-            stop = true;
+        if (isWordEqual(currentWord, stringToWord("TIDAK"))) {
+            end = true;
         }
     }
+    listKicauan.buffer[idx].idUtas = listUtas.idCount;
 
-    listKicauan.buffer[index].idUtas = listUtas.idCount;
-
-    insertLastListDinUtas(&listUtas, u);
+    insertLastListDinUtas(&listUtas, Utasan);
     listUtas.idCount++;
-    printf("Utas selesai\n");
+    printf("\nUtas selesai!\n");
 }
 
-void cetakUtas(int idUtas)
-{
-    if (currentUser == NULL)
-    {
+
+void sambungUtas(int IDUtas, int index) {
+    if (currentUser == NULL) {
         printf("Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n\n");
+    }
+
+    Utas u = listUtas.buffer[IDUtas - 1];
+    if (u == NULL) {
+        printf("\nUtas tidak ditemukan!\n");
+        return;
+    }
+    if (index > lengthUtas(u)) {
+        printf("\nIndex terlalu tinggi!\n");
+        return;
+    }
+    int IDKicau = u->info.idKicau;
+    int idx = indexOfListDinKicauById(listKicauan, IDKicau);
+    if (listKicauan.buffer[idx].idUser != currentUser->id) {
+        printf("\nUtas ini bukan milik Anda!\n");
         return;
     }
 
-    Utas curr = listUtas.buffer[idUtas - 1];
+    ElUtas val; 
 
-    if (curr == NULL)
-    {
-        printf("Utas tidak ditemukan!\n");
-        return;
-    }
-
-    if (!listUser.contents[curr->info.idUser].isPublic)
-    {
-        printf("Akun yang membuat utas ini adalah akun privat! Ikuti dahulu akun ini untuk melihat utasnya!\n");
-    }
-
-    printf("| ID = %d\n", curr->info.idKicau);
-    printf("| %s\n", listUser.contents[curr->info.idUser].name);
-    printf("| ");
-    TulisDATETIME(curr->info.datetime);
-    printf("\n");
-    printf("| %s\n\n", curr->info.text);
-
-    curr = curr->next;
-    int index = 1;
-    while (curr != NULL)
-    {
-        printf("   | INDEX = %d\n", index++);
-        printf("   | %s\n", listUser.contents[curr->info.idUser].name);
-        printf("   | ");
-        TulisDATETIME(curr->info.datetime);
-        printf("\n");
-        printf("   | %s\n\n", curr->info.text);
-        curr = curr->next;
-    }
-}
-
-void sambungUtas(int idUtas, int index)
-{
-    if (currentUser == NULL)
-    {
-        printf("Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n\n");
-        return;
-    }
-
-    Utas curr = listUtas.buffer[idUtas - 1];
-
-    if (curr == NULL)
-    {
-        printf("Utas tidak ditemukan!\n");
-        return;
-    }
-
-    int len = lengthUtas(curr);
-    if (index > len)
-    {
-        printf("Index terlalu tinggi!\n");
-        return;
-    }
-
-    if (curr->info.idUser != currentUser->id)
-    {
-        printf("Anda tidak bisa menyambung utas ini\n");
-        return;
-    }
-
-    boolean isUtasValid = false;
-    while (!isUtasValid)
-    {
-        printf("Masukkan kicauan: \n");
+    boolean isKicauanValid = false;
+    while(!isKicauanValid) {
+        printf("Masukkan kicauan:\n");
         STARTTEXT();
-        printf("\n");
-
-        if (currentText.Length == 0)
-        {
+        if (currentText.Length == 0) {
             printf("Kicauan tidak boleh kosong!!\n\n");
             continue;
         }
 
-        isUtasValid = true;
+        isKicauanValid = true;
     }
 
-    ElUtas elutas;
+    val.idUser = currentUser->id;
+    val.id = listUtas.idCount;
+    val.idKicau = IDKicau;
+
     int j = 0;
-    while (currentText.TabString[j] != '\0')
-    {
-        elutas.text[j] = currentText.TabString[j];
+    while (currentText.TabString[j] != '\0') {
+        val.text[j] = currentText.TabString[j];
         j++;
     }
+    val.text[j] = '\0';
 
-    elutas.text[j] = '\0';
-    elutas.id = curr->info.id;
-    elutas.idKicau = curr->info.id;
-
-    getCurrentDateTime(&elutas.datetime);
-    elutas.idUser = curr->info.id;
-    insertAtUtas(&listUtas.buffer[idUtas - 1], elutas, index);
-    printf("Sambung utas berhasil\n");
+    getCurrentDateTime(&val.datetime);
+    insertAtUtas(&u, val, index);
 }
 
-void hapusUtas(int idUtas, int index)
-{
-    if (currentUser == NULL)
-    {
+
+void hapusUtas(int IDUtas, int index) {
+    if (currentUser == NULL) {
         printf("Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n\n");
         return;
     }
 
-    Utas curr = listUtas.buffer[idUtas - 1];
-
-    if (curr == NULL)
-    {
-        printf("Utas tidak ditemukan!\n");
+    Utas u = listUtas.buffer[IDUtas - 1];
+    if (IDUtas > listUtas.idCount) {
+        printf("\nUtas tidak ditemukan!\n");
         return;
     }
 
-    if (index == 0)
-    {
-        printf("Anda tidak bisa menghapus kicauan utama!\n");
+    if (index >= lengthUtas(u)) {
+        printf("\nKicauan sambungan dengan index %d tidak ditemukan pada utas!\n", index);
         return;
     }
 
-    int len = lengthUtas(curr);
-    if (index > len)
-    {
-        printf("Kicauan sambungan dengan index %d tidak ditemukan pada utas!\n", index);
+    if (u->info.idUser != currentUser->id) {
+        printf("\nAnda tidak bisa menghapus kicauan dalam utas ini!\n");
+        return;
+    }
+    if (index == 0) {
+        printf("\nAnda tidak bisa menghapus kicauan utama!\n");
+    } else {
+        ElUtas val;
+        deleteAtUtas(&u, index, &val);
+        printf("\nKicauan sambungan berhasil dihapus!\n");
+    }
+}
+
+void cetakUtas(int IDUtas) {
+    if (currentUser == NULL) {
+        printf("Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n\n");
+        return;
+    }
+    
+    Utas u = listUtas.buffer[IDUtas - 1];
+    if (u == NULL) {
+        printf("\nUtas tidak ditemukan!\n");
         return;
     }
 
-    if (curr->info.idUser != currentUser->id)
-    {
-        printf("Anda tidak bisa menghapus kicauan utas ini\n");
-        return;
+    int idUser = u->info.idUser;
+    if (idUser != currentUser->id) {
+        if (!isHasRelation(graphFriendship, currentUser->id, idUser)) {
+            if (!listUser.contents[idUser].isPublic) {
+                printf("\nAkun yang membuat utas ini adalah akun privat! Ikuti dahulu akun ini untuk melihat utasnya!\n");
+            }
+            return;
+        }
     }
 
-    ElUtas elutas;
+    AddressUtas p = u;
 
-    deleteAtUtas(&listUtas.buffer[idUtas - 1], index, &elutas);
+    printf("\n| ID = %d\n", IDUtas);
+    printf("| %s\n", listUser.contents[idUser].name);
+    printf("| "); TulisDATETIME(p->info.datetime);
+    printf("\n");
+    printf("| %s\n\n", p->info.text);
 
-    printf("Kicauan sambungan berhasil dihapus!\n\n");
-
+    p = p->next;
+    int index = 1;
+    while (p != NULL) {
+        printf("  | INDEX = %d\n", index);
+        printf("  | %s\n", listUser.contents[idUser].name);
+        printf("  | "); TulisDATETIME(p->info.datetime); printf("\n");
+        printf("  | %s\n\n", p->info.text);  
+        p = p->next;
+        index++;
+    }
 }

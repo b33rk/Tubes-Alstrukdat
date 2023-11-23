@@ -30,6 +30,12 @@ void dealocateListDinKicau(ListDinKicau *l)
     /* KAMUS */
 
     /* ALGORITMA */
+
+    int i;
+    for(i = 0; i < l->nEff; i++){
+        dealokasiTree(&(l->buffer[i].balasan));
+    }
+
     l->capacity = 0;
     l->nEff = 0;
     free(l->buffer);

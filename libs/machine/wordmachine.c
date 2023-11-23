@@ -11,7 +11,7 @@ void IgnoreBlanksAndNewLine()
     /* KAMUS */
 
     /* ALGORITMA */
-    while (currentChar == BLANK || currentChar == '\n')
+    while (currentChar == BLANK || currentChar == '\n' || currentChar == '\r')
     {
         ADV();
     }

@@ -4,7 +4,7 @@
 #include "../list/listdin.h"
 #include "../machine/wordmachine.h"
 #include "../machine/textmachine.h"
-#include "../datetime.h"
+#include "../sederhana/datetime.h"
 
 /* Definisi elemen dan koleksi objek */
 
@@ -31,5 +31,7 @@ NodeBalasanAddress newNodeBalasan(int Id, Text content, int IdAuthor, NodeBalasa
 void addChildren(NodeBalasanAddress Nparent, NodeBalasanAddress Nchildren);
 
 void removeChildren(NodeBalasanAddress Nparent, NodeBalasanAddress Nchildren);
+
+void dealokasiNodeBalasan(NodeBalasanAddress Node);
 
 #endif

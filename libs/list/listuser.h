@@ -2,7 +2,7 @@
 #define LISTUSER_H
 
 #include "../boolean.h"
-#include "../user.h"
+#include "../sederhana/user.h"
 #include "../machine/textmachine.h"
 #include <stdio.h>
 
