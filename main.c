@@ -9,6 +9,7 @@
 #include "libs/feature/loadsave.h"
 #include "libs/feature/utasfeature.h"
 #include "libs/feature/balasan.h"
+#include "libs/feature/fyb.h"
 
 int main()
 {
@@ -189,6 +190,9 @@ int main()
         else if (isWordEqual(currentWord, stringToWord("HAPUS_BALASAN")))
         {
             hapusBalasan();
+        } else if (isWordEqual(currentWord, stringToWord("FYB")))
+        {
+            FYB();
         }
 
         printf("\n");
