@@ -32,11 +32,7 @@ build/./database/database.c.o: database/database.c database/database.h \
  database/../libs/list/../tree/../machine/wordmachine.h \
  database/../libs/list/../tree/../machine/textmachine.h \
  database/../libs/list/../tree/../sederhana/datetime.h \
-<<<<<<< HEAD
  database/../libs/list/../tree/NodeHashTable.h \
-=======
- database/../libs/list/../tree/NodeHashMap.h \
->>>>>>> b5369f878e208bea4d2da204478b314d5e33b334
  database/../libs/list/../tree/listnode.h \
  database/../libs/list/../tree/../boolean.h \
  database/../libs/list/listdinutas.h \
@@ -82,11 +78,7 @@ database/../libs/list/../tree/../list/../boolean.h:
 database/../libs/list/../tree/../machine/wordmachine.h:
 database/../libs/list/../tree/../machine/textmachine.h:
 database/../libs/list/../tree/../sederhana/datetime.h:
-<<<<<<< HEAD
 database/../libs/list/../tree/NodeHashTable.h:
-=======
-database/../libs/list/../tree/NodeHashMap.h:
->>>>>>> b5369f878e208bea4d2da204478b314d5e33b334
 database/../libs/list/../tree/listnode.h:
 database/../libs/list/../tree/../boolean.h:
 database/../libs/list/listdinutas.h:

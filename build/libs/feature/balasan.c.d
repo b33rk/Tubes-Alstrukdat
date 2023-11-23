@@ -10,11 +10,7 @@ build/./libs/feature/balasan.c.o: libs/feature/balasan.c \
  libs/feature/../tree/../sederhana/datetime.h \
  libs/feature/../tree/../sederhana/../boolean.h \
  libs/feature/../tree/../sederhana/time1.h \
-<<<<<<< HEAD
  libs/feature/../tree/NodeHashTable.h libs/feature/../tree/listnode.h \
-=======
- libs/feature/../tree/NodeHashMap.h libs/feature/../tree/listnode.h \
->>>>>>> b5369f878e208bea4d2da204478b314d5e33b334
  libs/feature/../tree/../boolean.h libs/feature/../../database/database.h \
  libs/feature/../../database/../libs/list/listuser.h \
  libs/feature/../../database/../libs/list/../boolean.h \
@@ -64,11 +60,7 @@ libs/feature/../tree/../machine/textmachine.h:
 libs/feature/../tree/../sederhana/datetime.h:
 libs/feature/../tree/../sederhana/../boolean.h:
 libs/feature/../tree/../sederhana/time1.h:
-<<<<<<< HEAD
 libs/feature/../tree/NodeHashTable.h:
-=======
-libs/feature/../tree/NodeHashMap.h:
->>>>>>> b5369f878e208bea4d2da204478b314d5e33b334
 libs/feature/../tree/listnode.h:
 libs/feature/../tree/../boolean.h:
 libs/feature/../../database/database.h:

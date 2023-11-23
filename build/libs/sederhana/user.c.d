@@ -33,11 +33,7 @@ build/./libs/sederhana/user.c.o: libs/sederhana/user.c \
  libs/sederhana/../../database/../libs/list/../tree/../machine/wordmachine.h \
  libs/sederhana/../../database/../libs/list/../tree/../machine/textmachine.h \
  libs/sederhana/../../database/../libs/list/../tree/../sederhana/datetime.h \
-<<<<<<< HEAD
  libs/sederhana/../../database/../libs/list/../tree/NodeHashTable.h \
-=======
- libs/sederhana/../../database/../libs/list/../tree/NodeHashMap.h \
->>>>>>> b5369f878e208bea4d2da204478b314d5e33b334
  libs/sederhana/../../database/../libs/list/../tree/listnode.h \
  libs/sederhana/../../database/../libs/list/../tree/../boolean.h \
  libs/sederhana/../../database/../libs/list/listdinutas.h \
@@ -84,11 +80,7 @@ libs/sederhana/../../database/../libs/list/../tree/../list/../boolean.h:
 libs/sederhana/../../database/../libs/list/../tree/../machine/wordmachine.h:
 libs/sederhana/../../database/../libs/list/../tree/../machine/textmachine.h:
 libs/sederhana/../../database/../libs/list/../tree/../sederhana/datetime.h:
-<<<<<<< HEAD
 libs/sederhana/../../database/../libs/list/../tree/NodeHashTable.h:
-=======
-libs/sederhana/../../database/../libs/list/../tree/NodeHashMap.h:
->>>>>>> b5369f878e208bea4d2da204478b314d5e33b334
 libs/sederhana/../../database/../libs/list/../tree/listnode.h:
 libs/sederhana/../../database/../libs/list/../tree/../boolean.h:
 libs/sederhana/../../database/../libs/list/listdinutas.h:
