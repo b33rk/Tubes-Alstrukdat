@@ -41,7 +41,11 @@ build/./libs/feature/friendshipfeature.c.o: \
  libs/feature/../../database/../libs/list/../tree/../machine/wordmachine.h \
  libs/feature/../../database/../libs/list/../tree/../machine/textmachine.h \
  libs/feature/../../database/../libs/list/../tree/../sederhana/datetime.h \
+<<<<<<< HEAD
  libs/feature/../../database/../libs/list/../tree/NodeHashTable.h \
+=======
+ libs/feature/../../database/../libs/list/../tree/NodeHashMap.h \
+>>>>>>> b5369f878e208bea4d2da204478b314d5e33b334
  libs/feature/../../database/../libs/list/../tree/listnode.h \
  libs/feature/../../database/../libs/list/../tree/../boolean.h \
  libs/feature/../../database/../libs/list/listdinutas.h \
@@ -92,7 +96,11 @@ libs/feature/../../database/../libs/list/../tree/../list/../boolean.h:
 libs/feature/../../database/../libs/list/../tree/../machine/wordmachine.h:
 libs/feature/../../database/../libs/list/../tree/../machine/textmachine.h:
 libs/feature/../../database/../libs/list/../tree/../sederhana/datetime.h:
+<<<<<<< HEAD
 libs/feature/../../database/../libs/list/../tree/NodeHashTable.h:
+=======
+libs/feature/../../database/../libs/list/../tree/NodeHashMap.h:
+>>>>>>> b5369f878e208bea4d2da204478b314d5e33b334
 libs/feature/../../database/../libs/list/../tree/listnode.h:
 libs/feature/../../database/../libs/list/../tree/../boolean.h:
 libs/feature/../../database/../libs/list/listdinutas.h:

@@ -16,7 +16,11 @@ build/./libs/feature/kicauan.c.o: libs/feature/kicauan.c \
  libs/feature/../list/../tree/../machine/charmachine.h \
  libs/feature/../list/../tree/../machine/textmachine.h \
  libs/feature/../list/../tree/../sederhana/datetime.h \
+<<<<<<< HEAD
  libs/feature/../list/../tree/NodeHashTable.h \
+=======
+ libs/feature/../list/../tree/NodeHashMap.h \
+>>>>>>> b5369f878e208bea4d2da204478b314d5e33b334
  libs/feature/../list/../tree/listnode.h \
  libs/feature/../list/../tree/../boolean.h \
  libs/feature/../../database/database.h \
@@ -70,7 +74,11 @@ libs/feature/../list/../tree/../machine/../boolean.h:
 libs/feature/../list/../tree/../machine/charmachine.h:
 libs/feature/../list/../tree/../machine/textmachine.h:
 libs/feature/../list/../tree/../sederhana/datetime.h:
+<<<<<<< HEAD
 libs/feature/../list/../tree/NodeHashTable.h:
+=======
+libs/feature/../list/../tree/NodeHashMap.h:
+>>>>>>> b5369f878e208bea4d2da204478b314d5e33b334
 libs/feature/../list/../tree/listnode.h:
 libs/feature/../list/../tree/../boolean.h:
 libs/feature/../../database/database.h:

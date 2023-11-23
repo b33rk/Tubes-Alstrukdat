@@ -184,6 +184,7 @@ void lihatdraft()
         }
         else if (isWordEqual(currentWord, stringToWord("KEMBALI")))
         {
+            pushStackDraft(&(currentUser->stackDraft), d);
         }
     }
 }

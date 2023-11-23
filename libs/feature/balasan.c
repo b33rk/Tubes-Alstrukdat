@@ -141,8 +141,8 @@ void hapusBalasan(){
             printf("Hei, ini balasan punya siapa? Jangan dihapus ya!\n\n");
         }
         else{
-            printf("Balasan berhasil dihapus\n\n");
             deleteTreeNodeAt(&listKicauan.buffer[index].balasan, idBalasan);
+            printf("Balasan berhasil dihapus\n\n");
         }
     }
 }
