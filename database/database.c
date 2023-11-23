@@ -13,7 +13,7 @@ void initDatabase()
     currentUser = NULL;
     CreateGraphFriendship(&graphFriendship);
     CreateListDinKicau(&listKicauan, 3);
-    CreateListDinUtas(&listUtas, 10);
+    CreateListDinUtas(&listUtas, 5);
 
     //hanya untuk tes
     // User user, user2, user3, user4;

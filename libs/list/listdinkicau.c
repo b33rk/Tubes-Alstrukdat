@@ -32,7 +32,8 @@ void dealocateListDinKicau(ListDinKicau *l)
     /* ALGORITMA */
 
     int i;
-    for(i = 0; i < l->nEff; i++){
+    for (i = 0; i < l->nEff; i++)
+    {
         dealokasiTree(&(l->buffer[i].balasan));
     }
 
@@ -113,39 +114,39 @@ boolean isListDinKicauFull(ListDinKicau l)
     return l.nEff == l.capacity;
 }
 
-void copyListDinKicau(ListDinKicau lIn, ListDinKicau *lOut)
-{
-    /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
-    /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
-    /* Proses : Menyalin isi lIn ke lOut */
-    /* KAMUS */
-    int i;
+// void copyListDinKicau(ListDinKicau lIn, ListDinKicau *lOut)
+// {
+//     /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
+//     /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
+//     /* Proses : Menyalin isi lIn ke lOut */
+//     /* KAMUS */
+//     int i;
 
-    /* ALGORITMA */
-    CreateListDinKicau(lOut, lIn.capacity);
+//     /* ALGORITMA */
+//     CreateListDinKicau(lOut, lIn.capacity);
 
-    for (i = 0; i < lIn.nEff; i++)
-    {
-        Kicauan temp;
-        CreateKicauan(&temp);
+//     for (i = 0; i < lIn.nEff; i++)
+//     {
+//         Kicauan temp;
+//         CreateKicauan(&temp);
 
-        temp.id = lIn.buffer[i].id;
-        temp.idUser = lIn.buffer[i].idUser;
-        temp.like = lIn.buffer[i].like;
-        temp.datetime = lIn.buffer[i].datetime;
+//         temp.id = lIn.buffer[i].id;
+//         temp.idUser = lIn.buffer[i].idUser;
+//         temp.like = lIn.buffer[i].like;
+//         temp.datetime = lIn.buffer[i].datetime;
 
-        int j = 0;
-        while (lIn.buffer[i].text[j] != '\0')
-        {
-            temp.text[j] = lIn.buffer[i].text[j];
-            j++;
-        }
-        temp.text[j] = '\0';
+//         int j = 0;
+//         while (lIn.buffer[i].text[j] != '\0')
+//         {
+//             temp.text[j] = lIn.buffer[i].text[j];
+//             j++;
+//         }
+//         temp.text[j] = '\0';
 
-        insertLastListDinKicau(lOut, temp);
-        lOut->nEff++;
-    }
-}
+//         insertLastListDinKicau(lOut, temp);
+//         lOut->nEff++;
+//     }
+// }
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi list dari pembacaan *** */
@@ -344,14 +345,14 @@ void insertLastListDinKicau(ListDinKicau *l, Kicauan val)
     /* KAMUS */
 
     /* ALGORITMA */
-    if (l->nEff < l->capacity)
+    if (!isListDinKicauFull(*l))
     {
         l->buffer[l->nEff] = val;
         l->nEff++;
     }
     else
     {
-        // expandListDinKicau(l, l->capacity);
+        expandListDinKicau(l, l->capacity);
         l->buffer[l->nEff] = val;
         l->nEff++;
     }
@@ -378,31 +379,40 @@ void expandListDinKicau(ListDinKicau *l, int num)
     /* I.S. List sudah terdefinisi */
     /* F.S. Ukuran list bertambah sebanyak num */
     /* KAMUS */
-    ListDinKicau lnew;
-    int i;
+    // ListDinKicau lnew;
+    // int i;
 
-    /* ALGORITMA */
-    CreateListDinKicau(&lnew, l->capacity + num);
+    l->capacity = l->capacity + num;
+    l->buffer = (Kicauan *)realloc(l->buffer, l->capacity *sizeof(Kicauan));
+    // /* ALGORITMA */
+    // CreateListDinKicau(&lnew, l->capacity + num);
 
-    for (i = 0; i < l->nEff; i++)
-    {
-        lnew.buffer[i].id = l->buffer[i].id;
-        lnew.buffer[i].datetime = l->buffer[i].datetime;
-        lnew.buffer[i].idUser = l->buffer[i].idUser;
-        lnew.buffer[i].like = l->buffer[i].like;
-        int j = 0;
-        while (l->buffer[i].text[j] != '\0')
-        {
-            lnew.buffer[i].text[j] = l->buffer[i].text[j];
-            j++;
-        }
-        lnew.buffer[i].text[j] = '\0';
-        lnew.nEff++;
-    }
+    // for (i = 0; i < l->nEff; i++)
+    // {
+    //     lnew.buffer[i].id = l->buffer[i].id;
+    //     lnew.buffer[i].datetime = l->buffer[i].datetime;
+    //     lnew.buffer[i].idUser = l->buffer[i].idUser;
+    //     lnew.buffer[i].like = l->buffer[i].like;
+    //     lnew.buffer[i].idUtas = l->buffer[i].idUtas;
+    //     int j = 0;
+    //     while (l->buffer[i].text[j] != '\0')
+    //     {
+    //         lnew.buffer[i].text[j] = l->buffer[i].text[j];
+    //         j++;
+    //     }
+    //     lnew.buffer[i].text[j] = '\0';
+    //     lnew.nEff++;
+    // }
 
-    dealocateListDinKicau(l);
+    // // for (i = 0; i < l->nEff; i++)
+    // // {
+    // //     lnew.buffer[i] = l->buffer[i];
+    // // }
+    // // lnew.nEff = l->nEff;
 
-    copyListDinKicau(lnew, l);
+    // dealocateListDinKicau(l);
+
+    // copyListDinKicau(lnew, l);
 }
 
 void shrinkListDinKicau(ListDinKicau *l, int num)
