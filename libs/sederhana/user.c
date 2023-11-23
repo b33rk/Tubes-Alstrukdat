@@ -1,5 +1,5 @@
 #include "user.h"
-#include "../database/database.h"
+#include "../../database/database.h"
 
 
 void CreateUser(User *u)

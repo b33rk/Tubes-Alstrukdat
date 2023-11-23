@@ -6,7 +6,7 @@
 #include "../list/listuser.h"
 #include "../machine/wordmachine.h"
 #include "../../database/database.h"
-#include "../profilepicture.h"
+#include "../sederhana/profilepicture.h"
 #include "../machine/stringdinmachine.h"
 
 void seeProfile(Word name);

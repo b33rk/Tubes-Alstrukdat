@@ -119,182 +119,99 @@ void TulisDATETIMEFile(DATETIME D, FILE* f)
     fprintf(f, "%02d/%02d/%d %02d:%02d:%02d", Day(D), Month(D), Year(D), Hour(Time(D)), Minute(Time(D)), Second(Time(D)));
 }
 
+
+long long int DATETIMEtoDetik(DATETIME D)
+{
+    long long int totalDetik = 0;
+    int i;
+    for (i = 1900; i < Year(D); i++)
+    {
+        totalDetik += (337 + GetMaxDay(2, i)) * 24 * 3600;
+    };
+    for (i = 1; i < Month(D); i++)
+    {
+        totalDetik += (GetMaxDay(i, Year(D))) * 24 * 3600;
+    };
+    for (i = 1; i < Day(D); i++)
+    {
+        totalDetik += 24 * 3600;
+    };
+    totalDetik += TIMEToDetik(Time(D));
+    return totalDetik;
+}
+
+DATETIME SecondtoDATETIME(long long int totalDetik)
+{
+    int year, month, day;
+    TIME T;
+    DATETIME D;
+    year = 1900;
+    month = 1;
+    day = 1;
+    while (totalDetik >= (337 + GetMaxDay(2, year)) * 24 * 3600)
+    {
+        totalDetik -= (337 + GetMaxDay(2, year)) * 24 * 3600;
+        year += 1;
+    }
+    while (totalDetik >= (GetMaxDay(month, year) * 24 * 3600))
+    {
+        totalDetik -= (GetMaxDay(month, year) * 24 * 3600);
+        month += 1;
+    }
+    while (totalDetik >= 24 * 3600)
+    {
+        day += 1;
+        totalDetik -= 24 * 3600;
+    }
+    T = DetikToTIME(totalDetik);
+    CreateDATETIME(&D, day, month, year, Hour(T), Minute(T), Second(T));
+    return D;
+}
+
+
+/* ***************************************************************** */
+/* KELOMPOK OPERASI TERHADAP TYPE                                    */
+/* ***************************************************************** */
+/* *** Kelompok operasi relasional terhadap DATETIME *** */
 boolean DEQ(DATETIME D1, DATETIME D2)
 {
     /* Mengirimkan true jika D1=D2, false jika tidak */
-
-    return (TEQ(Time(D1), Time(D2)) && (Year(D1) == Year(D2)) && (Month(D1) == Month(D2)) && (Day(D1) == Day(D2)));
+    return ((Day(D1) == Day(D2)) && (Month(D1) == Month(D2)) && (Year(D1) == Year(D2)) && TEQ(Time(D1), Time(D2)));
 }
 boolean DNEQ(DATETIME D1, DATETIME D2)
 {
     /* Mengirimkan true jika D1 tidak sama dengan D2 */
-
-    return (TNEQ(Time(D1), Time(D2)) || (Year(D1) != Year(D2)) || (Month(D1) != Month(D2)) || (Day(D1) != Day(D2)));
+    return !DEQ(D1, D2);
 }
 boolean DLT(DATETIME D1, DATETIME D2)
 {
     /* Mengirimkan true jika D1<D2, false jika tidak */
-
-    if (Year(D2) > Year(D1))
-    {
-        return true;
-    }
-    else if (Year(D2) == Year(D1))
-    {
-        if (Month(D2) > Month(D1))
-        {
-            return true;
-        }
-        else if (Month(D2) == Month(D1))
-        {
-            if (Day(D2) > Day(D1))
-            {
-                return true;
-            }
-            else if (Day(D2) == Day(D1))
-            {
-                if (TLT(Time(D1), Time(D2)))
-                {
-                    return true;
-                }
-            }
-        }
-    }
-
-    return false;
+    return (DATETIMEtoDetik(D1) < DATETIMEtoDetik(D2));
 }
 boolean DGT(DATETIME D1, DATETIME D2)
 {
     /* Mengirimkan true jika D1>D2, false jika tidak */
-    if (Year(D1) > Year(D2))
-    {
-        return true;
-    }
-    else if (Year(D1) == Year(D2))
-    {
-        if (Month(D1) > Month(D2))
-        {
-            return true;
-        }
-        else if (Month(D1) == Month(D2))
-        {
-            if (Day(D1) > Day(D2))
-            {
-                return true;
-            }
-            else if (Day(D1) == Day(D2))
-            {
-                if (TGT(Time(D1), Time(D2)))
-                {
-                    return true;
-                }
-            }
-        }
-    }
-
-    return false;
+    return (DATETIMEtoDetik(D1) > DATETIMEtoDetik(D2));
 }
+
 DATETIME DATETIMENextNDetik(DATETIME D, int N)
 {
     /* Mengirim salinan D dengan detik ditambah N */
-
-    // int detik, hari, jumlah;
-
-    // detik = N % 86400;
-    // hari = N / 86400;
-
-    // Time(D) = NextNDetik(Time(D), detik);
-
-    // if (hari != 0)
-    // {
-    //     for (jumlah = Day(D) + hari; jumlah > GetMaxDay(Month(D), Year(D)); jumlah = jumlah - ((GetMaxDay(Month(D), Year(D))) - Day(D)))
-    //     {
-    //         Month(D) = Month(D) + 1;
-    //         if (Month(D) == 13)
-    //         {
-    //             Month(D) = 1;
-    //             Year(D) = Year(D) + 1;
-    //         }
-    //     }
-    //     Day(D) = jumlah;
-    // }
-
-    // return D;
-    Time(D) = NextNDetik(Time(D), N);
-    return D;
+    long long int totalDetik = DATETIMEtoDetik(D);
+    totalDetik += N;
+    return SecondtoDATETIME(totalDetik);
 }
+
 DATETIME DATETIMEPrevNDetik(DATETIME D, int N)
 {
     /* Mengirim salinan D dengan detik dikurang N */
-    // int detik, hari, jumlah;
-
-    // detik = N % 86400;
-    // hari = N / 86400;
-
-    // Time(D) = PrevNDetik(Time(D), detik);
-
-    // if (hari != 0)
-    // {
-    //     for (jumlah = Day(D) - hari; jumlah < 1; jumlah = jumlah + GetMaxDay((Month(D) - 1 == 0 ? 12 : Month(D) - 1), (Month(D) - 1 == 0 ? Year(D) - 1 : Year(D))))
-    //     {
-    //         Month(D) = Month(D) - 1;
-    //         if (Month(D) == 0)
-    //         {
-    //             Month(D) = 12;
-    //             Year(D) = Year(D) - 1;
-    //         }
-    //     }
-    //     Day(D) = jumlah;
-    // }
-
-    // return D;
-    Time(D) = PrevNDetik(Time(D), N);
-    return D;
+    /* *** Kelompok Operator Aritmetika terhadap DATETIME *** */
+    return DATETIMENextNDetik(D, -N);
 }
-/* *** Kelompok Operator Aritmetika terhadap DATETIME *** */
+
 long int DATETIMEDurasi(DATETIME DAw, DATETIME DAkh)
 {
     /* Mengirim DAkh-DAw dlm Detik, dengan kalkulasi */
     /* Prekondisi: DAkh > DAw */
-
-    // unsigned long b, sAw, sAkh;
-
-    // selisih = 0;
-
-    // for (t = Year(DAw) + 1; t < Year(DAkh); t++)
-    // {
-    //     if ((t % 400 == 0) || (t % 400 != 0 && t % 100 != 0 && t % 4 == 0))
-    //     {
-    //         selisih += 366;
-    //     }
-    //     else
-    //     {
-    //         selisih += 365;
-    //     }
-    // }
-
-    // for (b = 1; b < Month(DAkh); b++)
-    // {
-    //     sAkh += (GetMaxDay(b, Year(DAkh)) * 86400);
-    // }
-    // sAkh += ((Day(DAkh) - 1) * 86400);
-    // sAkh += TIMEToDetik(Time(DAkh));
-
-    // for (b = 1; b < Month(DAw); b++)
-    // {
-    //     sAw += (GetMaxDay(b, Year(DAw)) * 86400);
-    // }
-    // sAw += ((Day(DAw) - 1) * 86400);
-    // sAw += TIMEToDetik(Time(DAw));
-
-    // for (b = Month(DAw) + 1; b <= 12; b++)
-    // {
-    //     selisih += GetMaxDay(b, Year(DAw));
-    // }
-    // selisih += (GetMaxDay(Month(DAw), Year(DAw)) - Day(DAw));
-
-    // selisih += TIMEToDetik(Time(DAkh));
-    // selisih += (86359 - TIMEToDetik(Time(DAw)));
-
-    return Durasi(Time(DAw), Time(DAkh));
+    return DATETIMEtoDetik(DAkh) - DATETIMEtoDetik(DAw);
 }

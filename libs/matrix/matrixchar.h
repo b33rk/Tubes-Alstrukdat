@@ -5,7 +5,7 @@
 
 #include "../boolean.h"
 #include "../machine/charmachine.h"
-#include "../pcolor.h"
+#include "../sederhana/pcolor.h"
 #include <stdio.h>
 
 /* Ukuran maksimum baris dan kolom */

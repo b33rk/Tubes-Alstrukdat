@@ -1,7 +1,6 @@
 /* File : time.c */
 /* Body ADT TIME */
 #include "time1.h"
-#include "boolean.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

@@ -3,7 +3,7 @@
 #ifndef MATRIXPICTURE_H
 #define MATRIXPICTURE_H
 
-#include "matrix/matrixchar.h"
+#include "../matrix/matrixchar.h"
 
 typedef struct
 {

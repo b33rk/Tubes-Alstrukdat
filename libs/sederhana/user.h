@@ -1,12 +1,12 @@
 #ifndef USER_H
 #define USER_H
 
-#include "boolean.h"
-#include "machine/wordmachine.h"
+#include "../boolean.h"
+#include "../machine/wordmachine.h"
 #include "profilepicture.h"
-#include "machine/stringdinmachine.h"
-#include "queue/prioqueuefriendreq.h"
-#include "stack/stackdraft.h"
+#include "../machine/stringdinmachine.h"
+#include "../queue/prioqueuefriendreq.h"
+#include "../stack/stackdraft.h"
 
 
 typedef struct user
