@@ -70,3 +70,11 @@ void doubleHMPSize(NodeHashMap *H){
         }
     }
 }
+
+void dealokasiHMP(NodeHashMap *H){
+    int i;
+    for(i = 0; i < NODEHMP_CONTAINER(*H); i++){
+        dealokasiListNode(&NODEHMP_LIST(*H, i));
+    }
+    free(H);
+}

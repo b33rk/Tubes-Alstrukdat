@@ -34,4 +34,6 @@ void removeNodeFromMap(NodeHashMap *H, NodeBalasanAddress Node);
 
 void doubleHMPSize(NodeHashMap *H);
 
+void dealokasiHMP(NodeHashMap *H);
+
 #endif

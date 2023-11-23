@@ -32,4 +32,6 @@ void addChildren(NodeBalasanAddress Nparent, NodeBalasanAddress Nchildren);
 
 void removeChildren(NodeBalasanAddress Nparent, NodeBalasanAddress Nchildren);
 
+void dealokasiNodeBalasan(NodeBalasanAddress Node);
+
 #endif

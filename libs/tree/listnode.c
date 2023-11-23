@@ -127,6 +127,11 @@ NodeBalasanAddress getNodeFromId(ListNode l, int Id){
     return LISTNODE_ELMT(l, listNodeIndexOf(l, Id));
 }
 
+void dealokasiListNode(ListNode *l){
+    free(LISTNODE_BUFFER(*l));
+    free(l);
+}
+
 // int main(){
 //     ListDin L;
 //     CreateListDin(&L, 100);

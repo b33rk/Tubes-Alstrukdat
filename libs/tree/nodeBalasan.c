@@ -30,5 +30,10 @@ void addChildren(NodeBalasanAddress Nparent, NodeBalasanAddress Nchildren){
 void removeChildren(NodeBalasanAddress Nparent, NodeBalasanAddress Nchildren){
     deleteElListDin(&NODEBALASAN_CHILDREN(Nparent), NODEBALASAN_ID(Nchildren));
     NODEBALASAN_PARENT(Nchildren) = NULL;
-    free(Nchildren);
+    dealokasiNodeBalasan(Nchildren);
+}
+
+void dealokasiNodeBalasan(NodeBalasanAddress Node){
+    free(NODEBALASAN_CHILDREN(Node).buffer);
+    free(Node);
 }

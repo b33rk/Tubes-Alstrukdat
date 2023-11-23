@@ -43,3 +43,10 @@ void deleteTreeNodeAt(TreeOfBalasan *T, int Id){
     removeNodeFromMap(&(TREE_HMP(*T)), node);
     removeChildren((NODEBALASAN_PARENT(node)), node);
 }
+
+void dealokasiTree(TreeOfBalasan *T){
+    TREE_MASTER(*T) = NULL;
+    deleteTreeNodeAt(T, 0);
+    dealokasiHMP(&TREE_HMP(*T));
+    free(T);
+}

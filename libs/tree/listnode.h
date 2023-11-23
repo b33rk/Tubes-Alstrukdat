@@ -101,4 +101,6 @@ void deleteListNode(ListNode *l, int Id);
 
 NodeBalasanAddress getNodeFromId(ListNode l, int Id);
 
+void dealokasiListNode(ListNode *l);
+
 #endif

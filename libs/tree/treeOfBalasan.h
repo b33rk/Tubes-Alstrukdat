@@ -29,4 +29,6 @@ int addToTreeAt(TreeOfBalasan *T, Text content, int IdAuthor, int Id);
 
 void deleteTreeNodeAt(TreeOfBalasan *T, int Id);
 
+void dealokasiTree(TreeOfBalasan *T);
+
 #endif
