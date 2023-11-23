@@ -46,7 +46,6 @@ void insert(MaxHeap *heap, Kicauan value)
 {
     if (isFull(heap))
     {
-        printf("Heap is full. Cannot insert Kicauan.\n");
         return;
     }
 
@@ -85,8 +84,7 @@ Kicauan deleteMax(MaxHeap *heap)
     Kicauan maxValue;
     if (isEmpty(heap))
     {
-        printf("Heap is empty. Cannot delete.\n");
-        maxValue.id = -1; // Menandakan bahwa heap kosong
+        maxValue.id = -1; 
         return maxValue;
     }
 
@@ -99,12 +97,4 @@ Kicauan deleteMax(MaxHeap *heap)
     return maxValue;
 }
 
-void printHeap(MaxHeap *heap)
-{
-    printf("Heap:\n");
-    for (int i = 0; i < heap->size; i++)
-    {
-        printf("Kicauan ID: %d, Like: %d\n", heap->elements[i].id, heap->elements[i].like);
-    }
-    printf("\n");
-}
+

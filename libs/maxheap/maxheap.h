@@ -32,6 +32,5 @@ void insert(MaxHeap *heap, Kicauan value);
 Kicauan deleteMax(MaxHeap *heap);
 
 /* Cetak isi heap */
-void printHeap(MaxHeap *heap);
 
 #endif
