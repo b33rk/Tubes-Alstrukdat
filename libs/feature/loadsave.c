@@ -378,7 +378,7 @@ boolean load(boolean isInitiate)
         else
             printf("Silahkan masukan folder konfigurasi untuk dimuat: ");
         STARTTEXT();
-        printf("%s\n", currentText.TabString);
+        printf("\n");
 
         if (currentText.Length == 0)
         {

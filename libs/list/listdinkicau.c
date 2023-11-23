@@ -114,39 +114,39 @@ boolean isListDinKicauFull(ListDinKicau l)
     return l.nEff == l.capacity;
 }
 
-// void copyListDinKicau(ListDinKicau lIn, ListDinKicau *lOut)
-// {
-//     /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
-//     /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
-//     /* Proses : Menyalin isi lIn ke lOut */
-//     /* KAMUS */
-//     int i;
+void copyListDinKicau(ListDinKicau lIn, ListDinKicau *lOut)
+{
+    /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
+    /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
+    /* Proses : Menyalin isi lIn ke lOut */
+    /* KAMUS */
+    int i;
 
-//     /* ALGORITMA */
-//     CreateListDinKicau(lOut, lIn.capacity);
+    /* ALGORITMA */
+    CreateListDinKicau(lOut, lIn.capacity);
 
-//     for (i = 0; i < lIn.nEff; i++)
-//     {
-//         Kicauan temp;
-//         CreateKicauan(&temp);
+    for (i = 0; i < lIn.nEff; i++)
+    {
+        Kicauan temp;
+        CreateKicauan(&temp);
 
-//         temp.id = lIn.buffer[i].id;
-//         temp.idUser = lIn.buffer[i].idUser;
-//         temp.like = lIn.buffer[i].like;
-//         temp.datetime = lIn.buffer[i].datetime;
+        temp.id = lIn.buffer[i].id;
+        temp.idUser = lIn.buffer[i].idUser;
+        temp.like = lIn.buffer[i].like;
+        temp.datetime = lIn.buffer[i].datetime;
 
-//         int j = 0;
-//         while (lIn.buffer[i].text[j] != '\0')
-//         {
-//             temp.text[j] = lIn.buffer[i].text[j];
-//             j++;
-//         }
-//         temp.text[j] = '\0';
+        int j = 0;
+        while (lIn.buffer[i].text[j] != '\0')
+        {
+            temp.text[j] = lIn.buffer[i].text[j];
+            j++;
+        }
+        temp.text[j] = '\0';
 
-//         insertLastListDinKicau(lOut, temp);
-//         lOut->nEff++;
-//     }
-// }
+        insertLastListDinKicau(lOut, temp);
+        lOut->nEff++;
+    }
+}
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi list dari pembacaan *** */

@@ -109,28 +109,28 @@ boolean isListDinUtasFull(ListDinUtas l)
     return l.nEff == l.capacity;
 }
 
-// void copyListDinUtas(ListDinUtas lIn, ListDinUtas *lOut)
-// {
-//     /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
-//     /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
-//     /* Proses : Menyalin isi lIn ke lOut */
-//     /* KAMUS */
-//     int i;
+void copyListDinUtas(ListDinUtas lIn, ListDinUtas *lOut)
+{
+    /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
+    /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
+    /* Proses : Menyalin isi lIn ke lOut */
+    /* KAMUS */
+    int i;
 
-//     /* ALGORITMA */
-//     CreateListDinUtas(lOut, lIn.capacity);
-//     lOut->nEff = lIn.nEff;
+    /* ALGORITMA */
+    CreateListDinUtas(lOut, lIn.capacity);
+    lOut->nEff = lIn.nEff;
 
-//     for (i = 0; i < lIn.nEff; i++)
-//     {
-//         Utas temp;
-//         CreateUtas(&temp);
+    for (i = 0; i < lIn.nEff; i++)
+    {
+        Utas temp;
+        CreateUtas(&temp);
 
-//         temp = lIn.buffer[i];
+        temp = lIn.buffer[i];
 
-//         insertLastListDinUtas(lOut, temp);
-//     }
-// }
+        insertLastListDinUtas(lOut, temp);
+    }
+}
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi list dari pembacaan *** */
