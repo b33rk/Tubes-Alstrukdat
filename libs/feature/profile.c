@@ -108,7 +108,7 @@ void changeProfile()
         isBioValid = true;
     }
 
-    setUserBio(currentUser, currentText.TabString);
+    if (currentText.Length != 0) setUserBio(currentUser, currentText.TabString);
 
     boolean isPhoneNumberValid = false;
 
@@ -127,7 +127,7 @@ void changeProfile()
         isPhoneNumberValid = true;
     }
 
-    setUserPhoneNumber(currentUser, currentStringDin);
+    if (!isListLinierCharEmpty(currentStringDin.TabString)) setUserPhoneNumber(currentUser, currentStringDin);
 
     deallocateStringDin();
     boolean isWetonValid = false;
@@ -148,7 +148,7 @@ void changeProfile()
         isWetonValid = true;
     }
 
-    setUserWeton(currentUser, currentWord.TabWord);
+    if (currentWord.Length != 0) setUserWeton(currentUser, currentWord.TabWord);
 
     printf("\nProfil Anda sudah berhasil diperbarui!\n");
 }
