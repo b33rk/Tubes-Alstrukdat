@@ -196,9 +196,9 @@ int main()
         {
             FYB();
         }
-        else if (isWordEqual(currentWord, stringToWord("KEL")))
+        else if (isWordEqual(currentWord, stringToWord("KELOMPOK_TEMAN")))
         {
-            kelompokTeman();
+            printKelompokTeman();
         }
 
         printf("\n");
