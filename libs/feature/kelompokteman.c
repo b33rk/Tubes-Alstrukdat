@@ -21,14 +21,14 @@ void printKelompokTeman() {
     int jumlahTeman = 0;
 
     // Menggunakan graphFriendship untuk menemukan teman langsung
-    for (int i = IDX_MIN; i < CAPACITY_USER; i++) {
+    for (int i = 0; i < 20; i++) {
         if (isHasRelation(graphFriendship, currentUser->id, listUser.contents[i].id) && (i != currentUser->id)) {
             jumlahTeman++;
         }
     }
 
     // Menggunakan DSU untuk menemukan teman tidak langsung
-    for (int i = IDX_MIN; i < CAPACITY_USER; i++) {
+    for (int i = 0; i < 20; i++) {
         if ((findSet(&dsu, i) == currentUserRoot) && (i != currentUser->id)) {
             jumlahTeman++;
         }
@@ -36,13 +36,13 @@ void printKelompokTeman() {
 
     printf("Terdapat %d orang dalam Kelompok Teman %s :\n", jumlahTeman, currentUser->name);
 
-    for (int i = IDX_MIN; i < CAPACITY_USER; i++) {
+    for (int i = 0; i < 20; i++) {
         if (isHasRelation(graphFriendship, currentUser->id, listUser.contents[i].id) && (i != currentUser->id)) {
             printf("%s\n", listUser.contents[i].name);
         }
     } 
 
-    for (int i = IDX_MIN; i < CAPACITY_USER; i++) {
+    for (int i = 0; i < 20; i++) {
         if ((findSet(&dsu, i) == currentUserRoot) && (i != currentUser->id)) {
             printf("%s\n", listUser.contents[i].name);
         }
