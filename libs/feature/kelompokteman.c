@@ -20,14 +20,12 @@ void printKelompokTeman() {
     int currentUserRoot = findSet(&dsu, currentUser->id);
     int jumlahTeman = 0;
 
-    // Menggunakan graphFriendship untuk menemukan teman langsung
     for (int i = IDX_MIN; i < CAPACITY_USER; i++) {
         if (isHasRelation(graphFriendship, currentUser->id, listUser.contents[i].id) && (i != currentUser->id)) {
             jumlahTeman++;
         }
     }
 
-    // Menggunakan DSU untuk menemukan teman tidak langsung
     for (int i = IDX_MIN; i < CAPACITY_USER; i++) {
         if ((findSet(&dsu, i) == currentUserRoot) && (i != currentUser->id)) {
             jumlahTeman++;
