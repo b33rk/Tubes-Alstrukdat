@@ -24,7 +24,12 @@
     "textmachine.h": "c",
     "loadsave.h": "c",
     "listlinierutas.h": "c",
-    "prioqueuefriendreq.h": "c"
+    "prioqueuefriendreq.h": "c",
+    "stdio.h": "c",
+    "stringdinmachine.h": "c",
+    "listlinierchar.h": "c",
+    "charfilemachine.h": "c",
+    "filemachine.h": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

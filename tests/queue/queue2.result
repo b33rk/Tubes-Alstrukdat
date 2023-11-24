@@ -1,0 +1,1 @@
+tests/queue/queue2.in tests/queue/queue2.out: TRUE

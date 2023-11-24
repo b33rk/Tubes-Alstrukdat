@@ -147,65 +147,6 @@ void copyListDinKicau(ListDinKicau lIn, ListDinKicau *lOut)
     }
 }
 
-/* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-/* *** Mendefinisikan isi list dari pembacaan *** */
-// void readListDinKicau(ListDinKicau *l)
-// {
-//     /* I.S. l sembarang dan sudah dialokasikan sebelumnya */
-//     /* F.S. List l terdefinisi */
-//     /* Proses : membaca banyaknya elemen l dan mengisi nilainya */
-//     /* 1. Baca banyaknya elemen diakhiri enter, misalnya N */
-//     /*    Pembacaan diulangi sampai didapat N yang benar yaitu 0 <= N <= l.capacity */
-//     /*    Jika N tidak valid, tidak diberikan pesan kesalahan */
-//     /* 2. Jika 0 < N <= l.capacity; Lakukan N kali: Baca elemen mulai dari indeks
-//           0 satu per satu diakhiri enter */
-//     /*    Jika N = 0; hanya terbentuk l kosong */
-//     /* KAMUS */
-//     int n, i;
-
-//     /* ALGORITMA */
-//     scanf("%d", &n);
-//     while (n < 0 || n > CAPACITY(*l))
-//     {
-//         scanf("%d", &n);
-//     }
-
-//     l->nEff = n;
-
-//     for (i = 0; i < n; i++)
-//     {
-//         scanf("%d", &l->buffer[i]);
-//     }
-// }
-
-// void printListDinKicau(ListDinKicau l)
-// {
-//     /* Proses : Menuliskan isi list dengan traversal, list ditulis di antara kurung siku;
-//        antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
-//     di tengah, atau di belakang, termasuk spasi dan enter */
-//     /* I.S. l boleh kosong */
-//     /* F.S. Jika l tidak kosong: [e1,e2,...,en] */
-//     /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-//     /* Jika list kosong : menulis [] */
-//     /* KAMUS */
-//     int i;
-//     int len;
-
-//     /* ALGORITMA */
-//     len = listLength(l);
-
-//     printf("[");
-//     for (i = 0; i < len; i++)
-//     {
-//         printf("%d", ELMT(l, i));
-//         if (i != len - 1)
-//         {
-//             printf(",");
-//         }
-//     }
-//     printf("]");
-// }
-
 /* ********** OPERATOR RELASIONAL ********** */
 /* *** Operasi pembandingan list : < =, > *** */
 

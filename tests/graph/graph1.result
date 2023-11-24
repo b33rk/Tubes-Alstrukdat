@@ -1,0 +1,1 @@
+tests/graph/graph1.in tests/graph/graph1.out: TRUE
