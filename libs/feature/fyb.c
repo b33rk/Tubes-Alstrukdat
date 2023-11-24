@@ -38,4 +38,6 @@ void FYB()
         printf("| %s\n", k.text);
         printf("| Disukai: %d\n\n", k.like);
     }
+
+    free(heap.elements);
 }
