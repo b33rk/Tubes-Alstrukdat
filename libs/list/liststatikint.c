@@ -7,13 +7,13 @@
 void CreateListStatikInt(ListStatikInt *l)
 {
     /* I.S. l sembarang */
-    /* F.S. Terbentuk List l kosong dengan kapasitas 50 */
+    /* F.S. Terbentuk List l kosong dengan kapasitas 20 */
     /* Proses: Inisialisasi semua elemen List l dengan -99999 */
     /* KAMUS */
     int i;
 
     /* ALGORITMA */
-    for (i = 0; i < 50; i++)
+    for (i = 0; i < 20; i++)
     {
         l->contents[i] = -99999;
     }
@@ -33,7 +33,7 @@ int listStatikIntLength(ListStatikInt l)
     length = 0;
     i = 0;
 
-    while (i < 50 && l.contents[i] != -99999)
+    while (i < 20 && l.contents[i] != -99999)
     {
         length++;
         i++;
@@ -70,7 +70,7 @@ boolean isListStatikIntIdxValid(ListStatikInt l, int i)
     /* KAMUS */
 
     /* ALGORITMA */
-    return (i >= 0 && i < 50);
+    return (i >= 0 && i < 20);
 }
 boolean isListStatikIntIdxEff(ListStatikInt l, int i)
 {
@@ -111,9 +111,9 @@ void readListStatikInt(ListStatikInt *l)
     /* Proses: membaca banyaknya elemen l dan mengisi nilainya */
 
     /* 1. Baca banyaknya elemen diakhiri enter, misalnya n */
-    /*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= 50 */
+    /*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= 20 */
     /*    Jika n tidak valid, tidak diberikan pesan kesalahan */
-    /* 2. Jika 0 <= n <= 50; Lakukan n kali:
+    /* 2. Jika 0 <= n <= 20; Lakukan n kali:
               Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
     /*    Jika n = 0; hanya terbentuk List kosong */
     /* KAMUS */
@@ -121,7 +121,7 @@ void readListStatikInt(ListStatikInt *l)
 
     /* ALGORITMA */
     scanf("%d", &n);
-    while (n < 0 || n > 50)
+    while (n < 0 || n > 20)
     {
         scanf("%d", &n);
     }
@@ -336,7 +336,7 @@ void deleteFirstListStatikInt(ListStatikInt *l, int *val)
     len = listStatikIntLength(*l);
     for (i = 0; i < len; i++)
     {
-        if (i == 50 - 1)
+        if (i == 20 - 1)
         {
             l->contents[i] = -99999;
         }
@@ -363,7 +363,7 @@ void deleteAtListStatikInt(ListStatikInt *l, int *val, int idx)
     len = listStatikIntLength(*l);
     for (i = idx; i < len; i++)
     {
-        if (i == 50 - 1)
+        if (i == 20 - 1)
         {
             l->contents[i] = -99999;
         }

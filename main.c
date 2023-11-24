@@ -10,6 +10,7 @@
 #include "libs/feature/utasfeature.h"
 #include "libs/feature/balasan.h"
 #include "libs/feature/fyb.h"
+#include "libs/feature/kelompokteman.h"
 
 int main()
 {
@@ -59,7 +60,7 @@ int main()
         printf("Folder tidak ditemukan, program akan berhenti\n\n");
         programStart = false;
     }
-    
+
     while (programStart)
     {
 
@@ -190,9 +191,14 @@ int main()
         else if (isWordEqual(currentWord, stringToWord("HAPUS_BALASAN")))
         {
             hapusBalasan();
-        } else if (isWordEqual(currentWord, stringToWord("FYB")))
+        }
+        else if (isWordEqual(currentWord, stringToWord("FYB")))
         {
             FYB();
+        }
+        else if (isWordEqual(currentWord, stringToWord("KEL")))
+        {
+            kelompokTeman();
         }
 
         printf("\n");
