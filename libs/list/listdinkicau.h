@@ -92,7 +92,7 @@ boolean isListDinKicauFull(ListDinKicau l);
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi list dari pembacaan *** */
-void readListDinKicau(ListDinKicau *l);
+// void readListDinKicau(ListDinKicau *l);
 /* I.S. l sembarang dan sudah dialokasikan sebelumnya */
 /* F.S. List l terdefinisi */
 /* Proses : membaca banyaknya elemen l dan mengisi nilainya */
@@ -102,7 +102,7 @@ void readListDinKicau(ListDinKicau *l);
 /* 2. Jika 0 < N <= CAPACITY(l); Lakukan N kali: Baca elemen mulai dari indeks
       0 satu per satu diakhiri enter */
 /*    Jika N = 0; hanya terbentuk l kosong */
-void printListDinKicau(ListDinKicau l);
+// void printListDinKicau(ListDinKicau l);
 /* Proses : Menuliskan isi list dengan traversal, list ditulis di antara kurung siku;
    antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
    di tengah, atau di belakang, termasuk spasi dan enter */

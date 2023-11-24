@@ -361,22 +361,24 @@ void expandListDinUtas(ListDinUtas *l, int num)
     /* I.S. List sudah terdefinisi */
     /* F.S. Ukuran list bertambah sebanyak num */
     /* KAMUS */
-    ListDinUtas lnew;
-    int i;
+    // ListDinUtas lnew;
+    // int i;
 
-    /* ALGORITMA */
-    CreateListDinUtas(&lnew, l->capacity + num);
+    // /* ALGORITMA */
+    // CreateListDinUtas(&lnew, l->capacity + num);
 
-    for (i = 0; i < l->nEff; i++)
-    {
-        lnew.buffer[i] = l->buffer[i];
-    }
+    // for (i = 0; i < l->nEff; i++)
+    // {
+    //     lnew.buffer[i] = l->buffer[i];
+    // }
 
-    lnew.nEff = l->nEff;
+    // lnew.nEff = l->nEff;
 
-    dealocateListDinUtas(l);
+    // dealocateListDinUtas(l);
 
-    copyListDinUtas(lnew, l);
+    // copyListDinUtas(lnew, l);
+    l->capacity = l->capacity + num;
+    l->buffer = (Utas *)realloc(l->buffer, l->capacity *sizeof(Utas));
 }
 
 void shrinkListDinUtas(ListDinUtas *l, int num)

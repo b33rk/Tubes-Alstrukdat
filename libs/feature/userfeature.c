@@ -90,6 +90,13 @@ void registerUser()
 
 void loginUser()
 {
+
+    if (listUserLength(listUser) == 0)
+    {
+        printf("Belum terdapat user yang terdaftar sama sekali. Silahkan lakukan registrasi terlebih dahulu\n");
+        return;
+    }
+
     if (currentUser != NULL)
     {
         printf("Wah Anda sudah masuk. Keluar dulu yuk!\n\n");
