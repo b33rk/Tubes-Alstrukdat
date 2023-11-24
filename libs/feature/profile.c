@@ -139,7 +139,7 @@ void changeProfile()
         printf("\n");
 
         Word lowerCase = wordToLowerCase(currentWord);
-        if (!(currentWord.Length == 0 || isWordEqual(lowerCase, stringToWord("pahing")) || isWordEqual(lowerCase, stringToWord("kliwon")) || isWordEqual(lowerCase, stringToWord("wage")) || isWordEqual(lowerCase, stringToWord("pon")) || isWordEqual(lowerCase, stringToWord("legi"))))
+        if (currentWord.Length > 0 && !(isWordEqual(lowerCase, stringToWord("pahing")) || isWordEqual(lowerCase, stringToWord("kliwon")) || isWordEqual(lowerCase, stringToWord("wage")) || isWordEqual(lowerCase, stringToWord("pon")) || isWordEqual(lowerCase, stringToWord("legi"))))
         {
             printf("Weton anda tidak valid!!\n\n");
             continue;
