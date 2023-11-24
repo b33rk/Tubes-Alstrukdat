@@ -5,7 +5,6 @@
 #include "../sederhana/user.h"
 #include "../list/listuser.h"
 #include "../boolean.h"
-// #include "../../database/database.h"
 
 typedef struct disjointsetunion {
     int parent[20];
