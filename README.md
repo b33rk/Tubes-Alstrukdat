@@ -6,11 +6,17 @@ BURBIR adalah program media sosial berbasis CLI (command-line interface) yang ka
 # Cara kompilasi program
  1. Buka terminal berbasis UNIX based system (contoh: WSL)
  2. Pastikan sudah berada di root folder kami
- 3. Ketikkan make
+ 3. Ketikkan make pada terminal
+```bash
+make
+```
 
 # Cara menjalankan program
  1. Pastikan program sudah dikompilasi
  2. Pada terminal, ketikkan ./build/main
+```bash
+./build/main
+```
 
 # Pembagian tugas
  1. Julian Chandra Sutnadi (13522080)       : Utas, bonus : tagar
