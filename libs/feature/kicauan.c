@@ -1,7 +1,5 @@
 #include "kicauan.h"
 
-void getCurrentDatetime(char *datetime);
-
 void publishKicauan()
 {
     if (currentUser == NULL)
@@ -89,7 +87,6 @@ void displayKicauan()
 
 void likeKicauan(int idKicau)
 {
-    printf("%d\n", idKicau);
     if (currentUser == NULL)
     {
         printf("Anda belum masuk! Masuk terlebih dahulu untuk menikmati layanan BurBir.\n\n");

@@ -46,6 +46,9 @@ void insert(MaxHeap *heap, Kicauan value)
 {
     if (isFull(heap))
     {
+        int index = smallestIndex(*heap);
+        heap->elements[index] = value;
+        heapifyUp(heap, index);
         return;
     }
 
@@ -97,4 +100,18 @@ Kicauan deleteMax(MaxHeap *heap)
     return maxValue;
 }
 
+
+int smallestIndex(MaxHeap heap){
+    int i;
+    int index = heap.size - 1;
+    int min = heap.elements[heap.size - 1].like;
+    for (i = heap.size - 2; i >= 4; i--){
+        if (heap.elements[i].like < min){
+            min = heap.elements[i].like;
+            index = i;
+        }
+    }
+
+    return index;
+}
 
