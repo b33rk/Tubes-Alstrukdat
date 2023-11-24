@@ -12,9 +12,9 @@ void FYB()
     int len = listDinKicauLength(listKicauan);
     int len2 = len;
 
-    if (len > 4)
+    if (len > 8)
     {
-        len2 = 4;
+        len2 = 8;
     }
     printf("\nBerikut %d kicauan dengan like tertinggi di FYB\n", len2);
 

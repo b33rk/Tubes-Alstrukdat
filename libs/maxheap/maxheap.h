@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "../list/listdinkicau.h"
 
-#define MAX_HEAP_SIZE 100
+#define MAX_HEAP_SIZE 8
 
 
 typedef struct
@@ -27,6 +27,8 @@ int isFull(MaxHeap *heap);
 
 /* Insert elemen ke dalam heap */
 void insert(MaxHeap *heap, Kicauan value);
+
+int smallestIndex(MaxHeap heap);
 
 /* Hapus elemen maksimum dari heap */
 Kicauan deleteMax(MaxHeap *heap);
