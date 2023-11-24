@@ -11,7 +11,7 @@
 
 /* Definisi elemen dan koleksi objek */
 typedef struct {
-   int contents[50]; /* memori tempat penyimpan elemen (container) */
+   int contents[20]; /* memori tempat penyimpan elemen (container) */
 } ListStatikInt;
 /* Indeks yang digunakan [0..CAPACITY-1] */
 /* Jika l adalah ListStatikInt, cara deklarasi dan akses: */

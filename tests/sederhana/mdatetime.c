@@ -20,7 +20,7 @@ int main()
         scanf("%d", &SS);
         CreateDATETIME(&datetime, DD, BB, YYYY, HH, MM, SS);
         TulisDATETIME(datetime);
-        printf("\n");
+        printf("\r\n");
         break;
 
     case 2:
@@ -38,7 +38,7 @@ int main()
         scanf("%d", &MM);
         scanf("%d", &SS);
         CreateDATETIME(&datetime2, DD, BB, YYYY, HH, MM, SS);
-        printf("%d %d\n", DGT(datetime, datetime2), DLT(datetime, datetime2));
+        printf("%d %d\r\n", DGT(datetime, datetime2), DLT(datetime, datetime2));
         break;
     }
 
