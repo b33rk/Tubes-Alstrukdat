@@ -1,3 +1,4 @@
+// #include "libs/DSU/DSUkelompokteman.h"
 #include "libs/machine/wordmachine.h"
 #include "database/database.h"
 #include "libs/feature/userfeature.h"
@@ -9,6 +10,7 @@
 #include "libs/feature/loadsave.h"
 #include "libs/feature/utasfeature.h"
 #include "libs/feature/balasan.h"
+#include "libs/feature/kelompokteman.h"
 
 int main()
 {
@@ -189,6 +191,10 @@ int main()
         else if (isWordEqual(currentWord, stringToWord("HAPUS_BALASAN")))
         {
             hapusBalasan();
+        }
+        else if (isWordEqual(currentWord, stringToWord("KELOMPOK_TEMAN")))
+        {
+            printKelompokTeman();
         }
 
         printf("\n");
