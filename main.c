@@ -10,7 +10,7 @@
 #include "libs/feature/utasfeature.h"
 #include "libs/feature/balasan.h"
 #include "libs/feature/fyb.h"
-// #include "libs/feature/kelompokteman.h"
+#include "libs/feature/kelompokteman.h"
 
 int main()
 {
