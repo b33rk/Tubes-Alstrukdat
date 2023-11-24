@@ -196,10 +196,10 @@ int main()
         {
             FYB();
         }
-        // else if (isWordEqual(currentWord, stringToWord("KEL")))
-        // {
-        //     kelompokTeman();
-        // }
+        else if (isWordEqual(currentWord, stringToWord("KELOMPOK_TEMAN")))
+        {
+            printKelompokTeman();
+        }
 
         printf("\n");
     }

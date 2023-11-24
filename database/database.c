@@ -1,5 +1,6 @@
 #include "database.h"
 
+Disjointsetunion dsu;
 ListUser listUser;
 User *currentUser;
 GraphFriendship graphFriendship;
@@ -9,6 +10,7 @@ ListDinUtas listUtas;
 
 void initDatabase()
 {
+    initDSU(&dsu);
     CreateListUser(&listUser);
     currentUser = NULL;
     CreateGraphFriendship(&graphFriendship);
